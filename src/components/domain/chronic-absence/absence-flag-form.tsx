@@ -3,6 +3,7 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { Flag, Check } from "lucide-react";
 
 import {
   createAbsenceFlag,
@@ -83,10 +84,16 @@ export function CreateFlagForm({
         <button
           type="submit"
           disabled={isPending}
-          className="touch-target active-push rounded-lg px-4 py-2 text-sm font-medium text-white transition-colors disabled:opacity-50"
+          className="touch-target active-push inline-flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-medium text-white transition-colors disabled:opacity-50"
           style={{ background: `var(--chronic-absence-chronic)` }}
         >
-          {isPending ? "Creating…" : "🚩 Create flag"}
+          {isPending ? (
+            "Creating…"
+          ) : (
+            <>
+              <Flag className="h-4 w-4" aria-hidden /> Create flag
+            </>
+          )}
         </button>
       </div>
     </form>
@@ -184,11 +191,15 @@ export function ResolveFlagForm({
                 : "var(--foreground)",
           }}
         >
-          {isPending
-            ? "…"
-            : mode === "resolve"
-              ? "✓ Mark resolved"
-              : "Dismiss flag"}
+          {isPending ? (
+            "…"
+          ) : mode === "resolve" ? (
+            <span className="inline-flex items-center gap-1.5">
+              <Check className="h-4 w-4" aria-hidden /> Mark resolved
+            </span>
+          ) : (
+            "Dismiss flag"
+          )}
         </button>
       </div>
     </form>

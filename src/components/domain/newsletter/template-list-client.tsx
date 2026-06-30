@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useState, useTransition } from "react";
+import { ClipboardList } from "lucide-react";
 import type { NewsletterTemplate } from "@/types/domain";
 import {
   createNewsletterTemplate,
@@ -127,9 +128,11 @@ export function TemplateListClient({ templates: initial, canManage }: TemplateLi
 
       {templates.length === 0 ? (
         <div className="rounded-lg border border-border p-8 text-center">
-          <p className="text-3xl" style={{ color: "var(--empty-state-icon)" }}>
-            📋
-          </p>
+          <ClipboardList
+            className="mx-auto h-10 w-10"
+            style={{ color: "var(--empty-state-icon)" }}
+            aria-hidden
+          />
           <p className="mt-2 text-sm" style={{ color: "var(--muted-foreground)" }}>
             No templates yet. Create one to speed up newsletter creation.
           </p>

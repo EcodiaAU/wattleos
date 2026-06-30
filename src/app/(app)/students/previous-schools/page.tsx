@@ -7,6 +7,7 @@
 // records on file, with quick links to each student's detail.
 // ============================================================
 
+import { School } from "lucide-react";
 import { listPreviousSchoolRecords } from "@/lib/actions/previous-school-records";
 import { getTenantContext, hasPermission } from "@/lib/auth/tenant-context";
 import { Permissions } from "@/lib/constants/permissions";
@@ -89,9 +90,11 @@ export default async function PreviousSchoolsOverviewPage({
       {/* Results */}
       {records.length === 0 ? (
         <div className="rounded-xl border border-border py-16 text-center">
-          <p className="text-2xl" style={{ color: "var(--empty-state-icon)" }}>
-            🏫
-          </p>
+          <School
+            className="mx-auto h-8 w-8"
+            style={{ color: "var(--empty-state-icon)" }}
+            aria-hidden
+          />
           <p
             className="mt-2 text-sm"
             style={{ color: "var(--muted-foreground)" }}

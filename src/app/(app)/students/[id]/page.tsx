@@ -17,6 +17,7 @@
 // identifiers, and other ACARA/ISQ reporting fields.
 // ============================================================
 
+import { Check } from "lucide-react";
 import { PickupAuthorizationSection } from "@/components/domain/attendance/pickup-authorization-section";
 import { getStudent } from "@/lib/actions/students";
 import { getTenantContext, hasPermission } from "@/lib/auth/tenant-context";
@@ -463,8 +464,9 @@ export default async function StudentDetailPage({
                         )}
                         {/* Account status */}
                         {guardian.user_id ? (
-                          <span className="ml-2 text-xs font-normal text-success">
-                            ✓ Account linked
+                          <span className="ml-2 inline-flex items-center gap-1 text-xs font-normal text-success">
+                            <Check className="h-3 w-3" aria-hidden /> Account
+                            linked
                           </span>
                         ) : (
                           <span className="ml-2 text-xs font-normal text-primary">

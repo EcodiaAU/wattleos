@@ -36,6 +36,7 @@ import { ToolResultCard } from "./tool-result-cards";
 import { useGlowRegistry } from "@/components/domain/glow/glow-registry";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { ClipboardList, Hand, CheckCircle2, School, type LucideIcon } from "lucide-react";
 
 // ============================================================
 // Sub-Components
@@ -404,11 +405,11 @@ function WelcomeState({
 }: {
   onSuggestionClick: (q: string) => void;
 }) {
-  const suggestions = [
-    { label: "What's my daily summary?", icon: "📋" },
-    { label: "Who's absent today?", icon: "👋" },
-    { label: "Mark everyone in Banksia as present", icon: "✅" },
-    { label: "Check in Mia to After School Care", icon: "🏫" },
+  const suggestions: { label: string; icon: LucideIcon }[] = [
+    { label: "What's my daily summary?", icon: ClipboardList },
+    { label: "Who's absent today?", icon: Hand },
+    { label: "Mark everyone in Banksia as present", icon: CheckCircle2 },
+    { label: "Check in Mia to After School Care", icon: School },
   ];
 
   return (
@@ -453,22 +454,25 @@ function WelcomeState({
       </p>
 
       <div className="grid w-full max-w-sm grid-cols-2 gap-2">
-        {suggestions.map((s) => (
-          <button
-            key={s.label}
-            onClick={() => onSuggestionClick(s.label)}
-            className="flex items-center gap-2 rounded-xl px-3 py-2.5 text-left text-sm transition-all hover:scale-[1.02] active:scale-[0.98]"
-            style={{
-              background:
-                "color-mix(in srgb, var(--wattle-gold) 6%, transparent)",
-              border: "1px solid var(--wattle-border)",
-              color: "var(--wattle-brown)",
-            }}
-          >
-            <span className="text-base">{s.icon}</span>
-            <span className="leading-snug">{s.label}</span>
-          </button>
-        ))}
+        {suggestions.map((s) => {
+          const Icon = s.icon;
+          return (
+            <button
+              key={s.label}
+              onClick={() => onSuggestionClick(s.label)}
+              className="flex items-center gap-2 rounded-xl px-3 py-2.5 text-left text-sm transition-all hover:scale-[1.02] active:scale-[0.98]"
+              style={{
+                background:
+                  "color-mix(in srgb, var(--wattle-gold) 6%, transparent)",
+                border: "1px solid var(--wattle-border)",
+                color: "var(--wattle-brown)",
+              }}
+            >
+              <Icon className="h-4 w-4 shrink-0" aria-hidden />
+              <span className="leading-snug">{s.label}</span>
+            </button>
+          );
+        })}
       </div>
     </div>
   );

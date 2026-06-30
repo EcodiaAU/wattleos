@@ -5,6 +5,7 @@
 // Table showing per-age-bracket educator requirements for a class.
 // Uses RatioBreakdown from getRatioBreakdown() action.
 
+import { Circle } from "lucide-react";
 import type { RatioBreakdown } from "@/lib/actions/ratios";
 
 interface AgeGroupBreakdownProps {
@@ -78,7 +79,11 @@ export function AgeGroupBreakdown({ breakdown }: AgeGroupBreakdownProps) {
                 totalAvailable - required_educators <= 1 &&
                 row.required_educators > 0;
 
-              const statusIcon = isBreached ? "🔴" : isWarning ? "🟡" : "🟢";
+              const statusDotClass = isBreached
+                ? "text-red-500 fill-red-500"
+                : isWarning
+                  ? "text-amber-500 fill-amber-500"
+                  : "text-green-500 fill-green-500";
               const statusText = isBreached
                 ? `${shortfall} short`
                 : isWarning
@@ -122,7 +127,7 @@ export function AgeGroupBreakdown({ breakdown }: AgeGroupBreakdownProps) {
                             : "var(--attendance-present-fg, #166534)",
                       }}
                     >
-                      {statusIcon} {statusText}
+                      <Circle className={`h-3 w-3 ${statusDotClass}`} aria-hidden /> {statusText}
                     </span>
                   </td>
                 </tr>

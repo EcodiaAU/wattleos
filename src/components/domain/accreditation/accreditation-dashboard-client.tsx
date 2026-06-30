@@ -7,6 +7,7 @@
 // and a list of all historical cycles.
 
 import Link from "next/link";
+import { GraduationCap } from "lucide-react";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import type {
   AccreditationBodyCode,
@@ -294,12 +295,12 @@ export function AccreditationDashboardClient({ data, canManage }: Props) {
 
       {data.cycles.length === 0 && (
         <div className="text-center py-20">
-          <p
-            className="text-4xl mb-3"
+          <div
+            className="flex justify-center mb-3"
             style={{ color: "var(--empty-state-icon)" }}
           >
-            🎓
-          </p>
+            <GraduationCap className="h-10 w-10" aria-hidden />
+          </div>
           <p
             className="text-base font-medium"
             style={{ color: "var(--foreground)" }}

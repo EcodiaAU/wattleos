@@ -15,6 +15,7 @@
 
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { Check, PartyPopper } from "lucide-react";
 import { getTenantContext } from "@/lib/auth/tenant-context";
 import { Permissions } from "@/lib/constants/permissions";
 import { listReportTemplates } from "@/lib/actions/reports/templates";
@@ -64,8 +65,15 @@ export default async function ReportsSetupPage() {
         >
           ← Back to Reports
         </Link>
-        <h1 className="mt-3 text-2xl font-bold text-foreground">
-          {allDone ? "You're all set 🎉" : "Set up your report builder"}
+        <h1 className="mt-3 flex items-center gap-2 text-2xl font-bold text-foreground">
+          {allDone ? (
+            <>
+              You&apos;re all set
+              <PartyPopper className="h-6 w-6" aria-hidden />
+            </>
+          ) : (
+            "Set up your report builder"
+          )}
         </h1>
         <p className="mt-1 text-sm text-muted-foreground">
           {allDone
@@ -208,7 +216,7 @@ function SetupCard({
             color: done ? "#fff" : "var(--color-muted-foreground)",
           }}
         >
-          {done ? "✓" : step}
+          {done ? <Check className="h-4 w-4" aria-hidden /> : step}
         </div>
 
         {/* Content */}

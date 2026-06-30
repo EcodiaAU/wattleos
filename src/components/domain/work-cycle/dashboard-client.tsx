@@ -7,6 +7,7 @@
 import Link from "next/link";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { useCallback } from "react";
+import { AlertTriangle, Star } from "lucide-react";
 import { InterruptionSourceBadge } from "./interruption-source-badge";
 import { FLAG_INTERRUPTIONS_THRESHOLD, INTERRUPTION_SOURCE_CONFIG } from "@/lib/constants/work-cycle";
 import type { WorkCycleDashboardData, WorkCycleInterruptionSource } from "@/types/domain";
@@ -192,10 +193,12 @@ export function WorkCycleDashboardClient({
                   >
                     <td className="px-4 py-3">
                       <span
-                        className="font-medium"
+                        className="inline-flex items-center gap-1 font-medium"
                         style={{ color: cs.flagged ? "var(--wc-severity-severe-fg)" : "var(--foreground)" }}
                       >
-                        {cs.flagged && "⚠ "}
+                        {cs.flagged && (
+                          <AlertTriangle className="h-4 w-4" aria-hidden />
+                        )}
                         {cs.class_name}
                       </span>
                     </td>
@@ -314,7 +317,10 @@ export function WorkCycleDashboardClient({
                   <div className="mt-3 flex items-center gap-3 text-xs text-muted-foreground">
                     <span>{s.total_interruption_minutes} min lost</span>
                     {s.quality_rating !== null && (
-                      <span>★ {s.quality_rating}/5</span>
+                      <span className="inline-flex items-center gap-1">
+                        <Star className="h-3.5 w-3.5" aria-hidden />
+                        {s.quality_rating}/5
+                      </span>
                     )}
                     {s.completed_full_cycle && (
                       <span className="text-green-600 dark:text-green-400">Full cycle</span>

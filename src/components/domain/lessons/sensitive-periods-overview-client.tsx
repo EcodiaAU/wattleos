@@ -8,6 +8,20 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import {
+  Speech,
+  Ruler,
+  Footprints,
+  Search,
+  Music,
+  Handshake,
+  BookOpen,
+  Pencil,
+  Calculator,
+  Eye,
+  Leaf,
+  type LucideIcon,
+} from "lucide-react";
 
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import type {
@@ -33,17 +47,17 @@ const PERIOD_LABELS: Record<MontessoriSensitivePeriod, string> = {
   refinement_of_senses: "Refinement of Senses",
 };
 
-const PERIOD_EMOJI: Record<MontessoriSensitivePeriod, string> = {
-  language: "🗣️",
-  order: "📐",
-  movement: "🏃",
-  small_objects: "🔍",
-  music: "🎵",
-  social_behavior: "🤝",
-  reading: "📖",
-  writing: "✏️",
-  mathematics: "🔢",
-  refinement_of_senses: "👁️",
+const PERIOD_ICON: Record<MontessoriSensitivePeriod, LucideIcon> = {
+  language: Speech,
+  order: Ruler,
+  movement: Footprints,
+  small_objects: Search,
+  music: Music,
+  social_behavior: Handshake,
+  reading: BookOpen,
+  writing: Pencil,
+  mathematics: Calculator,
+  refinement_of_senses: Eye,
 };
 
 const INTENSITY_ORDER: SensitivePeriodIntensity[] = [
@@ -151,7 +165,7 @@ export function SensitivePeriodsOverviewClient({
           className="py-16 text-center"
           style={{ color: "var(--empty-state-icon)" }}
         >
-          <div className="text-4xl">🌿</div>
+          <Leaf className="h-12 w-12 mx-auto" aria-hidden />
           <p className="mt-3 text-base font-medium" style={{ color: "var(--foreground)" }}>
             No active sensitive periods
           </p>
@@ -184,14 +198,16 @@ export function SensitivePeriodsOverviewClient({
               </div>
 
               <div className="flex flex-wrap gap-2">
-                {periods.map((p) => (
+                {periods.map((p) => {
+                  const PeriodIcon = PERIOD_ICON[p.sensitive_period];
+                  return (
                   <Link
                     key={p.id}
                     href={`/pedagogy/sensitive-periods/${student.id}?edit=${p.id}`}
                     className="card-interactive flex items-center gap-2 rounded-xl border border-border px-3 py-2"
                     onClick={() => haptics.light()}
                   >
-                    <span>{PERIOD_EMOJI[p.sensitive_period]}</span>
+                    <PeriodIcon className="h-4 w-4 shrink-0" aria-hidden />
                     <div>
                       <p
                         className="text-xs font-medium"
@@ -205,7 +221,8 @@ export function SensitivePeriodsOverviewClient({
                       />
                     </div>
                   </Link>
-                ))}
+                  );
+                })}
               </div>
 
               {/* Suggested materials preview */}

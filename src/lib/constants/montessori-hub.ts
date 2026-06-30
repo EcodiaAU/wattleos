@@ -1,94 +1,111 @@
 import type { HubArticleCategory, HubArticleAgeBand, HubArticleStatus } from "@/types/domain";
+import type { LucideIcon } from "lucide-react";
+import {
+  Sprout,
+  Library,
+  Calculator,
+  Brush,
+  Palette,
+  Globe,
+  Sparkles,
+  Brain,
+  House,
+  ListOrdered,
+  Search,
+  Timer,
+  Flower2,
+  Landmark,
+} from "lucide-react";
 
 // ── Category config ───────────────────────────────────────────────────────────
 
 export const HUB_CATEGORY_CONFIG: Record<
   HubArticleCategory,
-  { label: string; description: string; cssVar: string; emoji: string }
+  { label: string; description: string; cssVar: string; icon: LucideIcon }
 > = {
   philosophy: {
     label: "Philosophy & Foundation",
     description: "Core Montessori beliefs, history, and principles",
     cssVar: "var(--hub-philosophy)",
-    emoji: "🌱",
+    icon: Sprout,
   },
   language: {
     label: "Language & Literacy",
     description: "Reading, writing, phonics, and the language sequence",
     cssVar: "var(--hub-language)",
-    emoji: "📚",
+    icon: Library,
   },
   mathematics: {
     label: "Mathematics",
     description: "Concrete maths materials and the journey to abstraction",
     cssVar: "var(--hub-mathematics)",
-    emoji: "🔢",
+    icon: Calculator,
   },
   practical_life: {
     label: "Practical Life",
     description: "Self-care, care of environment, grace and courtesy",
     cssVar: "var(--hub-practical-life)",
-    emoji: "🫧",
+    icon: Brush,
   },
   sensorial: {
     label: "Sensorial",
     description: "Refining the senses and ordering the world through exploration",
     cssVar: "var(--hub-sensorial)",
-    emoji: "🎨",
+    icon: Palette,
   },
   cultural: {
     label: "Cultural Studies",
     description: "Geography, history, science, art, and music",
     cssVar: "var(--hub-cultural)",
-    emoji: "🌍",
+    icon: Globe,
   },
   cosmic_education: {
     label: "Cosmic Education",
     description: "The Great Lessons and integrated cultural studies (6–12)",
     cssVar: "var(--hub-philosophy)",
-    emoji: "🌌",
+    icon: Sparkles,
   },
   child_development: {
     label: "Child Development",
     description: "Planes of development, brain development, and learning science",
     cssVar: "var(--hub-child-development)",
-    emoji: "🧠",
+    icon: Brain,
   },
   home_connection: {
     label: "Montessori at Home",
     description: "Practical ideas for extending Montessori principles at home",
     cssVar: "var(--hub-home-connection)",
-    emoji: "🏡",
+    icon: House,
   },
   three_period_lesson: {
     label: "The Three-Period Lesson",
     description: "How guides introduce, reinforce, and assess mastery",
     cssVar: "var(--hub-language)",
-    emoji: "3️⃣",
+    icon: ListOrdered,
   },
   sensitive_periods: {
     label: "Sensitive Periods",
     description: "Windows of heightened readiness and how to support them",
     cssVar: "var(--hub-sensorial)",
-    emoji: "🔍",
+    icon: Search,
   },
   work_cycle: {
     label: "The Work Cycle",
     description: "The three-hour uninterrupted block and why it matters",
     cssVar: "var(--hub-philosophy)",
-    emoji: "⏱️",
+    icon: Timer,
   },
   normalization: {
     label: "Normalisation",
     description: "What it means, how it develops, and signs to watch for",
     cssVar: "var(--hub-child-development)",
-    emoji: "🧘",
+    icon: Flower2,
   },
   prepared_environment: {
     label: "Prepared Environment",
     description: "How the physical and social space is intentionally arranged",
     cssVar: "var(--hub-home-connection)",
-    emoji: "🏛️",
+    icon: Landmark,
   },
 };
 

@@ -15,6 +15,7 @@
 // FIX: Removed unused selectedTemplate variable.
 // ============================================================
 
+import { ClipboardList } from "lucide-react";
 import { ComplianceTemplateSelector } from "@/components/domain/curriculum-content/compliance-template-selector";
 import {
   generateComplianceReport,
@@ -157,7 +158,7 @@ export default async function CompliancePage({
       ) : !sp.template ? (
         /* No template selected */
         <div className="rounded-lg border border-dashed border-border p-12 text-center">
-          <div className="text-4xl mb-3">📋</div>
+          <ClipboardList className="mx-auto mb-3 h-12 w-12 text-muted-foreground" aria-hidden />
           <h3 className="text-lg font-medium mb-1">
             Compliance Report Generator
           </h3>

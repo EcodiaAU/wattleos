@@ -20,7 +20,6 @@ const SUPPORT_CATEGORY_OPTIONS = Object.entries(SUPPORT_CATEGORY_CONFIG).map(
   ([key, cfg]) => ({
     value: key as IlpSupportCategory,
     label: cfg.label,
-    emoji: cfg.emoji,
   }),
 );
 
@@ -133,7 +132,7 @@ export function PlanListClient({ plans, canManage }: PlanListClientProps) {
           <option value="all">All Categories</option>
           {SUPPORT_CATEGORY_OPTIONS.map((opt) => (
             <option key={opt.value} value={opt.value}>
-              {opt.emoji} {opt.label}
+              {opt.label}
             </option>
           ))}
         </select>

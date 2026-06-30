@@ -43,6 +43,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { Check, X } from "lucide-react";
 import { AskWattlePanel, AskWattleTrigger } from "./ask-wattle-panel";
 import { WattleCommandPalette } from "./wattle-command-palette";
 import { GlowOverlay } from "@/components/domain/glow/glow-overlay";
@@ -117,7 +118,7 @@ function WattleNotificationToast({
             color: "var(--wattle-cream)",
           }}
         >
-          ✓
+          <Check className="h-3.5 w-3.5" aria-hidden />
         </span>
 
         <div className="flex-1 min-w-0">
@@ -142,7 +143,7 @@ function WattleNotificationToast({
             style={{ color: "var(--wattle-brown)" }}
             aria-label="Dismiss"
           >
-            ✕
+            <X className="h-3.5 w-3.5" aria-hidden />
           </button>
           <button
             onClick={onOpen}

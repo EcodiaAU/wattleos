@@ -11,6 +11,7 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { Check } from "lucide-react";
 import {
   approveInstance,
   requestInstanceChanges,
@@ -199,10 +200,10 @@ export function ReviewClient({ instance }: Props) {
           }}
         >
           <p
-            className="text-sm font-semibold"
+            className="text-sm font-semibold inline-flex items-center gap-1.5"
             style={{ color: "var(--color-success-fg, #15803d)" }}
           >
-            ✓ Approved
+            <Check className="h-4 w-4" aria-hidden /> Approved
             {instance.approved_at && (
               <>
                 {" "}

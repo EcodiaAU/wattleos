@@ -4,6 +4,7 @@
 // Lists all students with attendance rates below the configured
 // thresholds. Provides quick flagging and links to per-student detail.
 
+import { Settings } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
@@ -52,9 +53,9 @@ export default async function ChronicAbsencePage() {
           {canManage && (
             <Link
               href="/attendance/chronic-absence/config"
-              className="touch-target active-push rounded-lg border border-border bg-background px-4 py-2 text-sm font-medium hover:bg-muted transition-colors"
+              className="touch-target active-push inline-flex items-center gap-1.5 rounded-lg border border-border bg-background px-4 py-2 text-sm font-medium hover:bg-muted transition-colors"
             >
-              ⚙️ Settings
+              <Settings className="h-4 w-4" aria-hidden /> Settings
             </Link>
           )}
         </div>

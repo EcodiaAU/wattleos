@@ -6,6 +6,7 @@
 // Staff tap the card to confirm a dismissal or flag an exception.
 
 import { useState } from "react";
+import { AlertTriangle, Check } from "lucide-react";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import { confirmDismissal, flagDismissalException } from "@/lib/actions/dismissal";
 import type {
@@ -186,8 +187,8 @@ export function StudentDismissalCard({
                 color: "var(--dismissal-exception-fg)",
               }}
             >
-              <p className="font-medium">
-                ⚠️ {EXCEPTION_LABELS[record.exception_reason] ?? record.exception_reason}
+              <p className="inline-flex items-center gap-1.5 font-medium">
+                <AlertTriangle className="h-4 w-4 flex-shrink-0" aria-hidden /> {EXCEPTION_LABELS[record.exception_reason] ?? record.exception_reason}
               </p>
               {record.exception_notes && (
                 <p className="mt-1 opacity-80">{record.exception_notes}</p>
@@ -230,7 +231,7 @@ export function StudentDismissalCard({
             <div className="flex gap-2 flex-wrap">
               <button
                 type="button"
-                className="flex-1 touch-target rounded-lg px-3 py-2 text-sm font-medium active-push"
+                className="flex-1 inline-flex items-center justify-center gap-1.5 touch-target rounded-lg px-3 py-2 text-sm font-medium active-push"
                 style={{
                   backgroundColor: "var(--dismissal-confirmed-bg)",
                   color: "var(--dismissal-confirmed-fg)",
@@ -243,11 +244,11 @@ export function StudentDismissalCard({
                   setError(null);
                 }}
               >
-                ✓ {record.status === "confirmed" ? "Update" : "Confirm"}
+                <Check className="h-4 w-4" aria-hidden /> {record.status === "confirmed" ? "Update" : "Confirm"}
               </button>
               <button
                 type="button"
-                className="touch-target rounded-lg px-3 py-2 text-sm font-medium active-push"
+                className="inline-flex items-center justify-center gap-1.5 touch-target rounded-lg px-3 py-2 text-sm font-medium active-push"
                 style={{
                   backgroundColor: "var(--dismissal-exception-bg)",
                   color: "var(--dismissal-exception-fg)",
@@ -260,7 +261,7 @@ export function StudentDismissalCard({
                   setError(null);
                 }}
               >
-                ⚠ Exception
+                <AlertTriangle className="h-4 w-4" aria-hidden /> Exception
               </button>
             </div>
           )}

@@ -14,6 +14,7 @@
 // The search query is passed from searchParams instead.
 // ============================================================
 
+import { Search, Blocks } from "lucide-react";
 import { MaterialSearchInput } from "@/components/domain/curriculum-content/material-search-input";
 import {
   searchNodesByMaterial,
@@ -80,7 +81,7 @@ export default async function MaterialsPage({
 
           {results.length === 0 && q.trim().length > 0 ? (
             <div className="rounded-lg border border-dashed border-border p-8 text-center">
-              <div className="text-3xl mb-2">🔍</div>
+              <Search className="mx-auto mb-2 h-10 w-10 text-muted-foreground" aria-hidden />
               <h3 className="text-sm font-medium mb-1">No outcomes found</h3>
               <p className="text-xs text-muted-foreground max-w-sm mx-auto">
                 No curriculum outcomes reference &quot;{q}&quot; in their
@@ -105,7 +106,7 @@ export default async function MaterialsPage({
       {/* Initial State - no search yet */}
       {!q && (
         <div className="rounded-lg border border-dashed border-border p-12 text-center">
-          <div className="text-4xl mb-3">🧱</div>
+          <Blocks className="mx-auto mb-3 h-12 w-12 text-muted-foreground" aria-hidden />
           <h3 className="text-lg font-medium mb-1">Search by Material</h3>
           <p className="text-sm text-muted-foreground max-w-md mx-auto">
             Enter a Montessori material name above to discover which curriculum

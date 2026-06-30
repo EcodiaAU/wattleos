@@ -20,6 +20,16 @@ import type {
   AnnouncementPriority,
 } from "@/lib/actions/comms/announcements";
 import type { Class } from "@/types/domain";
+import {
+  Info,
+  Megaphone,
+  AlertTriangle,
+  Siren,
+  Pin,
+  BookOpen,
+  Paperclip,
+  type LucideIcon,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 
 // ============================================================
@@ -31,31 +41,31 @@ import { useEffect, useState } from "react";
 
 const PRIORITY_CONFIG: Record<
   AnnouncementPriority,
-  { label: string; color: string; bgColor: string; icon: string }
+  { label: string; color: string; bgColor: string; icon: LucideIcon }
 > = {
   low: {
     label: "Low",
     color: "text-muted-foreground",
     bgColor: "bg-muted",
-    icon: "ℹ️",
+    icon: Info,
   },
   normal: {
     label: "Normal",
     color: "text-info",
     bgColor: "bg-info/10",
-    icon: "📢",
+    icon: Megaphone,
   },
   high: {
     label: "High",
     color: "text-primary",
     bgColor: "bg-primary/15",
-    icon: "⚠️",
+    icon: AlertTriangle,
   },
   urgent: {
     label: "Urgent",
     color: "text-destructive",
     bgColor: "bg-destructive/15",
-    icon: "🚨",
+    icon: Siren,
   },
 };
 
@@ -124,7 +134,7 @@ export function ParentAnnouncementFeed({
               <div className="flex items-center gap-2 flex-wrap">
                 {announcement.pin_to_top && (
                   <span className="inline-flex items-center gap-1 rounded-full bg-primary/15 px-2 py-0.5 text-[10px] font-semibold text-primary">
-                    📌 Pinned
+                    <Pin className="h-3 w-3" aria-hidden /> Pinned
                   </span>
                 )}
                 {(announcement.priority === "urgent" ||
@@ -132,13 +142,17 @@ export function ParentAnnouncementFeed({
                   <span
                     className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold ${config.bgColor} ${config.color}`}
                   >
-                    {config.icon} {config.label}
+                    {(() => {
+                      const Icon = config.icon;
+                      return <Icon className="h-3 w-3" aria-hidden />;
+                    })()}{" "}
+                    {config.label}
                   </span>
                 )}
                 {announcement.scope === "class" &&
                   announcement.target_class && (
-                    <span className="inline-flex items-center rounded-full bg-info/10 px-2 py-0.5 text-[10px] font-medium text-info">
-                      📚 {announcement.target_class.name}
+                    <span className="inline-flex items-center gap-1 rounded-full bg-info/10 px-2 py-0.5 text-[10px] font-medium text-info">
+                      <BookOpen className="h-3 w-3" aria-hidden /> {announcement.target_class.name}
                     </span>
                   )}
                 {isUnacknowledged && (
@@ -165,7 +179,7 @@ export function ParentAnnouncementFeed({
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1 rounded-md border bg-muted/50 px-2 py-1 text-xs text-muted-foreground hover:bg-muted"
                     >
-                      📎 {attachment.name}
+                      <Paperclip className="h-3 w-3" aria-hidden /> {attachment.name}
                     </a>
                   ))}
                 </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { MapPin, Target, ClipboardList } from "lucide-react";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import type { EmergencyCoordinationConfigData } from "@/types/domain";
 import { EmergencyActivationButton } from "./emergency-activation-button";
@@ -48,7 +49,7 @@ export function EmergencyCoordinationConfigClient({
           className="active-push card-interactive rounded-[var(--radius-lg)] border border-border p-4 text-center"
           style={{ backgroundColor: "var(--card)" }}
         >
-          <span className="text-2xl block mb-1">📍</span>
+          <MapPin className="h-6 w-6 mx-auto mb-1" aria-hidden />
           <span className="text-sm font-medium" style={{ color: "var(--foreground)" }}>
             Zones & Assembly Points
           </span>
@@ -63,7 +64,7 @@ export function EmergencyCoordinationConfigClient({
           className="active-push card-interactive rounded-[var(--radius-lg)] border border-border p-4 text-center"
           style={{ backgroundColor: "var(--card)" }}
         >
-          <span className="text-2xl block mb-1">🎯</span>
+          <Target className="h-6 w-6 mx-auto mb-1" aria-hidden />
           <span className="text-sm font-medium" style={{ color: "var(--foreground)" }}>
             Live Coordination
           </span>
@@ -78,7 +79,7 @@ export function EmergencyCoordinationConfigClient({
           className="active-push card-interactive rounded-[var(--radius-lg)] border border-border p-4 text-center"
           style={{ backgroundColor: "var(--card)" }}
         >
-          <span className="text-2xl block mb-1">📋</span>
+          <ClipboardList className="h-6 w-6 mx-auto mb-1" aria-hidden />
           <span className="text-sm font-medium" style={{ color: "var(--foreground)" }}>
             Event History
           </span>

@@ -4,6 +4,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { AlertTriangle } from "lucide-react";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import { createAssignment } from "@/lib/actions/volunteers";
 import type { VolunteerWithWwccStatus } from "@/types/domain";
@@ -169,7 +170,8 @@ export function AssignmentForm({
                 marginTop: "0.25rem",
               }}
             >
-              ⚠ {wwccWarning}
+              <AlertTriangle className="inline h-4 w-4 align-text-bottom" aria-hidden />{" "}
+              {wwccWarning}
             </p>
           )}
         </div>

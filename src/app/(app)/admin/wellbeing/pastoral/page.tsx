@@ -1,3 +1,4 @@
+import { FileText } from "lucide-react";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { getTenantContext, hasPermission } from "@/lib/auth/tenant-context";
@@ -57,7 +58,7 @@ export default async function PastoralRecordsPage() {
 
       {records.length === 0 ? (
         <div className="rounded-lg border border-border p-12 text-center" style={{ backgroundColor: "var(--card)" }}>
-          <div className="mx-auto mb-3 text-4xl" style={{ color: "var(--empty-state-icon)" }}>📝</div>
+          <FileText className="mx-auto mb-3 h-12 w-12" style={{ color: "var(--empty-state-icon)" }} aria-hidden />
           <p className="text-sm font-medium" style={{ color: "var(--foreground)" }}>No pastoral records</p>
           <p className="mt-1 text-xs" style={{ color: "var(--muted-foreground)" }}>
             Pastoral care records and concern notes will appear here.
@@ -89,7 +90,7 @@ export default async function PastoralRecordsPage() {
                   </p>
                 </div>
                 <div className="flex flex-col items-end gap-1.5">
-                  <PastoralCategoryBadge category={rec.category} size="sm" showEmoji />
+                  <PastoralCategoryBadge category={rec.category} size="sm" showIcon />
                   {!rec.parent_contacted && (
                     <span
                       className="rounded-full px-2 py-0.5 text-xs font-medium"

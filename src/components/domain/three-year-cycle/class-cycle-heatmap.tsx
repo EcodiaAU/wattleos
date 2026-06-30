@@ -7,6 +7,8 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { Brush, Eye, Languages, Calculator, Globe } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import type {
   ClassCycleReport,
   CycleAreaMastery,
@@ -29,12 +31,12 @@ const AREA_LABELS: Record<MontessoriArea, string> = {
   cultural: "Cultural",
 };
 
-const AREA_EMOJIS: Record<MontessoriArea, string> = {
-  practical_life: "🧹",
-  sensorial: "👁️",
-  language: "🔤",
-  mathematics: "🔢",
-  cultural: "🌍",
+const AREA_ICONS: Record<MontessoriArea, LucideIcon> = {
+  practical_life: Brush,
+  sensorial: Eye,
+  language: Languages,
+  mathematics: Calculator,
+  cultural: Globe,
 };
 
 // Generates a CSS background for a given mastery pct using a
@@ -220,19 +222,25 @@ export function ClassCycleHeatmap({
                 >
                   Band
                 </th>
-                {AREAS.map((area) => (
-                  <th
-                    key={area}
-                    className="px-3 py-2.5 text-center font-medium"
-                    style={{
-                      color: "var(--muted-foreground)",
-                      minWidth: 110,
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    {AREA_EMOJIS[area]} {AREA_LABELS[area]}
-                  </th>
-                ))}
+                {AREAS.map((area) => {
+                  const AreaIcon = AREA_ICONS[area];
+                  return (
+                    <th
+                      key={area}
+                      className="px-3 py-2.5 text-center font-medium"
+                      style={{
+                        color: "var(--muted-foreground)",
+                        minWidth: 110,
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      <span className="inline-flex items-center gap-1">
+                        <AreaIcon className="h-4 w-4" aria-hidden />
+                        {AREA_LABELS[area]}
+                      </span>
+                    </th>
+                  );
+                })}
                 <th
                   className="px-3 py-2.5 text-center font-medium"
                   style={{ color: "var(--muted-foreground)", minWidth: 90 }}

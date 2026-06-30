@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { PartyPopper, Search } from "lucide-react";
 import type {
   ImmunisationDashboardData,
   ImmunisationRecordWithStudent,
@@ -182,10 +183,14 @@ export function ImmunisationDashboardClient({
       {filtered.length === 0 ? (
         <div className="py-12 text-center">
           <div
-            className="mx-auto mb-3 text-4xl"
+            className="mx-auto mb-3 flex justify-center"
             style={{ color: "var(--empty-state-icon)" }}
           >
-            {non_compliant.length === 0 ? "🎉" : "🔍"}
+            {non_compliant.length === 0 ? (
+              <PartyPopper className="h-10 w-10" aria-hidden />
+            ) : (
+              <Search className="h-10 w-10" aria-hidden />
+            )}
           </div>
           <p
             className="text-sm font-medium"

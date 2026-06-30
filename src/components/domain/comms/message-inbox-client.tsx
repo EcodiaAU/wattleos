@@ -197,6 +197,7 @@ export function MessageInboxClient({
         <div className="divide-y divide-gray-200 rounded-lg border border-border bg-background shadow-sm">
           {threads.map((thread) => {
             const typeConfig = THREAD_TYPE_CONFIG[thread.thread_type];
+            const ThreadIcon = typeConfig.icon;
             const hasUnread = thread.unread_count > 0;
             const lastMsg = thread.last_message;
             const lastSender = thread.last_message_sender;
@@ -239,9 +240,9 @@ export function MessageInboxClient({
                         {thread.subject || "No subject"}
                       </span>
                       <span
-                        className={`inline-flex items-center rounded-full px-1.5 py-0.5 text-[10px] font-medium ${typeConfig.bgColor} ${typeConfig.color}`}
+                        className={`inline-flex items-center gap-1 rounded-full px-1.5 py-0.5 text-[10px] font-medium ${typeConfig.bgColor} ${typeConfig.color}`}
                       >
-                        {typeConfig.icon}{" "}
+                        <ThreadIcon className="h-3 w-3" aria-hidden />
                         {thread.target_class?.name ?? typeConfig.label}
                       </span>
                     </div>

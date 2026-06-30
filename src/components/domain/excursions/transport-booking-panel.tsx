@@ -8,6 +8,7 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { Phone, Mail, Bus } from "lucide-react";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import {
   upsertTransportBooking,
@@ -102,8 +103,8 @@ function BookingReadView({
           className="flex flex-wrap gap-x-3 gap-y-0.5 text-xs"
           style={{ color: "var(--muted-foreground)" }}
         >
-          {booking.company_phone && <span>📞 {booking.company_phone}</span>}
-          {booking.company_email && <span>✉️ {booking.company_email}</span>}
+          {booking.company_phone && <span className="inline-flex items-center gap-1"><Phone className="h-3.5 w-3.5" aria-hidden /> {booking.company_phone}</span>}
+          {booking.company_email && <span className="inline-flex items-center gap-1"><Mail className="h-3.5 w-3.5" aria-hidden /> {booking.company_email}</span>}
           {booking.booking_reference && <span>Ref: {booking.booking_reference}</span>}
         </div>
       </div>
@@ -136,8 +137,8 @@ function BookingReadView({
               </p>
             )}
             {booking.driver_phone && (
-              <p className="text-xs" style={{ color: "var(--muted-foreground)" }}>
-                📞 {booking.driver_phone}
+              <p className="inline-flex items-center gap-1 text-xs" style={{ color: "var(--muted-foreground)" }}>
+                <Phone className="h-3.5 w-3.5" aria-hidden /> {booking.driver_phone}
               </p>
             )}
             {booking.driver_licence_number && (
@@ -690,13 +691,11 @@ export function TransportBookingPanel({
   if (!booking && !editing) {
     return (
       <div className="flex flex-col items-center gap-3 py-6 text-center">
-        <span
-          className="text-3xl"
+        <Bus
+          className="h-10 w-10"
           style={{ color: "var(--empty-state-icon)" }}
           aria-hidden="true"
-        >
-          🚌
-        </span>
+        />
         <p className="text-sm" style={{ color: "var(--muted-foreground)" }}>
           No transport booking added yet.
         </p>

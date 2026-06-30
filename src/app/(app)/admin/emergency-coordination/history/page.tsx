@@ -1,3 +1,4 @@
+import { ClipboardList } from "lucide-react";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import {
@@ -83,10 +84,10 @@ export default async function EmergencyHistoryPage() {
       {events.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-12">
           <span
-            className="text-3xl mb-3"
+            className="mb-3"
             style={{ color: "var(--empty-state-icon)" }}
           >
-            📋
+            <ClipboardList className="h-10 w-10" aria-hidden />
           </span>
           <p
             className="text-sm font-medium"

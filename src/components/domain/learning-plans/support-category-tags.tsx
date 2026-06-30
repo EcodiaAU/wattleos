@@ -14,6 +14,7 @@ export function SupportCategoryTags({ categories }: SupportCategoryTagsProps) {
     <div className="flex flex-wrap gap-1.5">
       {categories.map((cat) => {
         const cfg = SUPPORT_CATEGORY_CONFIG[cat];
+        const Icon = cfg.icon;
         return (
           <span
             key={cat}
@@ -23,7 +24,7 @@ export function SupportCategoryTags({ categories }: SupportCategoryTagsProps) {
               color: "var(--muted-foreground)",
             }}
           >
-            <span>{cfg.emoji}</span>
+            <Icon className="h-3.5 w-3.5" aria-hidden />
             {cfg.label}
           </span>
         );

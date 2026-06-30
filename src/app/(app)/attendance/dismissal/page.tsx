@@ -8,6 +8,8 @@
 // person, bus no-show, etc.).
 // ============================================================
 
+import { Bus, ClipboardList, Settings } from "lucide-react";
+
 import { getTenantContext, hasPermission } from "@/lib/auth/tenant-context";
 import { Permissions } from "@/lib/constants/permissions";
 import Link from "next/link";
@@ -58,7 +60,7 @@ export default async function DismissalPage() {
               color: "var(--foreground)",
             }}
           >
-            📋 History
+            <ClipboardList className="h-4 w-4" aria-hidden /> History
           </Link>
           {canManage && (
             <>
@@ -70,7 +72,7 @@ export default async function DismissalPage() {
                   color: "var(--foreground)",
                 }}
               >
-                ⚙️ Student setup
+                <Settings className="h-4 w-4" aria-hidden /> Student setup
               </Link>
               <Link
                 href="/attendance/dismissal/routes"
@@ -80,7 +82,7 @@ export default async function DismissalPage() {
                   color: "var(--foreground)",
                 }}
               >
-                🚌 Bus routes
+                <Bus className="h-4 w-4" aria-hidden /> Bus routes
               </Link>
             </>
           )}

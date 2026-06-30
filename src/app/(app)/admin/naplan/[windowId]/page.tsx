@@ -2,6 +2,7 @@
 //
 // NAPLAN window detail - cohort list, opt-out management, and summary stats.
 
+import { AlertTriangle } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -181,7 +182,11 @@ export default async function NaplanWindowDetailPage({ params }: Props) {
             background: "var(--naplan-needs-additional-support-bg)",
           }}
         >
-          <span className="text-lg">⚠️</span>
+          <AlertTriangle
+            className="h-5 w-5 shrink-0"
+            style={{ color: "var(--naplan-needs-additional-support)" }}
+            aria-hidden
+          />
           <p
             className="text-sm font-medium"
             style={{ color: "var(--naplan-needs-additional-support)" }}

@@ -8,6 +8,25 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import {
+  Speech,
+  Ruler,
+  Footprints,
+  Search,
+  Music,
+  Handshake,
+  BookOpen,
+  Pencil,
+  Calculator,
+  Eye,
+  Sprout,
+  Zap,
+  Flame,
+  Sunrise,
+  Check,
+  Circle,
+  type LucideIcon,
+} from "lucide-react";
 
 import {
   closeSensitivePeriod,
@@ -28,86 +47,86 @@ import type {
 
 const SENSITIVE_PERIOD_INFO: Record<
   MontessoriSensitivePeriod,
-  { label: string; emoji: string; description: string }
+  { label: string; icon: LucideIcon; description: string }
 > = {
   language: {
     label: "Language",
-    emoji: "🗣️",
+    icon: Speech,
     description: "Intense absorption of spoken language; birth to ~6 years.",
   },
   order: {
     label: "Order",
-    emoji: "📐",
+    icon: Ruler,
     description:
       "Need for consistency, predictability, and arrangement; ~1.5–4 years.",
   },
   movement: {
     label: "Movement",
-    emoji: "🏃",
+    icon: Footprints,
     description:
       "Developing gross and fine motor coordination; birth to ~2.5 years.",
   },
   small_objects: {
     label: "Small Objects",
-    emoji: "🔍",
+    icon: Search,
     description:
       "Fascination with tiny objects and precise manipulation; ~18 months–3 years.",
   },
   music: {
     label: "Music",
-    emoji: "🎵",
+    icon: Music,
     description: "Receptivity to pitch, rhythm, and melody; birth to ~6 years.",
   },
   social_behavior: {
     label: "Social Behaviour",
-    emoji: "🤝",
+    icon: Handshake,
     description:
       "Learning social norms and forming relationships; ~2.5–6 years.",
   },
   reading: {
     label: "Reading",
-    emoji: "📖",
+    icon: BookOpen,
     description: "Emergence of symbol–sound connections; ~3.5–5.5 years.",
   },
   writing: {
     label: "Writing",
-    emoji: "✏️",
+    icon: Pencil,
     description: "Muscle readiness and letter formation; ~3.5–5 years.",
   },
   mathematics: {
     label: "Mathematics",
-    emoji: "🔢",
+    icon: Calculator,
     description: "Abstract quantity and symbol abstraction; ~4–6 years.",
   },
   refinement_of_senses: {
     label: "Refinement of Senses",
-    emoji: "👁️",
+    icon: Eye,
     description: "Isolating and discriminating sensory input; ~2–6 years.",
   },
 };
 
 const INTENSITY_META: Record<
   SensitivePeriodIntensity,
-  { label: string; emoji: string; description: string }
+  { label: string; icon: LucideIcon; description: string }
 > = {
   emerging: {
     label: "Emerging",
-    emoji: "🌱",
+    icon: Sprout,
     description: "Early signs of the period beginning",
   },
   active: {
     label: "Active",
-    emoji: "⚡",
+    icon: Zap,
     description: "Clearly observable; child returning repeatedly",
   },
   peak: {
     label: "Peak",
-    emoji: "🔥",
+    icon: Flame,
     description: "Strongest point - child is highly focused",
   },
   waning: {
     label: "Waning",
-    emoji: "🌅",
+    icon: Sunrise,
     description: "Period naturally subsiding",
   },
 };
@@ -296,7 +315,9 @@ export function SensitivePeriodForm({
               MontessoriSensitivePeriod,
               (typeof SENSITIVE_PERIOD_INFO)[MontessoriSensitivePeriod],
             ][]
-          ).map(([key, info]) => (
+          ).map(([key, info]) => {
+            const PeriodIcon = info.icon;
+            return (
             <button
               key={key}
               type="button"
@@ -318,12 +339,13 @@ export function SensitivePeriodForm({
                     }
               }
             >
-              <span className="text-lg leading-none">{info.emoji}</span>
+              <PeriodIcon className="h-5 w-5 shrink-0" aria-hidden />
               <div>
                 <p className="text-xs font-semibold">{info.label}</p>
               </div>
             </button>
-          ))}
+            );
+          })}
         </div>
         {periodInfo && (
           <p
@@ -349,7 +371,9 @@ export function SensitivePeriodForm({
               SensitivePeriodIntensity,
               (typeof INTENSITY_META)[SensitivePeriodIntensity],
             ][]
-          ).map(([key, meta]) => (
+          ).map(([key, meta]) => {
+            const IntensityIcon = meta.icon;
+            return (
             <button
               key={key}
               type="button"
@@ -368,9 +392,10 @@ export function SensitivePeriodForm({
                   : { color: "var(--foreground)" }
               }
             >
-              {meta.emoji} {meta.label}
+              <IntensityIcon className="h-4 w-4" aria-hidden /> {meta.label}
             </button>
-          ))}
+            );
+          })}
         </div>
         <p
           className="mt-1 text-xs"
@@ -464,7 +489,13 @@ export function SensitivePeriodForm({
                         : { color: "var(--foreground)" }
                     }
                   >
-                    <span className="shrink-0">{isSelected ? "✓" : "○"}</span>
+                    <span className="shrink-0">
+                      {isSelected ? (
+                        <Check className="h-4 w-4" aria-hidden />
+                      ) : (
+                        <Circle className="h-4 w-4" aria-hidden />
+                      )}
+                    </span>
                     <span className="flex-1">{m.name}</span>
                     <span
                       className="text-xs capitalize"
@@ -507,7 +538,13 @@ export function SensitivePeriodForm({
                           : { color: "var(--foreground)" }
                       }
                     >
-                      <span className="shrink-0">{isSelected ? "✓" : "○"}</span>
+                      <span className="shrink-0">
+                      {isSelected ? (
+                        <Check className="h-4 w-4" aria-hidden />
+                      ) : (
+                        <Circle className="h-4 w-4" aria-hidden />
+                      )}
+                    </span>
                       <span className="flex-1">{m.name}</span>
                       <span
                         className="text-xs capitalize"

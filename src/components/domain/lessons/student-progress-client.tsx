@@ -1,5 +1,7 @@
 "use client";
 
+import { Home, Hand, BookOpen, Calculator, Globe, type LucideIcon } from "lucide-react";
+
 import type { StudentLessonProgressSummary } from "@/lib/actions/lesson-tracking";
 
 const AREA_LABELS: Record<string, string> = {
@@ -10,12 +12,12 @@ const AREA_LABELS: Record<string, string> = {
   cultural: "Cultural",
 };
 
-const AREA_EMOJI: Record<string, string> = {
-  practical_life: "🏠",
-  sensorial: "👐",
-  language: "📖",
-  mathematics: "🔢",
-  cultural: "🌍",
+const AREA_ICON: Record<string, LucideIcon> = {
+  practical_life: Home,
+  sensorial: Hand,
+  language: BookOpen,
+  mathematics: Calculator,
+  cultural: Globe,
 };
 
 const STAGE_LABELS: Record<string, string> = {
@@ -127,7 +129,9 @@ export function StudentProgressClient({
           Curriculum Areas
         </h2>
 
-        {data.areas.map((area) => (
+        {data.areas.map((area) => {
+          const AreaIcon = AREA_ICON[area.area] ?? BookOpen;
+          return (
           <div
             key={area.area}
             className="rounded-[var(--radius-md)] border border-border p-4"
@@ -135,9 +139,7 @@ export function StudentProgressClient({
           >
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-2">
-                <span className="text-lg">
-                  {AREA_EMOJI[area.area] ?? "📚"}
-                </span>
+                <AreaIcon className="h-5 w-5" aria-hidden />
                 <span
                   className="font-medium text-sm"
                   style={{ color: "var(--foreground)" }}
@@ -210,7 +212,8 @@ export function StudentProgressClient({
               </span>
             </div>
           </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* Recent lessons */}

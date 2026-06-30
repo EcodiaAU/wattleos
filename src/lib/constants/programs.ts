@@ -10,6 +10,18 @@
 // across list pages, detail pages, badges, and reports.
 // ============================================================
 
+import type { LucideIcon } from "lucide-react";
+import {
+  Sunrise,
+  Sunset,
+  TreePalm,
+  Palette,
+  Clock,
+  GraduationCap,
+  BookOpen,
+  ClipboardList,
+} from "lucide-react";
+
 // ============================================================
 // Program Types
 // ============================================================
@@ -42,7 +54,7 @@ export const PROGRAM_TYPE_CONFIG: Record<
     shortLabel: string;
     badgeBg: string;
     badgeText: string;
-    icon: string;
+    icon: LucideIcon;
   }
 > = {
   before_school_care: {
@@ -50,56 +62,56 @@ export const PROGRAM_TYPE_CONFIG: Record<
     shortLabel: "BSC",
     badgeBg: "bg-amber-100",
     badgeText: "text-amber-700",
-    icon: "🌅",
+    icon: Sunrise,
   },
   after_school_care: {
     label: "After School Care",
     shortLabel: "ASC",
     badgeBg: "bg-orange-100",
     badgeText: "text-orange-700",
-    icon: "🌇",
+    icon: Sunset,
   },
   vacation_care: {
     label: "Vacation Care",
     shortLabel: "VAC",
     badgeBg: "bg-sky-100",
     badgeText: "text-sky-700",
-    icon: "🏖️",
+    icon: TreePalm,
   },
   extracurricular: {
     label: "Extracurricular",
     shortLabel: "EXT",
     badgeBg: "bg-purple-100",
     badgeText: "text-purple-700",
-    icon: "🎨",
+    icon: Palette,
   },
   extended_day: {
     label: "Extended Day",
     shortLabel: "EXT DAY",
     badgeBg: "bg-teal-100",
     badgeText: "text-teal-700",
-    icon: "🕐",
+    icon: Clock,
   },
   adolescent_program: {
     label: "Adolescent Program",
     shortLabel: "ADOL",
     badgeBg: "bg-indigo-100",
     badgeText: "text-indigo-700",
-    icon: "🧑‍🎓",
+    icon: GraduationCap,
   },
   senior_elective: {
     label: "Senior Elective",
     shortLabel: "ELECT",
     badgeBg: "bg-rose-100",
     badgeText: "text-rose-700",
-    icon: "📚",
+    icon: BookOpen,
   },
   other: {
     label: "Other",
     shortLabel: "OTHER",
     badgeBg: "bg-gray-100",
     badgeText: "text-gray-700",
-    icon: "📋",
+    icon: ClipboardList,
   },
 };
 

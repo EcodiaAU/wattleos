@@ -15,6 +15,7 @@ export function WellbeingFlagCard({ flag }: Props) {
   const student = flag.students;
   const studentName = student.preferred_name ?? student.first_name;
   const catCfg = PASTORAL_CATEGORY_CONFIG[flag.category];
+  const CatIcon = catCfg.icon;
 
   return (
     <Link href={`/admin/wellbeing/flags/${flag.id}`} className="block">
@@ -34,11 +35,11 @@ export function WellbeingFlagCard({ flag }: Props) {
         </div>
         <div className="flex items-center gap-2 flex-wrap">
           <WellbeingStatusBadge status={flag.status} size="sm" />
-          <PastoralCategoryBadge category={flag.category} size="sm" showEmoji />
+          <PastoralCategoryBadge category={flag.category} size="sm" showIcon />
         </div>
         <div className="flex items-center justify-between text-xs text-muted-foreground">
-          <span>
-            {catCfg.emoji} {flag.category}
+          <span className="inline-flex items-center gap-1">
+            <CatIcon className="h-3.5 w-3.5" aria-hidden /> {flag.category}
           </span>
           <span>
             {new Date(flag.created_at).toLocaleDateString("en-AU", {

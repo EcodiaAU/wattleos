@@ -5,6 +5,7 @@
 
 import type { SchoolEventWithDetails } from "@/lib/actions/comms/school-events";
 import { EVENT_TYPE_ICONS } from "@/lib/constants/communications";
+import { Check, ClipboardList, X } from "lucide-react";
 import Link from "next/link";
 
 interface EventCardProps {
@@ -63,9 +64,15 @@ export function EventCard({ event }: EventCardProps) {
           </div>
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2">
-              <span className="text-base">
-                {EVENT_TYPE_ICONS[event.event_type] ?? "📋"}
-              </span>
+              {(() => {
+                const Icon = EVENT_TYPE_ICONS[event.event_type] ?? ClipboardList;
+                return (
+                  <Icon
+                    className="h-4 w-4 text-muted-foreground"
+                    aria-hidden
+                  />
+                );
+              })()}
               <span className="text-xs font-medium text-muted-foreground">
                 {EVENT_TYPE_LABELS[event.event_type] ?? event.event_type}
               </span>
@@ -105,8 +112,8 @@ export function EventCard({ event }: EventCardProps) {
         {/* ── RSVP summary ────────────────────────────── */}
         {event.rsvp_enabled && totalRsvps > 0 && (
           <div className="mt-3 flex items-center gap-3 text-xs">
-            <span className="text-success">
-              ✓ {event.rsvp_summary.going} going
+            <span className="inline-flex items-center gap-1 text-success">
+              <Check className="h-3.5 w-3.5" aria-hidden /> {event.rsvp_summary.going} going
             </span>
             {event.rsvp_summary.maybe > 0 && (
               <span className="text-primary">
@@ -114,8 +121,8 @@ export function EventCard({ event }: EventCardProps) {
               </span>
             )}
             {event.rsvp_summary.not_going > 0 && (
-              <span className="text-muted-foreground">
-                ✗ {event.rsvp_summary.not_going}
+              <span className="inline-flex items-center gap-1 text-muted-foreground">
+                <X className="h-3.5 w-3.5" aria-hidden /> {event.rsvp_summary.not_going}
               </span>
             )}
           </div>

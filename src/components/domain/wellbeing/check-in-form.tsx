@@ -331,6 +331,7 @@ export function CheckInForm({
             <div className="flex gap-2">
               {[1, 2, 3, 4, 5].map((r) => {
                 const cfg = MOOD_RATING_CONFIG[r];
+                const MoodIcon = cfg.icon;
                 return (
                   <button
                     key={r}
@@ -348,7 +349,11 @@ export function CheckInForm({
                         moodRating === r ? `${cfg.color}20` : "var(--card)",
                     }}
                   >
-                    <div className="text-xl">{cfg.emoji}</div>
+                    <MoodIcon
+                      className="mx-auto h-6 w-6"
+                      style={{ color: cfg.color }}
+                      aria-hidden
+                    />
                     <div
                       className="mt-0.5 text-xs"
                       style={{ color: "var(--muted-foreground)" }}

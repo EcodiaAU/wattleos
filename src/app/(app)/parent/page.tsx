@@ -11,6 +11,8 @@
 // in parallel on the server for instant render.
 // ============================================================
 
+import { Camera } from "lucide-react";
+
 import { getChildOverview, getMyChildren } from "@/lib/actions/parent";
 import { getTenantContext } from "@/lib/auth/tenant-context";
 import Link from "next/link";
@@ -194,8 +196,9 @@ function ChildOverviewCard({ overview }: { overview: ChildOverview }) {
                     <p className="truncate text-foreground">
                       {obs.content?.slice(0, 80) ?? "Observation"}
                       {obs.mediaCount > 0 && (
-                        <span className="ml-1 text-muted-foreground">
-                          📷{obs.mediaCount}
+                        <span className="ml-1 inline-flex items-center gap-0.5 align-middle text-muted-foreground">
+                          <Camera className="h-3 w-3" aria-hidden />
+                          {obs.mediaCount}
                         </span>
                       )}
                     </p>

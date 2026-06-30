@@ -1,3 +1,4 @@
+import { Heart } from "lucide-react";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { getTenantContext, hasPermission } from "@/lib/auth/tenant-context";
@@ -60,7 +61,7 @@ export default async function WellbeingFlagsPage() {
 
       {flags.length === 0 ? (
         <div className="rounded-lg border border-border p-12 text-center" style={{ backgroundColor: "var(--card)" }}>
-          <div className="mx-auto mb-3 text-4xl" style={{ color: "var(--empty-state-icon)" }}>💚</div>
+          <Heart className="mx-auto mb-3 h-12 w-12" style={{ color: "var(--empty-state-icon)" }} aria-hidden />
           <p className="text-sm font-medium" style={{ color: "var(--foreground)" }}>No wellbeing flags</p>
           <p className="mt-1 text-xs" style={{ color: "var(--muted-foreground)" }}>
             Flags raised about student concerns will appear here.

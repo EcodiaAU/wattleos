@@ -18,6 +18,7 @@
 // page, not a confusing OAuth flow.
 // ============================================================
 
+import { Link as LinkIcon, CheckCircle2, XCircle, AlarmClock } from "lucide-react";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { InviteAcceptClient } from "./invite-accept-client";
 
@@ -73,7 +74,7 @@ export default async function InvitePage({ params }: InvitePageProps) {
     return (
       <div className="flex min-h-screen items-center justify-center px-4">
         <div className="max-w-sm text-center">
-          <div className="mb-4 text-5xl">🔗</div>
+          <LinkIcon className="mx-auto mb-4 h-12 w-12 text-muted-foreground" aria-hidden />
           <h1 className="text-xl font-bold text-foreground">
             Invalid Invitation
           </h1>
@@ -94,7 +95,7 @@ export default async function InvitePage({ params }: InvitePageProps) {
     return (
       <div className="flex min-h-screen items-center justify-center px-4">
         <div className="max-w-sm text-center">
-          <div className="mb-4 text-5xl">✓</div>
+          <CheckCircle2 className="mx-auto mb-4 h-12 w-12 text-muted-foreground" aria-hidden />
           <h1 className="text-xl font-bold text-foreground">Already Accepted</h1>
           <p className="mt-2 text-sm text-muted-foreground">
             This invitation has already been accepted. You can log in to
@@ -115,7 +116,7 @@ export default async function InvitePage({ params }: InvitePageProps) {
     return (
       <div className="flex min-h-screen items-center justify-center px-4">
         <div className="max-w-sm text-center">
-          <div className="mb-4 text-5xl">✕</div>
+          <XCircle className="mx-auto mb-4 h-12 w-12 text-muted-foreground" aria-hidden />
           <h1 className="text-xl font-bold text-foreground">
             Invitation Revoked
           </h1>
@@ -134,7 +135,7 @@ export default async function InvitePage({ params }: InvitePageProps) {
     return (
       <div className="flex min-h-screen items-center justify-center px-4">
         <div className="max-w-sm text-center">
-          <div className="mb-4 text-5xl">⏰</div>
+          <AlarmClock className="mx-auto mb-4 h-12 w-12 text-muted-foreground" aria-hidden />
           <h1 className="text-xl font-bold text-foreground">
             Invitation Expired
           </h1>

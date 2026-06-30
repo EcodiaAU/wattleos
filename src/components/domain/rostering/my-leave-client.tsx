@@ -68,7 +68,7 @@ export function MyLeaveClient({
                 <label className="mb-1 block text-xs font-medium" style={{ color: "var(--foreground)" }}>Leave Type</label>
                 <select name="leaveType" required className="w-full rounded-lg border border-border px-2 py-1.5 text-sm" style={{ backgroundColor: "var(--input)", color: "var(--foreground)" }}>
                   {LEAVE_TYPES.map((lt) => (
-                    <option key={lt} value={lt}>{LEAVE_TYPE_CONFIG[lt].emoji} {LEAVE_TYPE_CONFIG[lt].label}</option>
+                    <option key={lt} value={lt}>{LEAVE_TYPE_CONFIG[lt].label}</option>
                   ))}
                 </select>
               </div>
@@ -105,13 +105,14 @@ export function MyLeaveClient({
         <div className="space-y-2">
           {requests.map((lr) => {
             const config = LEAVE_TYPE_CONFIG[lr.leave_type];
+            const Icon = config.icon;
             return (
               <div key={lr.id} className="rounded-xl border border-border p-4" style={{ backgroundColor: "var(--card)" }}>
                 <div className="flex items-start justify-between">
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="font-medium" style={{ color: "var(--foreground)" }}>
-                        {config.emoji} {config.label}
+                      <span className="inline-flex items-center gap-1.5 font-medium" style={{ color: "var(--foreground)" }}>
+                        <Icon className="h-4 w-4" aria-hidden /> {config.label}
                       </span>
                       <LeaveStatusBadge status={lr.status} />
                     </div>

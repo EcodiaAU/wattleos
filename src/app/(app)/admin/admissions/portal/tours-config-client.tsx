@@ -12,6 +12,7 @@
 
 import { updateToursConfig } from "@/lib/actions/admissions/tours-config";
 import type { CustomField, ToursConfig } from "@/types/domain";
+import { X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
@@ -183,8 +184,9 @@ export function ToursConfigClient({ initialConfig }: ToursConfigClientProps) {
                   type="button"
                   onClick={() => removeQuestion(index)}
                   className="rounded p-1 text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-colors"
+                  aria-label="Remove question"
                 >
-                  ✕
+                  <X className="h-4 w-4" aria-hidden />
                 </button>
               </div>
             </div>

@@ -21,6 +21,7 @@
 
 "use client";
 
+import { CheckCircle2 } from "lucide-react";
 import { submitEnrollmentApplication } from "@/lib/actions/enroll";
 import type {
     ApplicationCustodyRestriction,
@@ -407,7 +408,7 @@ export function EnrollmentWizard({
   if (submitted) {
     return (
       <div className="mx-auto max-w-lg py-16 text-center">
-        <div className="mb-6 text-5xl">✓</div>
+        <CheckCircle2 className="mx-auto mb-6 h-12 w-12 text-success" aria-hidden />
         <h2 className="text-2xl font-bold text-foreground">
           Application Submitted
         </h2>

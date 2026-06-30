@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { Download } from "lucide-react";
 import {
   exportWorkerRegister,
   validateWorkerRegister,
@@ -105,7 +106,7 @@ export function WorkerRegisterExportButton() {
           </>
         ) : (
           <>
-            <span aria-hidden>📥</span>
+            <Download className="h-4 w-4" aria-hidden />
             Export Worker Register
           </>
         )}

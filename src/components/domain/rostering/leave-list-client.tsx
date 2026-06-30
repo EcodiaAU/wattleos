@@ -61,6 +61,7 @@ export function LeaveListClient({
         <div className="space-y-2">
           {filtered.map((lr) => {
             const leaveConfig = LEAVE_TYPE_CONFIG[lr.leave_type as LeaveType];
+            const Icon = leaveConfig?.icon;
             return (
               <div
                 key={lr.id}
@@ -79,10 +80,11 @@ export function LeaveListClient({
                       <LeaveStatusBadge status={lr.status} />
                     </div>
                     <p
-                      className="mt-1 text-sm"
+                      className="mt-1 inline-flex items-center gap-1.5 text-sm"
                       style={{ color: "var(--muted-foreground)" }}
                     >
-                      {leaveConfig?.emoji} {leaveConfig?.label ?? lr.leave_type}{" "}
+                      {Icon && <Icon className="h-4 w-4" aria-hidden />}{" "}
+                      {leaveConfig?.label ?? lr.leave_type}{" "}
                       - {lr.start_date} to {lr.end_date}
                       {lr.is_partial_day &&
                         ` (partial: ${lr.partial_start_time}–${lr.partial_end_time})`}

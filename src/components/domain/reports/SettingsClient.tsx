@@ -11,6 +11,7 @@
 
 import { useState, useTransition } from "react";
 import Link from "next/link";
+import { Check } from "lucide-react";
 import { updateReportSettings } from "@/lib/actions/reports/report-settings";
 import type { ReportSettings } from "@/lib/actions/reports/report-settings";
 
@@ -327,10 +328,10 @@ export function SettingsClient({ initialSettings, tenantName }: Props) {
           </button>
           {saved && (
             <span
-              className="text-sm font-medium"
+              className="text-sm font-medium inline-flex items-center gap-1.5"
               style={{ color: "var(--color-success-fg, #15803d)" }}
             >
-              ✓ Saved
+              <Check className="h-4 w-4" aria-hidden /> Saved
             </span>
           )}
         </div>

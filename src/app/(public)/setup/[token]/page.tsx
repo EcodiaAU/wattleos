@@ -17,6 +17,7 @@
 // Mirrors /invite/[token]/page.tsx in structure.
 // ============================================================
 
+import { X } from "lucide-react";
 import { createSupabaseAdminClient } from "@/lib/supabase/server";
 import { SetupAcceptClient } from "./setup-accept-client";
 
@@ -164,10 +165,10 @@ function ErrorPage({
     <div className="flex min-h-screen items-center justify-center px-4">
       <div className="max-w-sm space-y-4 text-center">
         <div
-          className="mx-auto flex h-14 w-14 items-center justify-center rounded-full text-2xl"
+          className="mx-auto flex h-14 w-14 items-center justify-center rounded-full"
           style={{ background: "var(--muted)" }}
         >
-          ✕
+          <X className="h-7 w-7" aria-hidden />
         </div>
         <h1
           className="text-xl font-bold"

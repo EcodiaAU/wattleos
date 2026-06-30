@@ -5,6 +5,7 @@
 // Admin bus route management page component
 
 import { useState } from "react";
+import { Bus, Building2, User, Phone, Car } from "lucide-react";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import { deleteBusRoute } from "@/lib/actions/dismissal";
 import type { BusRoute } from "@/types/domain";
@@ -104,7 +105,7 @@ export function BusRouteListClient({
 
       {activeRoutes.length === 0 && !showForm ? (
         <div className="text-center py-16 space-y-3">
-          <div className="text-4xl" style={{ color: "var(--empty-state-icon)" }}>🚌</div>
+          <Bus className="h-10 w-10 mx-auto" style={{ color: "var(--empty-state-icon)" }} aria-hidden />
           <p className="font-medium" style={{ color: "var(--foreground)" }}>No bus routes configured</p>
           {canManage && (
             <p className="text-sm" style={{ color: "var(--muted-foreground)" }}>
@@ -123,8 +124,8 @@ export function BusRouteListClient({
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
                   <div className="flex items-center gap-2">
-                    <span className="font-semibold" style={{ color: "var(--foreground)" }}>
-                      🚌 {route.route_name}
+                    <span className="inline-flex items-center gap-1.5 font-semibold" style={{ color: "var(--foreground)" }}>
+                      <Bus className="h-4 w-4" aria-hidden /> {route.route_name}
                     </span>
                     {route.depart_time && (
                       <span
@@ -146,10 +147,10 @@ export function BusRouteListClient({
 
                   {/* Details row */}
                   <div className="flex flex-wrap gap-x-4 gap-y-1 mt-2 text-xs" style={{ color: "var(--muted-foreground)" }}>
-                    {route.operator_name && <span>🏢 {route.operator_name}</span>}
-                    {route.driver_name && <span>👤 {route.driver_name}</span>}
-                    {route.driver_phone && <span>📞 {route.driver_phone}</span>}
-                    {route.vehicle_registration && <span>🚗 {route.vehicle_registration}</span>}
+                    {route.operator_name && <span className="inline-flex items-center gap-1"><Building2 className="h-3.5 w-3.5" aria-hidden /> {route.operator_name}</span>}
+                    {route.driver_name && <span className="inline-flex items-center gap-1"><User className="h-3.5 w-3.5" aria-hidden /> {route.driver_name}</span>}
+                    {route.driver_phone && <span className="inline-flex items-center gap-1"><Phone className="h-3.5 w-3.5" aria-hidden /> {route.driver_phone}</span>}
+                    {route.vehicle_registration && <span className="inline-flex items-center gap-1"><Car className="h-3.5 w-3.5" aria-hidden /> {route.vehicle_registration}</span>}
                   </div>
 
                   {route.notes && (

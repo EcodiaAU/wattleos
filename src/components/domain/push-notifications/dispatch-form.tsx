@@ -8,6 +8,19 @@
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import {
+  Megaphone,
+  MessageSquare,
+  CheckCircle2,
+  Calendar,
+  Siren,
+  Backpack,
+  BarChart3,
+  Receipt,
+  Eye,
+  Bell,
+  type LucideIcon,
+} from "lucide-react";
+import {
   createDispatch,
   updateDispatch,
 } from "@/lib/actions/push-notifications";
@@ -18,19 +31,19 @@ import type {
   NotificationTargetType,
 } from "@/types/domain";
 
-const TOPICS: { value: NotificationTopic; label: string; emoji: string }[] = [
-  { value: "announcements", label: "Announcements", emoji: "📢" },
-  { value: "messages", label: "Messages", emoji: "💬" },
-  { value: "attendance", label: "Attendance", emoji: "✅" },
-  { value: "events", label: "Events", emoji: "📅" },
-  { value: "incidents", label: "Incidents", emoji: "🚨" },
-  { value: "bookings", label: "Bookings", emoji: "🎒" },
-  { value: "reports", label: "Reports", emoji: "📊" },
-  { value: "billing", label: "Billing", emoji: "🧾" },
-  { value: "rostering", label: "Rostering", emoji: "📅" },
-  { value: "observations", label: "Observations", emoji: "👁" },
-  { value: "emergency", label: "Emergency", emoji: "🆘" },
-  { value: "general", label: "General", emoji: "🔔" },
+const TOPICS: { value: NotificationTopic; label: string; icon: LucideIcon }[] = [
+  { value: "announcements", label: "Announcements", icon: Megaphone },
+  { value: "messages", label: "Messages", icon: MessageSquare },
+  { value: "attendance", label: "Attendance", icon: CheckCircle2 },
+  { value: "events", label: "Events", icon: Calendar },
+  { value: "incidents", label: "Incidents", icon: Siren },
+  { value: "bookings", label: "Bookings", icon: Backpack },
+  { value: "reports", label: "Reports", icon: BarChart3 },
+  { value: "billing", label: "Billing", icon: Receipt },
+  { value: "rostering", label: "Rostering", icon: Calendar },
+  { value: "observations", label: "Observations", icon: Eye },
+  { value: "emergency", label: "Emergency", icon: Siren },
+  { value: "general", label: "General", icon: Bell },
 ];
 
 const TARGET_TYPES: {
@@ -166,7 +179,9 @@ export function DispatchForm({ existing }: Props) {
           Topic
         </label>
         <div className="grid grid-cols-3 gap-2 sm:grid-cols-4">
-          {TOPICS.map((t) => (
+          {TOPICS.map((t) => {
+            const Icon = t.icon;
+            return (
             <button
               key={t.value}
               type="button"
@@ -186,10 +201,11 @@ export function DispatchForm({ existing }: Props) {
                     : "var(--foreground)",
               }}
             >
-              <span className="text-lg">{t.emoji}</span>
+              <Icon className="h-5 w-5" aria-hidden />
               <span>{t.label}</span>
             </button>
-          ))}
+            );
+          })}
         </div>
       </div>
 

@@ -58,6 +58,7 @@ export function ReviewTimeline({ reviews }: ReviewTimelineProps) {
     <div className="space-y-0">
       {sorted.map((review, idx) => {
         const typeCfg = REVIEW_TYPE_CONFIG[review.review_type];
+        const TypeIcon = typeCfg.icon;
         const isLast = idx === sorted.length - 1;
 
         return (
@@ -71,7 +72,7 @@ export function ReviewTimeline({ reviews }: ReviewTimelineProps) {
                   color: "var(--muted-foreground)",
                 }}
               >
-                {typeCfg.emoji}
+                <TypeIcon className="h-4 w-4" aria-hidden />
               </div>
               {!isLast && (
                 <div

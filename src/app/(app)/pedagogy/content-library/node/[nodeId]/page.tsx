@@ -22,6 +22,18 @@ import {
 } from "@/lib/actions/curriculum-content";
 import { getTenantContext, hasPermission } from "@/lib/auth/tenant-context";
 import Link from "next/link";
+import {
+  Blocks,
+  Target,
+  Sprout,
+  ClipboardList,
+  Link as LinkIcon,
+  Paperclip,
+  Search,
+  Camera,
+  BarChart3,
+  type LucideIcon,
+} from "lucide-react";
 
 interface NodeDetailPageProps {
   params: Promise<{ nodeId: string }>;
@@ -108,7 +120,7 @@ export default async function NodeDetailPage({ params }: NodeDetailPageProps) {
         {/* Main Content - left 2 cols */}
         <div className="lg:col-span-2 space-y-6">
           {/* Materials */}
-          <DetailSection title="Materials" icon="🧱">
+          <DetailSection title="Materials" icon={Blocks}>
             {node.materials && node.materials.length > 0 ? (
               <div className="flex flex-wrap gap-2">
                 {node.materials.map((mat, i) => (
@@ -131,7 +143,7 @@ export default async function NodeDetailPage({ params }: NodeDetailPageProps) {
           </DetailSection>
 
           {/* Direct Aims */}
-          <DetailSection title="Direct Aims" icon="🎯">
+          <DetailSection title="Direct Aims" icon={Target}>
             {node.direct_aims && node.direct_aims.length > 0 ? (
               <div className="flex flex-wrap gap-2">
                 {node.direct_aims.map((aim, i) => (
@@ -152,7 +164,7 @@ export default async function NodeDetailPage({ params }: NodeDetailPageProps) {
           </DetailSection>
 
           {/* Indirect Aims */}
-          <DetailSection title="Indirect Aims" icon="🌱">
+          <DetailSection title="Indirect Aims" icon={Sprout}>
             {node.indirect_aims && node.indirect_aims.length > 0 ? (
               <div className="flex flex-wrap gap-2">
                 {node.indirect_aims.map((aim, i) => (
@@ -174,7 +186,7 @@ export default async function NodeDetailPage({ params }: NodeDetailPageProps) {
 
           {/* Assessment Criteria */}
           {node.assessment_criteria && (
-            <DetailSection title="Assessment Criteria" icon="📋">
+            <DetailSection title="Assessment Criteria" icon={ClipboardList}>
               <p className="text-sm text-foreground whitespace-pre-wrap">
                 {node.assessment_criteria}
               </p>
@@ -183,7 +195,7 @@ export default async function NodeDetailPage({ params }: NodeDetailPageProps) {
 
           {/* Prerequisites */}
           {node.prerequisites && node.prerequisites.length > 0 && (
-            <DetailSection title="Prerequisites" icon="🔗">
+            <DetailSection title="Prerequisites" icon={LinkIcon}>
               <p className="text-xs text-muted-foreground">
                 {node.prerequisites.length} prerequisite
                 {node.prerequisites.length !== 1 ? "s" : ""} - these outcomes
@@ -194,7 +206,7 @@ export default async function NodeDetailPage({ params }: NodeDetailPageProps) {
 
           {/* Content URL */}
           {node.content_url && (
-            <DetailSection title="Resource Link" icon="📎">
+            <DetailSection title="Resource Link" icon={Paperclip}>
               <a
                 href={node.content_url}
                 target="_blank"
@@ -267,7 +279,7 @@ export default async function NodeDetailPage({ params }: NodeDetailPageProps) {
                 href={`/pedagogy/content-library/materials?q=${encodeURIComponent(node.materials[0])}`}
                 className="flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground transition-colors"
               >
-                <span>🔍</span>
+                <Search className="h-3.5 w-3.5" aria-hidden />
                 Find other outcomes using {node.materials[0]}
               </Link>
             )}
@@ -275,14 +287,14 @@ export default async function NodeDetailPage({ params }: NodeDetailPageProps) {
               href="/pedagogy/observations?create=1"
               className="flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground transition-colors"
             >
-              <span>📸</span>
+              <Camera className="h-3.5 w-3.5" aria-hidden />
               Create observation for this outcome
             </Link>
             <Link
               href="/pedagogy/mastery"
               className="flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground transition-colors"
             >
-              <span>📊</span>
+              <BarChart3 className="h-3.5 w-3.5" aria-hidden />
               View mastery tracking
             </Link>
           </div>
@@ -302,13 +314,14 @@ function DetailSection({
   children,
 }: {
   title: string;
-  icon: string;
+  icon: LucideIcon;
   children: React.ReactNode;
 }) {
+  const Icon = icon;
   return (
     <section className="space-y-2">
       <h2 className="text-sm font-medium flex items-center gap-2">
-        <span>{icon}</span>
+        <Icon className="h-4 w-4" aria-hidden />
         {title}
       </h2>
       {children}

@@ -13,6 +13,15 @@ import type {
   TimeEntryType,
   TimesheetStatus,
 } from "@/types/domain";
+import type { LucideIcon } from "lucide-react";
+import {
+  AlarmClock,
+  Zap,
+  PartyPopper,
+  Thermometer,
+  TreePalm,
+  ClipboardList,
+} from "lucide-react";
 
 // ============================================================
 // Time Entry Types
@@ -23,7 +32,7 @@ export interface EntryTypeConfig {
   shortLabel: string;
   color: string;
   bgColor: string;
-  icon: string;
+  icon: LucideIcon;
 }
 
 export const TIME_ENTRY_TYPE_CONFIG: Record<TimeEntryType, EntryTypeConfig> = {
@@ -32,42 +41,42 @@ export const TIME_ENTRY_TYPE_CONFIG: Record<TimeEntryType, EntryTypeConfig> = {
     shortLabel: "Reg",
     color: "text-gray-700",
     bgColor: "bg-muted",
-    icon: "⏰",
+    icon: AlarmClock,
   },
   overtime: {
     label: "Overtime",
     shortLabel: "OT",
     color: "text-amber-700",
     bgColor: "bg-amber-100",
-    icon: "⚡",
+    icon: Zap,
   },
   public_holiday: {
     label: "Public Holiday",
     shortLabel: "PH",
     color: "text-purple-700",
     bgColor: "bg-purple-100",
-    icon: "🎉",
+    icon: PartyPopper,
   },
   sick_leave: {
     label: "Sick Leave",
     shortLabel: "Sick",
     color: "text-red-700",
     bgColor: "bg-red-100",
-    icon: "🤒",
+    icon: Thermometer,
   },
   annual_leave: {
     label: "Annual Leave",
     shortLabel: "AL",
     color: "text-blue-700",
     bgColor: "bg-blue-100",
-    icon: "🌴",
+    icon: TreePalm,
   },
   unpaid_leave: {
     label: "Unpaid Leave",
     shortLabel: "UL",
     color: "text-muted-foreground",
     bgColor: "bg-background",
-    icon: "📋",
+    icon: ClipboardList,
   },
 };
 

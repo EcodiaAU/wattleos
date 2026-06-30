@@ -4,6 +4,7 @@
 
 import { useState, useTransition } from "react";
 import Link from "next/link";
+import { Check } from "lucide-react";
 import { AlertStatusBadge } from "./alert-status-badge";
 import { ExplanationForm } from "./explanation-form";
 import { NotificationSendForm } from "./notification-send-form";
@@ -118,7 +119,7 @@ export function AlertDetailClient({ alert: initialAlert, canManage }: AlertDetai
                         color: "var(--absence-followup-explained-fg)",
                       }}
                     >
-                      App ✓
+                      App <Check className="inline h-3 w-3 align-text-bottom" aria-hidden />
                     </span>
                   )}
                 </div>

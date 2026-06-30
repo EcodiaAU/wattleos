@@ -24,6 +24,7 @@ import {
   deleteTourSlot,
   recordTourAttendance,
 } from "@/lib/actions/admissions/tour-slots";
+import { Check, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
@@ -169,8 +170,9 @@ export function TourManagementClient({
           <button
             onClick={() => setError(null)}
             className="ml-2 text-destructive hover:text-destructive"
+            aria-label="Dismiss"
           >
-            ✕
+            <X className="h-4 w-4" aria-hidden />
           </button>
         </div>
       )}
@@ -488,8 +490,9 @@ function TourSlotCard({
                             disabled={isSubmitting || isPending}
                             className="rounded bg-success/15 px-2 py-0.5 text-xs font-medium text-success hover:bg-success/20 disabled:opacity-50"
                             title="Mark as attended"
+                            aria-label="Mark as attended"
                           >
-                            ✓
+                            <Check className="h-4 w-4" aria-hidden />
                           </button>
                           <button
                             onClick={() =>
@@ -498,14 +501,19 @@ function TourSlotCard({
                             disabled={isSubmitting || isPending}
                             className="rounded bg-destructive/15 px-2 py-0.5 text-xs font-medium text-destructive hover:bg-destructive/20 disabled:opacity-50"
                             title="Mark as no-show"
+                            aria-label="Mark as no-show"
                           >
-                            ✗
+                            <X className="h-4 w-4" aria-hidden />
                           </button>
                         </div>
                       ) : booking.tour_attended ? (
-                        <span className="text-success">✓ Yes</span>
+                        <span className="inline-flex items-center gap-1 text-success">
+                          <Check className="h-4 w-4" aria-hidden /> Yes
+                        </span>
                       ) : (
-                        <span className="text-destructive">✗ No</span>
+                        <span className="inline-flex items-center gap-1 text-destructive">
+                          <X className="h-4 w-4" aria-hidden /> No
+                        </span>
                       )}
                     </td>
                   </tr>

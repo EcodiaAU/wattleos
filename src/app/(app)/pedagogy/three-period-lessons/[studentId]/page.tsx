@@ -7,6 +7,20 @@
 
 import Link from "next/link";
 import { redirect, notFound } from "next/navigation";
+import {
+  Speech,
+  Ruler,
+  Footprints,
+  Search,
+  Music,
+  Handshake,
+  BookOpen,
+  Pencil,
+  Calculator,
+  Eye,
+  Leaf,
+  type LucideIcon,
+} from "lucide-react";
 
 import { ThreePeriodProgressCard } from "@/components/domain/lessons/three-period-progress-card";
 import { getTenantContext, hasPermission } from "@/lib/auth/tenant-context";
@@ -37,17 +51,17 @@ const PERIOD_LABELS: Record<MontessoriSensitivePeriod, string> = {
   refinement_of_senses: "Refinement of Senses",
 };
 
-const PERIOD_EMOJI: Record<MontessoriSensitivePeriod, string> = {
-  language: "🗣️",
-  order: "📐",
-  movement: "🏃",
-  small_objects: "🔍",
-  music: "🎵",
-  social_behavior: "🤝",
-  reading: "📖",
-  writing: "✏️",
-  mathematics: "🔢",
-  refinement_of_senses: "👁️",
+const PERIOD_ICON: Record<MontessoriSensitivePeriod, LucideIcon> = {
+  language: Speech,
+  order: Ruler,
+  movement: Footprints,
+  small_objects: Search,
+  music: Music,
+  social_behavior: Handshake,
+  reading: BookOpen,
+  writing: Pencil,
+  mathematics: Calculator,
+  refinement_of_senses: Eye,
 };
 
 interface StudentProgressPageProps {
@@ -150,10 +164,10 @@ export default async function StudentThreePeriodProgressPage({
         <div className="rounded-xl border border-border p-4">
           <div className="mb-3 flex items-center justify-between">
             <h2
-              className="text-sm font-semibold"
+              className="flex items-center gap-1.5 text-sm font-semibold"
               style={{ color: "var(--foreground)" }}
             >
-              🌿 Active sensitive periods
+              <Leaf className="h-4 w-4" aria-hidden /> Active sensitive periods
             </h2>
             {canManage && (
               <Link
@@ -171,7 +185,10 @@ export default async function StudentThreePeriodProgressPage({
                 key={sp.id}
                 className="flex items-center gap-2 rounded-xl border border-border px-3 py-2"
               >
-                <span>{PERIOD_EMOJI[sp.sensitive_period]}</span>
+                {(() => {
+                  const Icon = PERIOD_ICON[sp.sensitive_period];
+                  return <Icon className="h-4 w-4" aria-hidden />;
+                })()}
                 <div>
                   <p
                     className="text-xs font-medium"
@@ -198,7 +215,7 @@ export default async function StudentThreePeriodProgressPage({
           className="card-interactive flex items-center gap-3 rounded-xl border border-dashed border-border p-4"
           style={{ color: "var(--muted-foreground)" }}
         >
-          <span className="text-2xl">🌿</span>
+          <Leaf className="h-6 w-6 shrink-0" aria-hidden />
           <div>
             <p
               className="text-sm font-medium"
@@ -219,7 +236,7 @@ export default async function StudentThreePeriodProgressPage({
           className="py-16 text-center"
           style={{ color: "var(--empty-state-icon)" }}
         >
-          <div className="text-4xl">🔢</div>
+          <Calculator className="mx-auto h-10 w-10" aria-hidden />
           <p
             className="mt-3 text-base font-medium"
             style={{ color: "var(--foreground)" }}

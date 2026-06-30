@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { ClipboardList } from "lucide-react";
 import { GlowTarget } from "@/components/domain/glow/glow-registry";
 import {
   upsertCertificate,
@@ -331,13 +332,11 @@ export function CertificateSection({ userId, certificates, canManage }: Props) {
       {/* Certificate List */}
       {certificates.length === 0 && !showForm ? (
         <div className="py-8 text-center">
-          <p
-            className="text-2xl"
+          <ClipboardList
+            className="mx-auto h-10 w-10"
             style={{ color: "var(--empty-state-icon)" }}
             aria-hidden
-          >
-            📋
-          </p>
+          />
           <p
             className="mt-2 text-sm"
             style={{ color: "var(--muted-foreground)" }}

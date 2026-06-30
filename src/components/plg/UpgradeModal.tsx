@@ -19,6 +19,8 @@
 // ============================================================
 
 import { useEffect, useRef } from "react";
+import { BarChart3, Users, Calendar, Eye, Link as LinkIcon, X } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 // ============================================================
 // Types
@@ -41,33 +43,33 @@ interface UpgradeModalProps {
 // Pro feature list (Module A focus)
 // ============================================================
 
-const PRO_FEATURES = [
+const PRO_FEATURES: { icon: LucideIcon; title: string; description: string }[] = [
   {
-    icon: "📊",
+    icon: BarChart3,
     title: "Auto-populate mastery & observations",
     description:
       "Report sections fill themselves from curriculum tracking and observation data.",
   },
   {
-    icon: "👨‍👩‍👧",
+    icon: Users,
     title: "Parent portal delivery",
     description:
       "Parents receive reports in the WattleOS app. No printing, no email attachments.",
   },
   {
-    icon: "📅",
+    icon: Calendar,
     title: "Unlimited report history",
     description:
       "Access all past report periods, not just the most recent one.",
   },
   {
-    icon: "👀",
+    icon: Eye,
     title: "Colleague visibility",
     description:
       "Guides share one platform. Observations, curriculum, and reports all connect.",
   },
   {
-    icon: "🔗",
+    icon: LinkIcon,
     title: "Connected data",
     description:
       "Observations update mastery. Mastery fills reports. Everything flows automatically.",
@@ -145,7 +147,7 @@ export function UpgradeModal({
             style={{ color: "var(--color-muted-foreground)" }}
             aria-label="Close"
           >
-            ✕
+            <X className="h-5 w-5" aria-hidden />
           </button>
         </div>
 
@@ -227,9 +229,11 @@ export function UpgradeModal({
         {/* Pro features */}
         {!isAdmissionsWall && (
           <div className="mt-4 space-y-3">
-            {PRO_FEATURES.map((f) => (
+            {PRO_FEATURES.map((f) => {
+              const Icon = f.icon;
+              return (
               <div key={f.title} className="flex items-start gap-3">
-                <span className="text-lg shrink-0">{f.icon}</span>
+                <Icon className="h-5 w-5 shrink-0" aria-hidden />
                 <div>
                   <p
                     className="text-sm font-medium"
@@ -245,7 +249,8 @@ export function UpgradeModal({
                   </p>
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
         )}
 

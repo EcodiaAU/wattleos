@@ -2,17 +2,18 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { Flame, Lock, Home, Stethoscope, Bell, Check } from "lucide-react";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import { createDrill, updateDrill } from "@/lib/actions/emergency-drills";
 import type { EmergencyDrill } from "@/types/domain";
 import type { CreateDrillInput } from "@/lib/validations/emergency-drills";
 
 const DRILL_TYPES = [
-  { value: "fire_evacuation", label: "Fire Evacuation", emoji: "\u{1F525}" },
-  { value: "lockdown", label: "Lockdown", emoji: "\u{1F512}" },
-  { value: "shelter_in_place", label: "Shelter in Place", emoji: "\u{1F3E0}" },
-  { value: "medical_emergency", label: "Medical Emergency", emoji: "\u{1FA7A}" },
-  { value: "other", label: "Other", emoji: "\u{1F514}" },
+  { value: "fire_evacuation", label: "Fire Evacuation", icon: Flame },
+  { value: "lockdown", label: "Lockdown", icon: Lock },
+  { value: "shelter_in_place", label: "Shelter in Place", icon: Home },
+  { value: "medical_emergency", label: "Medical Emergency", icon: Stethoscope },
+  { value: "other", label: "Other", icon: Bell },
 ] as const;
 
 interface DrillFormProps {
@@ -102,7 +103,9 @@ export function DrillForm({ drill, classes, staff }: DrillFormProps) {
           Drill Type
         </label>
         <div className="flex flex-wrap gap-2">
-          {DRILL_TYPES.map((t) => (
+          {DRILL_TYPES.map((t) => {
+            const Icon = t.icon;
+            return (
             <button
               key={t.value}
               type="button"
@@ -110,7 +113,7 @@ export function DrillForm({ drill, classes, staff }: DrillFormProps) {
                 haptics.selection();
                 setDrillType(t.value);
               }}
-              className="active-push rounded-full border px-3 py-1.5 text-xs font-medium transition-colors"
+              className="active-push inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition-colors"
               style={{
                 borderColor:
                   drillType === t.value ? "var(--primary)" : "var(--border)",
@@ -122,9 +125,10 @@ export function DrillForm({ drill, classes, staff }: DrillFormProps) {
                     : "var(--foreground)",
               }}
             >
-              {t.emoji} {t.label}
+              <Icon className="h-3.5 w-3.5" aria-hidden /> {t.label}
             </button>
-          ))}
+            );
+          })}
         </div>
       </div>
 
@@ -223,7 +227,7 @@ export function DrillForm({ drill, classes, staff }: DrillFormProps) {
               : "var(--foreground)",
           }}
         >
-          <span className="text-base">{isWholeOfService ? "✓" : ""}</span>
+          {isWholeOfService && <Check className="h-4 w-4" aria-hidden />}
           Whole of service (all classes)
         </button>
       </div>

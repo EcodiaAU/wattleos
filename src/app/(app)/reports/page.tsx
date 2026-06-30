@@ -13,6 +13,16 @@
 
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import {
+  Check,
+  ClipboardList,
+  FileText,
+  Backpack,
+  User,
+  Settings,
+  BarChart3,
+  type LucideIcon,
+} from "lucide-react";
 import { getTenantContext } from "@/lib/auth/tenant-context";
 import { Permissions } from "@/lib/constants/permissions";
 import {
@@ -267,31 +277,31 @@ export default async function ReportsPage() {
             href="/reports/periods"
             label="Periods"
             description="Manage report periods and track progress"
-            icon="📋"
+            icon={ClipboardList}
           />
           <NavCard
             href="/reports/templates"
             label="Templates"
             description="Design the structure of your reports"
-            icon="📄"
+            icon={FileText}
           />
           <NavCard
             href="/reports/students"
             label={`Students ${studentCount > 0 ? `(${studentCount})` : ""}`}
             description="Add, edit or import student records"
-            icon="🎒"
+            icon={Backpack}
           />
           <NavCard
             href="/reports/guides"
             label={`Guides ${guideCount > 0 ? `(${guideCount})` : ""}`}
             description="Invite guides and manage assignments"
-            icon="👤"
+            icon={User}
           />
           <NavCard
             href="/reports/settings"
             label="Settings"
             description="Logo, school name, PDF branding"
-            icon="⚙️"
+            icon={Settings}
           />
           {isFree && (
             <div
@@ -302,8 +312,8 @@ export default async function ReportsPage() {
                   "color-mix(in srgb, var(--color-muted) 40%, transparent)",
               }}
             >
-              <p className="text-sm font-medium text-muted-foreground">
-                📊 Analytics
+              <p className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground">
+                <BarChart3 className="h-4 w-4" aria-hidden /> Analytics
               </p>
               <p className="mt-1 text-xs text-muted-foreground">
                 Available on Pro
@@ -380,7 +390,7 @@ function SetupStep({
           color: done ? "#fff" : "var(--color-muted-foreground)",
         }}
       >
-        {done ? "✓" : ""}
+        {done ? <Check className="h-3 w-3" aria-hidden /> : ""}
       </div>
       <div className="flex-1 min-w-0">
         <p
@@ -422,15 +432,16 @@ function NavCard({
   href: string;
   label: string;
   description: string;
-  icon: string;
+  icon: LucideIcon;
 }) {
+  const Icon = icon;
   return (
     <Link
       href={href}
       className="rounded-xl border border-border bg-card p-4 transition-colors hover:bg-muted/30 card-interactive"
     >
-      <p className="text-sm font-medium text-foreground">
-        {icon} {label}
+      <p className="flex items-center gap-1.5 text-sm font-medium text-foreground">
+        <Icon className="h-4 w-4" aria-hidden /> {label}
       </p>
       <p className="mt-1 text-xs text-muted-foreground">{description}</p>
     </Link>

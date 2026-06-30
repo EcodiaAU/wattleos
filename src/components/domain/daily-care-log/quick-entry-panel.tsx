@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import type { LucideIcon } from "lucide-react";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import { CARE_ENTRY_TYPE_CONFIG } from "@/lib/constants/daily-care";
 import type { CareEntryType, NappyType } from "@/types/domain";
@@ -31,7 +32,7 @@ type ActiveFormType = CareEntryType | "nappy_wet" | "nappy_soiled";
 
 interface QuickAction {
   id: ActiveFormType;
-  emoji: string;
+  icon: LucideIcon;
   label: string;
   cssVarBg: string;
   cssVarFg: string;
@@ -40,49 +41,49 @@ interface QuickAction {
 const QUICK_ACTIONS: QuickAction[] = [
   {
     id: "nappy_wet",
-    emoji: CARE_ENTRY_TYPE_CONFIG.nappy_change.emoji,
+    icon: CARE_ENTRY_TYPE_CONFIG.nappy_change.icon,
     label: "Nappy Wet",
     cssVarBg: CARE_ENTRY_TYPE_CONFIG.nappy_change.cssVarBg,
     cssVarFg: CARE_ENTRY_TYPE_CONFIG.nappy_change.cssVarFg,
   },
   {
     id: "nappy_soiled",
-    emoji: CARE_ENTRY_TYPE_CONFIG.nappy_change.emoji,
+    icon: CARE_ENTRY_TYPE_CONFIG.nappy_change.icon,
     label: "Nappy Soiled",
     cssVarBg: CARE_ENTRY_TYPE_CONFIG.nappy_change.cssVarBg,
     cssVarFg: CARE_ENTRY_TYPE_CONFIG.nappy_change.cssVarFg,
   },
   {
     id: "meal",
-    emoji: CARE_ENTRY_TYPE_CONFIG.meal.emoji,
+    icon: CARE_ENTRY_TYPE_CONFIG.meal.icon,
     label: "Meal",
     cssVarBg: CARE_ENTRY_TYPE_CONFIG.meal.cssVarBg,
     cssVarFg: CARE_ENTRY_TYPE_CONFIG.meal.cssVarFg,
   },
   {
     id: "bottle",
-    emoji: CARE_ENTRY_TYPE_CONFIG.bottle.emoji,
+    icon: CARE_ENTRY_TYPE_CONFIG.bottle.icon,
     label: "Bottle",
     cssVarBg: CARE_ENTRY_TYPE_CONFIG.bottle.cssVarBg,
     cssVarFg: CARE_ENTRY_TYPE_CONFIG.bottle.cssVarFg,
   },
   {
     id: "sleep_start",
-    emoji: CARE_ENTRY_TYPE_CONFIG.sleep_start.emoji,
+    icon: CARE_ENTRY_TYPE_CONFIG.sleep_start.icon,
     label: "Sleep",
     cssVarBg: CARE_ENTRY_TYPE_CONFIG.sleep_start.cssVarBg,
     cssVarFg: CARE_ENTRY_TYPE_CONFIG.sleep_start.cssVarFg,
   },
   {
     id: "sunscreen",
-    emoji: CARE_ENTRY_TYPE_CONFIG.sunscreen.emoji,
+    icon: CARE_ENTRY_TYPE_CONFIG.sunscreen.icon,
     label: "Sunscreen",
     cssVarBg: CARE_ENTRY_TYPE_CONFIG.sunscreen.cssVarBg,
     cssVarFg: CARE_ENTRY_TYPE_CONFIG.sunscreen.cssVarFg,
   },
   {
     id: "wellbeing_note",
-    emoji: CARE_ENTRY_TYPE_CONFIG.wellbeing_note.emoji,
+    icon: CARE_ENTRY_TYPE_CONFIG.wellbeing_note.icon,
     label: "Wellbeing",
     cssVarBg: CARE_ENTRY_TYPE_CONFIG.wellbeing_note.cssVarBg,
     cssVarFg: CARE_ENTRY_TYPE_CONFIG.wellbeing_note.cssVarFg,
@@ -208,6 +209,7 @@ export function QuickEntryPanel({
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         {QUICK_ACTIONS.map((action) => {
           const isActive = activeForm === action.id;
+          const Icon = action.icon;
 
           return (
             <button
@@ -223,13 +225,11 @@ export function QuickEntryPanel({
                 opacity: activeForm !== null && !isActive ? 0.6 : 1,
               }}
             >
-              <span
-                className="text-[32px] leading-none"
-                role="img"
-                aria-hidden="true"
-              >
-                {action.emoji}
-              </span>
+              <Icon
+                className="h-8 w-8 shrink-0"
+                style={{ color: action.cssVarFg }}
+                aria-hidden
+              />
               <span
                 className="text-xs font-semibold leading-tight"
                 style={{ color: action.cssVarFg }}

@@ -5,6 +5,14 @@
 // NCCD register dashboard - summary cards, alerts, and quick links.
 
 import Link from "next/link";
+import {
+  Accessibility,
+  AlertTriangle,
+  Calendar,
+  CheckCircle2,
+  Hourglass,
+  Info,
+} from "lucide-react";
 
 import {
   NCCD_CATEGORIES,
@@ -78,24 +86,28 @@ export function NccdDashboardClient({
 
         {/* Top stats */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          <StatCard label="Total students" value={s.total_students} icon="♿" />
+          <StatCard
+            label="Total students"
+            value={s.total_students}
+            icon={<Accessibility className="h-6 w-6" aria-hidden />}
+          />
           <StatCard
             label="Submitted"
             value={s.submitted}
-            icon="✓"
+            icon={<CheckCircle2 className="h-6 w-6" aria-hidden />}
             color="var(--nccd-status-active)"
           />
           <StatCard
             label="Pending"
             value={s.pending_submission}
-            icon="⏳"
+            icon={<Hourglass className="h-6 w-6" aria-hidden />}
             color="var(--nccd-supplementary)"
           />
           {data.prior_year_summary && (
             <StatCard
               label={`${data.prior_year_summary.year} total`}
               value={data.prior_year_summary.total_students}
-              icon="📅"
+              icon={<Calendar className="h-6 w-6" aria-hidden />}
             />
           )}
         </div>
@@ -179,6 +191,7 @@ export function NccdDashboardClient({
                 ? Math.round((count / s.total_students) * 100)
                 : 0;
             const config = NCCD_CATEGORY_CONFIG[cat];
+            const CategoryIcon = config.icon;
             return (
               <div
                 key={cat}
@@ -186,8 +199,8 @@ export function NccdDashboardClient({
                   i < NCCD_CATEGORIES.length - 1 ? "border-b border-border" : ""
                 }`}
               >
-                <span className="text-lg w-6 text-center shrink-0">
-                  {config.emoji}
+                <span className="w-6 flex justify-center shrink-0">
+                  <CategoryIcon className="h-5 w-5" aria-hidden />
                 </span>
                 <div className="flex-1 min-w-0">
                   <p
@@ -247,9 +260,11 @@ export function NccdDashboardClient({
       {/* Empty state */}
       {s.total_students === 0 && (
         <div className="py-16 text-center space-y-3">
-          <p className="text-4xl" style={{ color: "var(--empty-state-icon)" }}>
-            ♿
-          </p>
+          <Accessibility
+            className="h-12 w-12 mx-auto"
+            style={{ color: "var(--empty-state-icon)" }}
+            aria-hidden
+          />
           <p
             className="font-semibold text-lg"
             style={{ color: "var(--foreground)" }}
@@ -291,7 +306,7 @@ function StatCard({
 }: {
   label: string;
   value: number;
-  icon: string;
+  icon: React.ReactNode;
   color?: string;
 }) {
   return (
@@ -299,7 +314,7 @@ function StatCard({
       className="rounded-xl border border-border p-4 space-y-1"
       style={{ background: "var(--card)" }}
     >
-      <p className="text-2xl">{icon}</p>
+      <div style={{ color: color ?? "var(--foreground)" }}>{icon}</div>
       <p
         className="text-2xl font-bold leading-tight"
         style={{ color: color ?? "var(--foreground)" }}
@@ -339,7 +354,11 @@ function Alert({
           : "var(--nccd-qdtp)",
       }}
     >
-      <span>{isWarning ? "⚠️" : "ℹ️"}</span>
+      {isWarning ? (
+        <AlertTriangle className="h-4 w-4 shrink-0" aria-hidden />
+      ) : (
+        <Info className="h-4 w-4 shrink-0" aria-hidden />
+      )}
       <span className="flex-1">{message}</span>
       <span>→</span>
     </Link>
@@ -356,9 +375,15 @@ function RecentEntryRow({ entry }: { entry: NccdEntryWithStudent }) {
       className="card-interactive flex items-center gap-3 rounded-xl border border-border px-4 py-3"
       style={{ background: "var(--card)" }}
     >
-      <span className="text-xl">
-        {NCCD_CATEGORY_CONFIG[entry.disability_category].emoji}
-      </span>
+      {(() => {
+        const CategoryIcon =
+          NCCD_CATEGORY_CONFIG[entry.disability_category].icon;
+        return (
+          <span className="shrink-0">
+            <CategoryIcon className="h-5 w-5" aria-hidden />
+          </span>
+        );
+      })()}
       <div className="flex-1 min-w-0">
         <p
           className="text-sm font-medium truncate"

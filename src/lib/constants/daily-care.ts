@@ -20,6 +20,24 @@ import type {
   WellbeingMood,
   DailyCareLogStatus,
 } from "@/types/domain";
+import type { LucideIcon } from "lucide-react";
+import {
+  Baby,
+  Utensils,
+  Milk,
+  Moon,
+  Sun,
+  Heart,
+  CheckCircle2,
+  ThumbsUp,
+  Hand,
+  ThumbsDown,
+  XCircle,
+  Smile,
+  Meh,
+  Frown,
+  Thermometer,
+} from "lucide-react";
 
 // ── Status Config ────────────────────────────────────────────
 
@@ -52,7 +70,7 @@ export const DAILY_CARE_LOG_STATUS_CONFIG: Record<
 
 export interface CareEntryTypeConfig {
   label: string;
-  emoji: string;
+  icon: LucideIcon;
   cssVar: string;
   cssVarFg: string;
   cssVarBg: string;
@@ -64,49 +82,49 @@ export const CARE_ENTRY_TYPE_CONFIG: Record<
 > = {
   nappy_change: {
     label: "Nappy Change",
-    emoji: "\u{1F9F7}", // 🧷
+    icon: Baby,
     cssVar: "var(--care-nappy)",
     cssVarFg: "var(--care-nappy-fg)",
     cssVarBg: "var(--care-nappy-bg)",
   },
   meal: {
     label: "Meal",
-    emoji: "\u{1F37D}\u{FE0F}", // 🍽️
+    icon: Utensils,
     cssVar: "var(--care-meal)",
     cssVarFg: "var(--care-meal-fg)",
     cssVarBg: "var(--care-meal-bg)",
   },
   bottle: {
     label: "Bottle",
-    emoji: "\u{1F37C}", // 🍼
+    icon: Milk,
     cssVar: "var(--care-bottle)",
     cssVarFg: "var(--care-bottle-fg)",
     cssVarBg: "var(--care-bottle-bg)",
   },
   sleep_start: {
     label: "Sleep",
-    emoji: "\u{1F634}", // 😴
+    icon: Moon,
     cssVar: "var(--care-sleep)",
     cssVarFg: "var(--care-sleep-fg)",
     cssVarBg: "var(--care-sleep-bg)",
   },
   sleep_end: {
     label: "Woke Up",
-    emoji: "\u{2600}\u{FE0F}", // ☀️
+    icon: Sun,
     cssVar: "var(--care-sleep)",
     cssVarFg: "var(--care-sleep-fg)",
     cssVarBg: "var(--care-sleep-bg)",
   },
   sunscreen: {
     label: "Sunscreen",
-    emoji: "\u{2600}\u{FE0F}", // ☀️
+    icon: Sun,
     cssVar: "var(--care-sunscreen)",
     cssVarFg: "var(--care-sunscreen-fg)",
     cssVarBg: "var(--care-sunscreen-bg)",
   },
   wellbeing_note: {
     label: "Wellbeing",
-    emoji: "\u{1F49B}", // 💛
+    icon: Heart,
     cssVar: "var(--care-wellbeing)",
     cssVarFg: "var(--care-wellbeing-fg)",
     cssVarBg: "var(--care-wellbeing-bg)",
@@ -135,13 +153,13 @@ export const MEAL_TYPE_CONFIG: Record<MealType, { label: string }> = {
 
 export const FOOD_CONSUMED_CONFIG: Record<
   FoodConsumed,
-  { label: string; emoji: string }
+  { label: string; icon: LucideIcon }
 > = {
-  all: { label: "All", emoji: "\u{2705}" }, // ✅
-  most: { label: "Most", emoji: "\u{1F44D}" }, // 👍
-  some: { label: "Some", emoji: "\u{1F44C}" }, // 👌
-  little: { label: "Little", emoji: "\u{1F90F}" }, // 🤏
-  none: { label: "None", emoji: "\u{274C}" }, // ❌
+  all: { label: "All", icon: CheckCircle2 },
+  most: { label: "Most", icon: ThumbsUp },
+  some: { label: "Some", icon: Hand },
+  little: { label: "Little", icon: ThumbsDown },
+  none: { label: "None", icon: XCircle },
 };
 
 // ── Bottle Type Config ───────────────────────────────────────
@@ -178,13 +196,13 @@ export const SLEEP_MANNER_CONFIG: Record<SleepManner, { label: string }> = {
 
 export const WELLBEING_MOOD_CONFIG: Record<
   WellbeingMood,
-  { label: string; emoji: string }
+  { label: string; icon: LucideIcon }
 > = {
-  happy: { label: "Happy", emoji: "\u{1F60A}" }, // 😊
-  settled: { label: "Settled", emoji: "\u{1F60C}" }, // 😌
-  unsettled: { label: "Unsettled", emoji: "\u{1F61F}" }, // 😟
-  tired: { label: "Tired", emoji: "\u{1F634}" }, // 😴
-  unwell: { label: "Unwell", emoji: "\u{1F912}" }, // 🤒
+  happy: { label: "Happy", icon: Smile },
+  settled: { label: "Settled", icon: Meh },
+  unsettled: { label: "Unsettled", icon: Frown },
+  tired: { label: "Tired", icon: Moon },
+  unwell: { label: "Unwell", icon: Thermometer },
 };
 
 // ── Timing Constants ─────────────────────────────────────────

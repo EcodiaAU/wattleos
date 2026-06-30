@@ -6,6 +6,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { Check } from "lucide-react";
 
 import {
   NCCD_ADJUSTMENT_TYPE_CONFIG,
@@ -204,6 +205,7 @@ export function NccdEntryForm({
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {NCCD_CATEGORIES.map((cat) => {
             const config = NCCD_CATEGORY_CONFIG[cat];
+            const CategoryIcon = config.icon;
             const selected = form.disability_category === cat;
             return (
               <button
@@ -223,7 +225,7 @@ export function NccdEntryForm({
                 }}
                 aria-pressed={selected}
               >
-                <span className="text-lg">{config.emoji}</span>
+                <CategoryIcon className="h-5 w-5 shrink-0" aria-hidden />
                 <div>
                   <p className="font-medium leading-tight">{config.label}</p>
                 </div>
@@ -285,7 +287,7 @@ export function NccdEntryForm({
                   </p>
                 </div>
                 {selected && (
-                  <span className="shrink-0 text-base">✓</span>
+                  <Check className="h-4 w-4 shrink-0" aria-hidden />
                 )}
               </button>
             );
@@ -311,6 +313,7 @@ export function NccdEntryForm({
             ] as NccdAdjustmentType[]
           ).map((type) => {
             const config = NCCD_ADJUSTMENT_TYPE_CONFIG[type];
+            const TypeIcon = config.icon;
             const selected = form.adjustment_types.includes(type);
             return (
               <button
@@ -326,9 +329,9 @@ export function NccdEntryForm({
                 }}
                 aria-pressed={selected}
               >
-                <span>{config.emoji}</span>
+                <TypeIcon className="h-4 w-4 shrink-0" aria-hidden />
                 <span className="font-medium">{config.label}</span>
-                {selected && <span className="ml-auto">✓</span>}
+                {selected && <Check className="ml-auto h-4 w-4" aria-hidden />}
               </button>
             );
           })}

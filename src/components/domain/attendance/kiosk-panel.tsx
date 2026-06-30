@@ -14,6 +14,7 @@
 // ============================================================
 
 import { useCallback, useState, useTransition } from "react";
+import { Check } from "lucide-react";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import {
   createSignInOutRecord,
@@ -439,13 +440,13 @@ function ConfirmStep({
     <div className="flex flex-col items-center gap-6 py-8 text-center">
       {/* Large success icon */}
       <div
-        className="flex h-24 w-24 items-center justify-center rounded-full text-4xl"
+        className="flex h-24 w-24 items-center justify-center rounded-full"
         style={{
           background: cfg.colorVar,
           color: cfg.fgVar,
         }}
       >
-        ✓
+        <Check className="h-12 w-12" aria-hidden />
       </div>
 
       <div>

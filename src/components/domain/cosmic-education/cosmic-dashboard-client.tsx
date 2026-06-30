@@ -6,6 +6,8 @@
 // and quick-access to draft / completed units.
 
 import Link from "next/link";
+import type { LucideIcon } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import type { CosmicEducationDashboardData, CosmicGreatLesson, CosmicUnitSummary } from "@/types/domain";
 import {
@@ -32,6 +34,7 @@ interface Props {
 function UnitCard({ unit }: { unit: CosmicUnitSummary }) {
   const haptics = useHaptics();
   const cfg = getLessonConfig(unit.lesson_key);
+  const LessonIcon: LucideIcon = cfg.icon;
 
   return (
     <Link
@@ -44,8 +47,9 @@ function UnitCard({ unit }: { unit: CosmicUnitSummary }) {
           <p className="text-sm font-medium truncate" style={{ color: "var(--foreground)" }}>
             {unit.title}
           </p>
-          <p className="text-xs mt-0.5" style={{ color: "var(--muted-foreground)" }}>
-            {cfg.emoji} {unit.great_lesson_title}
+          <p className="text-xs mt-0.5 flex items-center gap-1" style={{ color: "var(--muted-foreground)" }}>
+            <LessonIcon className="h-3.5 w-3.5 shrink-0" aria-hidden />
+            {unit.great_lesson_title}
           </p>
         </div>
         <CosmicUnitStatusBadge status={unit.status} />
@@ -130,6 +134,7 @@ export function CosmicEducationDashboardClient({ data, canManage }: Props) {
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2">
           {LESSON_ORDER.map(key => {
             const cfg = getLessonConfig(key);
+            const LessonIcon: LucideIcon = cfg.icon;
             const count = data.units_by_lesson[key] ?? 0;
             return (
               <Link
@@ -139,7 +144,7 @@ export function CosmicEducationDashboardClient({ data, canManage }: Props) {
                 className="card-interactive flex flex-col items-center gap-1 p-3 rounded-xl border border-border text-center"
                 style={{ background: count > 0 ? `color-mix(in srgb, var(${cfg.accentVar}) 8%, transparent)` : "var(--card)" } as React.CSSProperties & Record<string, string>}
               >
-                <span className="text-2xl">{cfg.emoji}</span>
+                <LessonIcon className="h-6 w-6" style={{ color: `var(${cfg.accentVar})` }} aria-hidden />
                 <span className="text-xs font-medium" style={{ color: `var(${cfg.accentVar})` }}>
                   {cfg.label}
                 </span>
@@ -214,7 +219,7 @@ export function CosmicEducationDashboardClient({ data, canManage }: Props) {
       {/* Empty state */}
       {!hasAnyUnits && (
         <div className="flex flex-col items-center justify-center py-20 gap-4 text-center">
-          <span className="text-5xl" style={{ color: "var(--empty-state-icon)" }}>🌌</span>
+          <Sparkles className="h-12 w-12" style={{ color: "var(--empty-state-icon)" }} aria-hidden />
           <h3 className="text-lg font-semibold" style={{ color: "var(--foreground)" }}>
             No units yet
           </h3>

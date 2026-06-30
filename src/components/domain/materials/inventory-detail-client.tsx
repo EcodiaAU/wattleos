@@ -3,6 +3,7 @@
 
 import Link from "next/link";
 import { useState, useTransition } from "react";
+import { MapPin, AlertTriangle, Search } from "lucide-react";
 import {
   updateItemCondition,
   updateItemStatus,
@@ -170,8 +171,10 @@ export function InventoryDetailClient({
               className="text-sm mt-1"
               style={{ color: "var(--text-tertiary)" }}
             >
-              📍 {item.location.name}
-              {item.shelf_position && ` - ${item.shelf_position}`}
+              <span className="inline-flex items-center gap-1">
+                <MapPin className="h-3.5 w-3.5" aria-hidden /> {item.location.name}
+                {item.shelf_position && ` - ${item.shelf_position}`}
+              </span>
             </p>
           )}
         </div>
@@ -199,7 +202,9 @@ export function InventoryDetailClient({
               backgroundColor: "var(--color-warning-subtle)",
             }}
           >
-            ⚠ Inspection overdue
+            <span className="inline-flex items-center gap-1">
+              <AlertTriangle className="h-3.5 w-3.5" aria-hidden /> Inspection overdue
+            </span>
           </span>
         )}
       </div>
@@ -284,7 +289,9 @@ export function InventoryDetailClient({
               className="active-push touch-target rounded-lg px-3 py-2 text-sm border border-border"
               style={{ color: "var(--text-primary)" }}
             >
-              🔍 Record Inspection
+              <span className="inline-flex items-center gap-1.5">
+                <Search className="h-4 w-4" aria-hidden /> Record Inspection
+              </span>
             </button>
             <button
               onClick={() => {

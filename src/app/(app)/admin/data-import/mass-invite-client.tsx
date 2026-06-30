@@ -11,6 +11,14 @@
 "use client";
 
 import {
+  AlertTriangle,
+  CheckCircle2,
+  Download,
+  FileText,
+  User,
+  Users,
+} from "lucide-react";
+import {
   generateCSVTemplate,
   parseCSV,
   suggestColumnMapping,
@@ -232,7 +240,9 @@ export function MassInviteClient() {
             }}
             className="card-interactive rounded-lg border bg-card p-6 text-left"
           >
-            <div className="mb-3 text-3xl">👨‍👩‍👧‍👦</div>
+            <div className="mb-3 text-primary">
+              <Users className="h-8 w-8" aria-hidden />
+            </div>
             <h3 className="font-bold text-foreground">Invite Parents</h3>
             <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
               Upload guardian emails linked to students. Creates invitations and
@@ -257,7 +267,9 @@ export function MassInviteClient() {
             }}
             className="card-interactive rounded-lg border bg-card p-6 text-left"
           >
-            <div className="mb-3 text-3xl">🧑‍🏫</div>
+            <div className="mb-3 text-primary">
+              <User className="h-8 w-8" aria-hidden />
+            </div>
             <h3 className="font-bold text-foreground">Invite Staff</h3>
             <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
               Onboard staff members in bulk. Creates accounts and triggers
@@ -295,9 +307,9 @@ export function MassInviteClient() {
           <div className="flex gap-3">
             <button
               onClick={downloadTemplate}
-              className="rounded-md border bg-card px-3 py-2 text-xs font-bold shadow-sm hover:bg-muted transition-all active:scale-95"
+              className="inline-flex items-center gap-1.5 rounded-md border bg-card px-3 py-2 text-xs font-bold shadow-sm hover:bg-muted transition-all active:scale-95"
             >
-              📥 Download Template
+              <Download className="h-4 w-4" aria-hidden /> Download Template
             </button>
           </div>
 
@@ -316,7 +328,9 @@ export function MassInviteClient() {
             onClick={() => fileInputRef.current?.click()}
             className="flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-border bg-card/50 p-10 transition-all hover:border-primary hover:bg-primary-50/20"
           >
-            <div className="mb-3 text-4xl">📄</div>
+            <div className="mb-3 flex justify-center text-muted-foreground">
+              <FileText className="h-10 w-10" aria-hidden />
+            </div>
             <p className="font-bold text-foreground">
               Drop CSV here or click to browse
             </p>
@@ -503,8 +517,12 @@ export function MassInviteClient() {
       {step === "results" && result && (
         <div className="space-y-6 animate-scale-in">
           <div className="flex items-center gap-4">
-            <div className="text-4xl">
-              {result.errors.length === 0 ? "✅" : "⚠️"}
+            <div>
+              {result.errors.length === 0 ? (
+                <CheckCircle2 className="h-10 w-10 text-success" aria-hidden />
+              ) : (
+                <AlertTriangle className="h-10 w-10 text-warning" aria-hidden />
+              )}
             </div>
             <div>
               <h3 className="text-lg font-bold">

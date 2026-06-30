@@ -232,6 +232,7 @@ export function FieldConfigBuilder({
       >
         {rows.map((row, index) => {
           const config = CARE_ENTRY_TYPE_CONFIG[row.field_type];
+          const Icon = config.icon;
           const isFirst = index === 0;
           const isLast = index === rows.length - 1;
 
@@ -244,13 +245,17 @@ export function FieldConfigBuilder({
                 transition: "opacity 0.15s",
               }}
             >
-              {/* Field label + emoji */}
+              {/* Field label + icon */}
               <div className="flex items-center gap-2">
                 <span
-                  className="flex h-8 w-8 items-center justify-center rounded-lg text-base"
+                  className="flex h-8 w-8 items-center justify-center rounded-lg"
                   style={{ background: config.cssVarBg }}
                 >
-                  {config.emoji}
+                  <Icon
+                    className="h-4 w-4"
+                    style={{ color: config.cssVarFg }}
+                    aria-hidden
+                  />
                 </span>
                 <span
                   className="text-sm font-medium"

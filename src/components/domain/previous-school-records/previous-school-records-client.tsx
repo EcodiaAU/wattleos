@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { FileText, Mail, Phone, School, User } from "lucide-react";
 import type { PreviousSchoolRecord } from "@/types/domain";
 import { PreviousSchoolRecordForm } from "./previous-school-record-form";
 import { useHaptics } from "@/lib/hooks/use-haptics";
@@ -143,15 +144,27 @@ function RecordCard({
                 className="mb-5 space-y-1.5 text-sm"
                 style={{ color: "var(--muted-foreground)" }}
               >
-                {record.principal_name && <p>👤 {record.principal_name}</p>}
-                {record.contact_phone && <p>📞 {record.contact_phone}</p>}
-                {record.contact_email && <p>✉️ {record.contact_email}</p>}
+                {record.principal_name && (
+                  <p className="flex items-center gap-1.5">
+                    <User className="h-4 w-4" aria-hidden /> {record.principal_name}
+                  </p>
+                )}
+                {record.contact_phone && (
+                  <p className="flex items-center gap-1.5">
+                    <Phone className="h-4 w-4" aria-hidden /> {record.contact_phone}
+                  </p>
+                )}
+                {record.contact_email && (
+                  <p className="flex items-center gap-1.5">
+                    <Mail className="h-4 w-4" aria-hidden /> {record.contact_email}
+                  </p>
+                )}
                 {record.reason_for_leaving && (
                   <p>↩ {record.reason_for_leaving}</p>
                 )}
                 {record.transfer_document_url && (
-                  <p>
-                    📄{" "}
+                  <p className="flex items-center gap-1.5">
+                    <FileText className="h-4 w-4" aria-hidden />{" "}
                     <a
                       href={record.transfer_document_url}
                       target="_blank"
@@ -264,9 +277,11 @@ export function PreviousSchoolRecordsClient({
       {/* Empty state */}
       {records.length === 0 && !showAddForm && (
         <div className="rounded-xl border border-border py-12 text-center">
-          <p className="text-2xl" style={{ color: "var(--empty-state-icon)" }}>
-            🏫
-          </p>
+          <School
+            className="mx-auto h-10 w-10"
+            style={{ color: "var(--empty-state-icon)" }}
+            aria-hidden
+          />
           <p
             className="mt-2 text-sm"
             style={{ color: "var(--muted-foreground)" }}

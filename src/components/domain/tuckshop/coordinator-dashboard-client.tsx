@@ -3,6 +3,7 @@
 import { useState, useTransition } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { Package, CheckCircle2 } from "lucide-react";
 import type {
   TuckshopDashboardData,
   TuckshopOrderWithDetails,
@@ -93,7 +94,7 @@ export function CoordinatorDashboardClient({
 
         {active_delivery_weeks.length === 0 ? (
           <EmptyState
-            icon="📦"
+            icon={<Package className="mx-auto h-10 w-10" aria-hidden />}
             message="No active delivery weeks"
             hint="Create a delivery week to start accepting orders."
             action={
@@ -203,7 +204,7 @@ export function CoordinatorDashboardClient({
 
         {pending_orders.length === 0 ? (
           <EmptyState
-            icon="✅"
+            icon={<CheckCircle2 className="mx-auto h-10 w-10" aria-hidden />}
             message="All caught up"
             hint="No orders are awaiting action right now."
           />
@@ -347,7 +348,7 @@ function EmptyState({
   hint,
   action,
 }: {
-  icon: string;
+  icon: React.ReactNode;
   message: string;
   hint: string;
   action?: React.ReactNode;
@@ -358,7 +359,7 @@ function EmptyState({
       style={{ backgroundColor: "var(--card)" }}
     >
       <div
-        className="mx-auto mb-3 text-4xl"
+        className="mb-3"
         style={{ color: "var(--empty-state-icon)" }}
       >
         {icon}

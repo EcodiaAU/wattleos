@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useState, useTransition } from "react";
+import { Newspaper } from "lucide-react";
 import type { NewsletterStatus, NewsletterWithDetails } from "@/types/domain";
 import { listNewsletters } from "@/lib/actions/comms/newsletter";
 import { NewsletterCard } from "./newsletter-card";
@@ -89,9 +90,11 @@ export function NewsletterListClient({
         </div>
       ) : newsletters.length === 0 ? (
         <div className="rounded-lg border border-border p-8 text-center">
-          <p className="text-3xl" style={{ color: "var(--empty-state-icon)" }}>
-            📰
-          </p>
+          <Newspaper
+            className="mx-auto h-10 w-10"
+            style={{ color: "var(--empty-state-icon)" }}
+            aria-hidden
+          />
           <p className="mt-2 text-sm" style={{ color: "var(--muted-foreground)" }}>
             No newsletters found.
           </p>

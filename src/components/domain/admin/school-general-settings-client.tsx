@@ -40,6 +40,7 @@ import {
   type DragEvent,
   type ChangeEvent,
 } from "react";
+import { Check } from "lucide-react";
 
 // ============================================================
 // Props
@@ -404,8 +405,8 @@ export function SchoolGeneralSettingsClient({
           </GlowTarget>
 
           {saveStatus === "saved" && (
-            <span className="text-sm text-success animate-fade-in">
-              ✓ Saved successfully
+            <span className="inline-flex items-center gap-1 text-sm text-success animate-fade-in">
+              <Check className="h-4 w-4" aria-hidden /> Saved successfully
             </span>
           )}
           {saveStatus === "error" && (

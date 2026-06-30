@@ -14,6 +14,7 @@
 
 import { updateInquiryConfig } from "@/lib/actions/admissions/inquiry-config";
 import type { CustomField, InquiryConfig } from "@/types/domain";
+import { X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
@@ -287,8 +288,9 @@ export function InquiryConfigClient({ initialConfig }: InquiryConfigClientProps)
                   type="button"
                   onClick={() => removeCustomField(index)}
                   className="rounded p-1 text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-colors"
+                  aria-label="Remove question"
                 >
-                  ✕
+                  <X className="h-4 w-4" aria-hidden />
                 </button>
               </div>
             </div>

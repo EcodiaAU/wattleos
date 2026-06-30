@@ -6,6 +6,7 @@ import {
   type EnhancedCurriculumNode,
   type UpdateNodeEnrichmentInput,
 } from "@/lib/actions/curriculum-content";
+import { Check } from "lucide-react";
 import { useCallback, useState, useTransition } from "react";
 
 interface NodeEnrichmentEditorProps {
@@ -66,7 +67,7 @@ export function NodeEnrichmentEditor({ node }: NodeEnrichmentEditorProps) {
           </svg>
           Edit Enrichment
         </button>
-        {success && <span className="text-sm font-bold text-success animate-fade-in">✓ Changes Saved</span>}
+        {success && <span className="inline-flex items-center gap-1 text-sm font-bold text-success animate-fade-in"><Check className="h-4 w-4" aria-hidden /> Changes Saved</span>}
       </div>
     );
   }

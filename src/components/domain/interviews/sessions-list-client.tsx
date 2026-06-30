@@ -2,6 +2,7 @@
 "use client";
 
 import Link from "next/link";
+import { Calendar } from "lucide-react";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import { InterviewSessionStatusBadge } from "./interview-status-badge";
 import type { InterviewSessionWithCounts, InterviewSessionStatus } from "@/types/domain";
@@ -27,7 +28,7 @@ export function SessionsListClient({ sessions }: SessionsListClientProps) {
         className="rounded-2xl p-12 text-center"
         style={{ background: "var(--muted)", border: "1px solid var(--border)" }}
       >
-        <p className="text-5xl mb-4" style={{ color: "var(--empty-state-icon)" }}>🗓️</p>
+        <Calendar className="h-12 w-12 mx-auto mb-4" style={{ color: "var(--empty-state-icon)" }} aria-hidden />
         <p className="text-base font-medium mb-1" style={{ color: "var(--foreground)" }}>
           No interview sessions yet
         </p>

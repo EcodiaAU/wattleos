@@ -5,6 +5,7 @@ import {
   updateEnrollmentPeriod,
 } from "@/lib/actions/enroll";
 import type { CustomField, EnrollmentPeriod } from "@/types/domain";
+import { X } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
@@ -375,8 +376,9 @@ export function EnrollmentPeriodForm({ initialData }: EnrollmentPeriodFormProps)
                   onClick={() => removeCustomField(index)}
                   className="rounded p-1 text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-colors"
                   title="Remove"
+                  aria-label="Remove"
                 >
-                  ✕
+                  <X className="h-4 w-4" aria-hidden />
                 </button>
               </div>
             </div>

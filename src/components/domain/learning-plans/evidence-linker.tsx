@@ -11,7 +11,7 @@ const EVIDENCE_TYPE_OPTIONS = Object.entries(EVIDENCE_TYPE_CONFIG).map(
   ([key, cfg]) => ({
     value: key as IlpEvidenceType,
     label: cfg.label,
-    emoji: cfg.emoji,
+    icon: cfg.icon,
   }),
 );
 
@@ -154,6 +154,7 @@ export function EvidenceLinker({
             <div className="flex flex-wrap gap-2">
               {EVIDENCE_TYPE_OPTIONS.map((opt) => {
                 const isSelected = evidenceType === opt.value;
+                const Icon = opt.icon;
                 return (
                   <button
                     key={opt.value}
@@ -162,7 +163,7 @@ export function EvidenceLinker({
                       haptics.selection();
                       setEvidenceType(opt.value);
                     }}
-                    className="active-push rounded-full border px-3 py-1.5 text-xs font-medium transition-colors"
+                    className="active-push inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition-colors"
                     style={{
                       borderColor: isSelected
                         ? "var(--primary)"
@@ -173,7 +174,7 @@ export function EvidenceLinker({
                         : "var(--foreground)",
                     }}
                   >
-                    {opt.emoji} {opt.label}
+                    <Icon className="h-3.5 w-3.5" aria-hidden /> {opt.label}
                   </button>
                 );
               })}
@@ -295,6 +296,7 @@ export function EvidenceLinker({
         <div className="space-y-2">
           {evidence.map((item) => {
             const typeCfg = EVIDENCE_TYPE_CONFIG[item.evidence_type];
+            const TypeIcon = typeCfg.icon;
             return (
               <div
                 key={item.id}
@@ -302,7 +304,7 @@ export function EvidenceLinker({
                 style={{ background: "var(--card)" }}
               >
                 <div className="flex items-start gap-2.5">
-                  <span className="mt-0.5 text-lg">{typeCfg.emoji}</span>
+                  <TypeIcon className="mt-0.5 h-5 w-5 shrink-0" style={{ color: "var(--muted-foreground)" }} aria-hidden />
                   <div className="min-w-0">
                     <p
                       className="text-sm font-medium"

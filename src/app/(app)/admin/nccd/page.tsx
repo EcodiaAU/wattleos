@@ -3,6 +3,7 @@
 // NCCD Disability Register - Dashboard
 // Server component: loads dashboard data, passes to client.
 
+import { Accessibility } from "lucide-react";
 import Link from "next/link";
 
 import { NccdDashboardClient } from "@/components/domain/nccd/nccd-dashboard-client";
@@ -42,10 +43,10 @@ export default async function NccdDashboardPage() {
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <div>
           <h1
-            className="text-2xl font-bold"
+            className="flex items-center gap-2 text-2xl font-bold"
             style={{ color: "var(--foreground)" }}
           >
-            ♿ NCCD Register
+            <Accessibility className="h-6 w-6" aria-hidden /> NCCD Register
           </h1>
           <p
             className="text-sm mt-1"

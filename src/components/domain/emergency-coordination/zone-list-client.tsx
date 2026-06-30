@@ -2,14 +2,16 @@
 
 import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import type { LucideIcon } from "lucide-react";
+import { Home, Trees, MapPin, Check } from "lucide-react";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import { deleteZone } from "@/lib/actions/emergency-coordination";
 import type { EmergencyZoneWithWarden } from "@/types/domain";
 
-const ZONE_TYPE_EMOJI: Record<string, string> = {
-  indoor: "🏠",
-  outdoor: "🌳",
-  assembly_point: "📍",
+const ZONE_TYPE_ICON: Record<string, LucideIcon> = {
+  indoor: Home,
+  outdoor: Trees,
+  assembly_point: MapPin,
 };
 
 export function ZoneListClient({
@@ -39,12 +41,11 @@ export function ZoneListClient({
   if (zones.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-12">
-        <span
-          className="text-3xl mb-3"
+        <MapPin
+          className="h-10 w-10 mb-3"
           style={{ color: "var(--empty-state-icon)" }}
-        >
-          📍
-        </span>
+          aria-hidden
+        />
         <p className="text-sm font-medium" style={{ color: "var(--foreground)" }}>
           No zones configured
         </p>
@@ -57,15 +58,15 @@ export function ZoneListClient({
 
   return (
     <div className="space-y-2">
-      {zones.map((zone) => (
+      {zones.map((zone) => {
+        const ZoneIcon = ZONE_TYPE_ICON[zone.zone_type] ?? MapPin;
+        return (
         <div
           key={zone.id}
           className="flex items-center gap-3 rounded-[var(--radius-lg)] border border-border p-3"
           style={{ backgroundColor: "var(--card)" }}
         >
-          <span className="text-lg shrink-0">
-            {ZONE_TYPE_EMOJI[zone.zone_type] ?? "📍"}
-          </span>
+          <ZoneIcon className="h-5 w-5 shrink-0" aria-hidden />
           <div className="flex-1 min-w-0">
             <p className="font-medium text-sm truncate" style={{ color: "var(--foreground)" }}>
               {zone.name}
@@ -92,7 +93,7 @@ export function ZoneListClient({
               color: zone.is_active ? "var(--zone-clear-fg)" : "var(--muted-foreground)",
             }}
           >
-            {zone.is_active ? "✓" : "-"}
+            {zone.is_active ? <Check className="h-3.5 w-3.5" aria-hidden /> : "-"}
           </div>
           {canManage && (
             <div className="flex gap-1">
@@ -132,7 +133,8 @@ export function ZoneListClient({
             </div>
           )}
         </div>
-      ))}
+        );
+      })}
     </div>
   );
 }

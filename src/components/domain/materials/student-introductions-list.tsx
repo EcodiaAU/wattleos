@@ -1,6 +1,8 @@
 // src/components/domain/materials/student-introductions-list.tsx
 "use client";
 
+import { ClipboardList } from "lucide-react";
+
 import type { MaterialStudentIntroduction } from "@/types/domain";
 
 const STAGE_LABELS: Record<string, string> = {
@@ -23,7 +25,7 @@ export function StudentIntroductionsList({ introductions }: StudentIntroductions
   if (introductions.length === 0) {
     return (
       <div className="py-8 text-center">
-        <p style={{ color: "var(--empty-state-icon)" }} className="text-2xl mb-1">📋</p>
+        <ClipboardList style={{ color: "var(--empty-state-icon)" }} className="h-8 w-8 mx-auto mb-1" aria-hidden />
         <p className="text-sm" style={{ color: "var(--text-tertiary)" }}>
           No lesson records found for this material.
         </p>

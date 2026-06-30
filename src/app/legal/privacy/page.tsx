@@ -7,6 +7,7 @@
 
 import type { Metadata } from "next";
 import type { CSSProperties } from "react";
+import { Lock, MapPin } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -132,7 +133,11 @@ export default function PrivacyPolicyPage() {
 
       <div style={callout}>
         <p style={calloutText}>
-          🇦🇺 All WattleOS data is stored exclusively in Australia. Our database
+          <MapPin
+            aria-hidden
+            style={{ display: "inline", verticalAlign: "-2px", width: 16, height: 16, marginRight: 6 }}
+          />
+          All WattleOS data is stored exclusively in Australia. Our database
           infrastructure is hosted in the Sydney (ap-southeast-2) AWS region via
           Supabase. Your school&apos;s data never leaves Australian soil.
         </p>
@@ -202,7 +207,17 @@ export default function PrivacyPolicyPage() {
 
       <div style={callout}>
         <p style={calloutText}>
-          🔒 Defence in Depth: WattleOS uses database-level Row Level Security
+          <Lock
+            aria-hidden
+            style={{
+              display: "inline-block",
+              verticalAlign: "-2px",
+              width: 16,
+              height: 16,
+              marginRight: 6,
+            }}
+          />
+          Defence in Depth: WattleOS uses database-level Row Level Security
           (RLS) policies, application-layer permission checks, and tenant-scoped
           isolation to ensure schools can only ever access their own data.
         </p>

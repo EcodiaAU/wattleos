@@ -16,7 +16,7 @@ import type { ReferralStatus, ReferralSpecialty } from "@/types/domain";
 
 const SPECIALTIES = Object.entries(REFERRAL_SPECIALTY_CONFIG).map(([value, cfg]) => ({
   value: value as ReferralSpecialty,
-  label: `${cfg.emoji} ${cfg.label}`,
+  label: cfg.label,
 }));
 
 const STATUSES = [

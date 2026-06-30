@@ -8,6 +8,19 @@
 // parent form to be saved via tagObservationWithSensitivePeriods.
 // ============================================================
 
+import {
+  Speech,
+  Ruler,
+  Footprints,
+  Search,
+  Music,
+  Handshake,
+  BookOpen,
+  Pencil,
+  Calculator,
+  Eye,
+  type LucideIcon,
+} from "lucide-react";
 import type { MontessoriSensitivePeriod, SensitivePeriodIntensity } from "@/types/domain";
 
 // ── Types ────────────────────────────────────────────────────
@@ -41,17 +54,17 @@ const PERIOD_LABELS: Record<MontessoriSensitivePeriod, string> = {
   refinement_of_senses: "Refinement of Senses",
 };
 
-const PERIOD_EMOJI: Record<MontessoriSensitivePeriod, string> = {
-  language: "🗣️",
-  order: "📐",
-  movement: "🏃",
-  small_objects: "🔍",
-  music: "🎵",
-  social_behavior: "🤝",
-  reading: "📖",
-  writing: "✏️",
-  mathematics: "🔢",
-  refinement_of_senses: "👁️",
+const PERIOD_ICON: Record<MontessoriSensitivePeriod, LucideIcon> = {
+  language: Speech,
+  order: Ruler,
+  movement: Footprints,
+  small_objects: Search,
+  music: Music,
+  social_behavior: Handshake,
+  reading: BookOpen,
+  writing: Pencil,
+  mathematics: Calculator,
+  refinement_of_senses: Eye,
 };
 
 const INTENSITY_LABEL: Record<SensitivePeriodIntensity, string> = {
@@ -104,6 +117,7 @@ export function ObservationPeriodTagger({
           <div className="space-y-1.5">
             {periods.map((p) => {
               const isChecked = selectedIds.includes(p.id);
+              const PeriodIcon = PERIOD_ICON[p.sensitivePeriod];
               return (
                 <label
                   key={p.id}
@@ -119,7 +133,7 @@ export function ObservationPeriodTagger({
                     onChange={() => toggle(p.id)}
                     className="h-4 w-4 rounded border-border accent-primary-foreground"
                   />
-                  <span className="text-base">{PERIOD_EMOJI[p.sensitivePeriod]}</span>
+                  <PeriodIcon className="h-5 w-5 shrink-0" aria-hidden />
                   <span
                     className="flex-1 text-sm font-medium"
                     style={{ color: isChecked ? "var(--primary-foreground)" : "var(--foreground)" }}

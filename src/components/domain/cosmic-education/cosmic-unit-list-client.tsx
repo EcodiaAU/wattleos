@@ -6,6 +6,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import type { LucideIcon } from "lucide-react";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import type { CosmicUnitSummary, CosmicUnitStatus, CosmicGreatLesson } from "@/types/domain";
 import {
@@ -92,7 +93,7 @@ export function CosmicUnitListClient({ units, canManage, defaultStatus = 'all', 
           <option value="all">All lessons</option>
           {LESSON_KEYS.map(k => {
             const cfg = getLessonConfig(k);
-            return <option key={k} value={k}>{cfg.emoji} {cfg.label}</option>;
+            return <option key={k} value={k}>{cfg.label}</option>;
           })}
         </select>
       </div>
@@ -106,6 +107,7 @@ export function CosmicUnitListClient({ units, canManage, defaultStatus = 'all', 
         <div className="space-y-2">
           {filtered.map(unit => {
             const cfg = getLessonConfig(unit.lesson_key);
+            const LessonIcon: LucideIcon = cfg.icon;
             return (
               <Link
                 key={unit.id}
@@ -114,7 +116,7 @@ export function CosmicUnitListClient({ units, canManage, defaultStatus = 'all', 
                 className="card-interactive flex items-center gap-4 p-4 rounded-xl border border-border"
                 style={{ background: "var(--card)" }}
               >
-                <span className="text-2xl shrink-0">{cfg.emoji}</span>
+                <LessonIcon className="h-6 w-6 shrink-0" style={{ color: `var(${cfg.accentVar})` }} aria-hidden />
                 <div className="flex-1 min-w-0 space-y-1.5">
                   <div className="flex items-center gap-2 flex-wrap">
                     <p className="text-sm font-medium truncate" style={{ color: "var(--foreground)" }}>

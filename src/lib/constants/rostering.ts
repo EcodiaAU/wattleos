@@ -7,6 +7,25 @@
 // helper functions for the rostering module.
 // ============================================================
 
+import type { LucideIcon } from "lucide-react";
+import {
+  Baby,
+  BookOpen,
+  ClipboardList,
+  Crown,
+  Flower2,
+  FolderOpen,
+  Handshake,
+  RefreshCw,
+  SquarePen,
+  Thermometer,
+  TreePalm,
+  Trophy,
+  User,
+  Utensils,
+  Wrench,
+} from "lucide-react";
+
 import type {
   CoverageUrgency,
   LeaveRequestStatus,
@@ -23,7 +42,7 @@ import type {
 export interface ShiftRoleConfig {
   label: string;
   shortLabel: string;
-  emoji: string;
+  icon: LucideIcon;
   cssVar: string;
 }
 
@@ -31,43 +50,43 @@ export const SHIFT_ROLE_CONFIG: Record<ShiftRole, ShiftRoleConfig> = {
   lead: {
     label: "Lead Educator",
     shortLabel: "Lead",
-    emoji: "👑",
+    icon: Crown,
     cssVar: "var(--shift-role-lead)",
   },
   co_educator: {
     label: "Co-Educator",
     shortLabel: "Co-Ed",
-    emoji: "🤝",
+    icon: Handshake,
     cssVar: "var(--shift-role-co-educator)",
   },
   general: {
     label: "General",
     shortLabel: "Gen",
-    emoji: "👤",
+    icon: User,
     cssVar: "var(--shift-role-general)",
   },
   float: {
     label: "Float",
     shortLabel: "Float",
-    emoji: "🔄",
+    icon: RefreshCw,
     cssVar: "var(--shift-role-float)",
   },
   admin: {
     label: "Administration",
     shortLabel: "Admin",
-    emoji: "🗂️",
+    icon: FolderOpen,
     cssVar: "var(--shift-role-admin)",
   },
   kitchen: {
     label: "Kitchen",
     shortLabel: "Kit",
-    emoji: "🍳",
+    icon: Utensils,
     cssVar: "var(--shift-role-admin)",
   },
   maintenance: {
     label: "Maintenance",
     shortLabel: "Maint",
-    emoji: "🔧",
+    icon: Wrench,
     cssVar: "var(--shift-role-general)",
   },
 };
@@ -88,49 +107,49 @@ export const SHIFT_ROLES: ShiftRole[] = [
 
 export interface LeaveTypeConfig {
   label: string;
-  emoji: string;
+  icon: LucideIcon;
   mapsToTimeEntryType: string | null;
 }
 
 export const LEAVE_TYPE_CONFIG: Record<LeaveType, LeaveTypeConfig> = {
   sick_leave: {
     label: "Sick Leave",
-    emoji: "🤒",
+    icon: Thermometer,
     mapsToTimeEntryType: "sick_leave",
   },
   annual_leave: {
     label: "Annual Leave",
-    emoji: "🌴",
+    icon: TreePalm,
     mapsToTimeEntryType: "annual_leave",
   },
   unpaid_leave: {
     label: "Unpaid Leave",
-    emoji: "📋",
+    icon: ClipboardList,
     mapsToTimeEntryType: "unpaid_leave",
   },
   long_service_leave: {
     label: "Long Service Leave",
-    emoji: "🏆",
+    icon: Trophy,
     mapsToTimeEntryType: null,
   },
   parental_leave: {
     label: "Parental Leave",
-    emoji: "👶",
+    icon: Baby,
     mapsToTimeEntryType: null,
   },
   compassionate_leave: {
     label: "Compassionate Leave",
-    emoji: "💐",
+    icon: Flower2,
     mapsToTimeEntryType: null,
   },
   professional_development: {
     label: "Professional Development",
-    emoji: "📚",
+    icon: BookOpen,
     mapsToTimeEntryType: null,
   },
   other: {
     label: "Other Leave",
-    emoji: "📝",
+    icon: SquarePen,
     mapsToTimeEntryType: "unpaid_leave",
   },
 };

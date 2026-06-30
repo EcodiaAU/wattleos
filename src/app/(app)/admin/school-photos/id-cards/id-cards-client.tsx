@@ -6,6 +6,7 @@
 // Manages template creation, editing, and batch card generation.
 // ============================================================
 
+import { IdCard } from "lucide-react";
 import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { useHaptics } from "@/lib/hooks/use-haptics";
@@ -142,10 +143,10 @@ export function IdCardsClient({
                   style={{ backgroundColor: "var(--card)" }}
                 >
                   <div
-                    className="text-4xl mb-3"
+                    className="mb-3 flex justify-center"
                     style={{ color: "var(--empty-state-icon)" }}
                   >
-                    🪪
+                    <IdCard className="h-10 w-10" aria-hidden />
                   </div>
                   <p style={{ color: "var(--muted-foreground)" }}>
                     No templates yet. Create one to start generating ID cards.

@@ -5,6 +5,7 @@
 // Card component for displaying an NCCD register entry in a list.
 
 import Link from "next/link";
+import { AlertTriangle, Check, User } from "lucide-react";
 
 import {
   NCCD_ADJUSTMENT_TYPE_CONFIG,
@@ -49,10 +50,10 @@ export function NccdEntryCard({ entry }: NccdEntryCardProps) {
             />
           ) : (
             <div
-              className="w-10 h-10 rounded-full flex items-center justify-center text-lg shrink-0"
+              className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
               style={{ background: "var(--muted)" }}
             >
-              👤
+              <User className="h-5 w-5" aria-hidden />
             </div>
           )}
           <div className="min-w-0">
@@ -72,14 +73,20 @@ export function NccdEntryCard({ entry }: NccdEntryCardProps) {
 
       {/* Disability category + adjustment types */}
       <div className="flex flex-wrap gap-2">
-        <span
-          className="inline-flex items-center gap-1 rounded px-2 py-0.5 text-xs font-medium"
-          style={{ background: "var(--muted)", color: categoryConfig.cssVar }}
-        >
-          {categoryConfig.emoji} {categoryConfig.label}
-        </span>
+        {(() => {
+          const CategoryIcon = categoryConfig.icon;
+          return (
+            <span
+              className="inline-flex items-center gap-1 rounded px-2 py-0.5 text-xs font-medium"
+              style={{ background: "var(--muted)", color: categoryConfig.cssVar }}
+            >
+              <CategoryIcon className="h-4 w-4" aria-hidden /> {categoryConfig.label}
+            </span>
+          );
+        })()}
         {entry.adjustment_types.map((type) => {
           const typeConfig = NCCD_ADJUSTMENT_TYPE_CONFIG[type];
+          const TypeIcon = typeConfig.icon;
           return (
             <span
               key={type}
@@ -89,7 +96,7 @@ export function NccdEntryCard({ entry }: NccdEntryCardProps) {
                 color: "var(--muted-foreground)",
               }}
             >
-              {typeConfig.emoji} {typeConfig.label}
+              <TypeIcon className="h-4 w-4" aria-hidden /> {typeConfig.label}
             </span>
           );
         })}
@@ -107,7 +114,7 @@ export function NccdEntryCard({ entry }: NccdEntryCardProps) {
                 color: "var(--nccd-status-under-review-fg)",
               }}
             >
-              ⚠️ {w}
+              <AlertTriangle className="h-3.5 w-3.5" aria-hidden /> {w}
             </span>
           ))}
         </div>
@@ -120,7 +127,7 @@ export function NccdEntryCard({ entry }: NccdEntryCardProps) {
         </span>
         {entry.submitted_to_collection ? (
           <span className="flex items-center gap-1" style={{ color: "var(--nccd-status-active)" }}>
-            ✓ Submitted
+            <Check className="h-3.5 w-3.5" aria-hidden /> Submitted
           </span>
         ) : (
           <span>Pending submission</span>

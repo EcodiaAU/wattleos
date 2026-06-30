@@ -1,6 +1,7 @@
 // src/app/(app)/interviews/[sessionId]/book/page.tsx
 // Family/parent: view existing booking + book a new slot
 
+import { CheckCircle2 } from "lucide-react";
 import { redirect, notFound } from "next/navigation";
 import { getTenantContext, hasPermission } from "@/lib/auth/tenant-context";
 import { Permissions } from "@/lib/constants/permissions";
@@ -131,7 +132,7 @@ export default async function BookInterviewPage({ params }: Props) {
             className="rounded-2xl p-8 text-center"
             style={{ background: "var(--muted)", border: "1px solid var(--border)" }}
           >
-            <p className="text-3xl mb-2" style={{ color: "var(--empty-state-icon)" }}>✅</p>
+            <CheckCircle2 className="mx-auto mb-2 h-10 w-10" style={{ color: "var(--empty-state-icon)" }} aria-hidden />
             <p className="text-sm font-medium" style={{ color: "var(--foreground)" }}>
               All your children are booked in.
             </p>

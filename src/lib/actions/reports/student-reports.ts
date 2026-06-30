@@ -457,7 +457,7 @@ export async function updateReportContent(
 
     const report = existing as StudentReport;
 
-    // ✅ widen locally (prevents TS narrowing that excludes "published")
+    // widen locally (prevents TS narrowing that excludes "published")
     const status: ReportStatus = report.status as unknown as ReportStatus;
 
     if (status === "approved" || status === "published") {

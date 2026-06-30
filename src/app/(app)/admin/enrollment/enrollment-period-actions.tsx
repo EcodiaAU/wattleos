@@ -6,6 +6,7 @@ import {
   deleteEnrollmentPeriod,
   openEnrollmentPeriod,
 } from "@/lib/actions/enroll";
+import { AlertTriangle } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
@@ -72,8 +73,8 @@ export function EnrollmentPeriodActions({
   return (
     <div className="flex items-center justify-end gap-2">
       {error && (
-        <span className="text-xs text-destructive" title={error}>
-          ⚠
+        <span className="text-destructive" title={error} aria-label="Error">
+          <AlertTriangle className="h-4 w-4" aria-hidden />
         </span>
       )}
 

@@ -9,6 +9,22 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import {
+  Speech,
+  Ruler,
+  Footprints,
+  Search,
+  Music,
+  Handshake,
+  BookOpen,
+  Pencil,
+  Calculator,
+  Eye,
+  Circle,
+  Star,
+  Leaf,
+  type LucideIcon,
+} from "lucide-react";
 import type {
   MontessoriSensitivePeriod,
   SensitivePeriodIntensity,
@@ -31,17 +47,17 @@ interface ActivePeriodsDashboardProps {
 
 // ── Constants ────────────────────────────────────────────────
 
-const PERIOD_EMOJI: Record<MontessoriSensitivePeriod, string> = {
-  language: "🗣️",
-  order: "📐",
-  movement: "🏃",
-  small_objects: "🔍",
-  music: "🎵",
-  social_behavior: "🤝",
-  reading: "📖",
-  writing: "✏️",
-  mathematics: "🔢",
-  refinement_of_senses: "👁️",
+const PERIOD_ICON: Record<MontessoriSensitivePeriod, LucideIcon> = {
+  language: Speech,
+  order: Ruler,
+  movement: Footprints,
+  small_objects: Search,
+  music: Music,
+  social_behavior: Handshake,
+  reading: BookOpen,
+  writing: Pencil,
+  mathematics: Calculator,
+  refinement_of_senses: Eye,
 };
 
 const PERIOD_LABELS: Record<MontessoriSensitivePeriod, string> = {
@@ -57,11 +73,14 @@ const PERIOD_LABELS: Record<MontessoriSensitivePeriod, string> = {
   refinement_of_senses: "Refinement of Senses",
 };
 
-const INTENSITY_DOT: Record<SensitivePeriodIntensity, string> = {
-  emerging: "🔵",
-  active: "🟢",
-  peak: "⭐",
-  waning: "🟡",
+const INTENSITY_DOT: Record<
+  SensitivePeriodIntensity,
+  { icon: LucideIcon; className: string }
+> = {
+  emerging: { icon: Circle, className: "text-blue-500 fill-blue-500" },
+  active: { icon: Circle, className: "text-green-500 fill-green-500" },
+  peak: { icon: Star, className: "text-amber-500 fill-amber-500" },
+  waning: { icon: Circle, className: "text-amber-500 fill-amber-500" },
 };
 
 // ── Component ────────────────────────────────────────────────
@@ -128,7 +147,7 @@ export function ActivePeriodsDashboard({ rows }: ActivePeriodsDashboardProps) {
           className="py-12 text-center"
           style={{ color: "var(--muted-foreground)" }}
         >
-          <div className="text-3xl">🌿</div>
+          <Leaf className="h-10 w-10 mx-auto" aria-hidden />
           <p className="mt-2 text-sm">No students match the current filter.</p>
         </div>
       )}
@@ -212,7 +231,11 @@ export function ActivePeriodsDashboard({ rows }: ActivePeriodsDashboardProps) {
                         </span>
                       ) : (
                         <div className="flex flex-wrap gap-1.5">
-                          {row.activePeriods.map((p) => (
+                          {row.activePeriods.map((p) => {
+                            const intensity = INTENSITY_DOT[p.intensity];
+                            const IntensityIcon = intensity.icon;
+                            const PeriodIcon = PERIOD_ICON[p.sensitive_period];
+                            return (
                             <span
                               key={p.id}
                               className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs"
@@ -222,13 +245,14 @@ export function ActivePeriodsDashboard({ rows }: ActivePeriodsDashboardProps) {
                               }}
                               title={`${PERIOD_LABELS[p.sensitive_period]} - ${p.intensity}`}
                             >
-                              {INTENSITY_DOT[p.intensity]}
-                              {PERIOD_EMOJI[p.sensitive_period]}
+                              <IntensityIcon className={`h-3 w-3 ${intensity.className}`} aria-hidden />
+                              <PeriodIcon className="h-3.5 w-3.5" aria-hidden />
                               <span className="hidden sm:inline">
                                 {PERIOD_LABELS[p.sensitive_period]}
                               </span>
                             </span>
-                          ))}
+                            );
+                          })}
                         </div>
                       )}
                     </td>
@@ -284,10 +308,18 @@ export function ActivePeriodsDashboard({ rows }: ActivePeriodsDashboardProps) {
         className="flex flex-wrap gap-3 text-xs"
         style={{ color: "var(--muted-foreground)" }}
       >
-        <span>⭐ Peak</span>
-        <span>🟢 Active</span>
-        <span>🔵 Emerging</span>
-        <span>🟡 Waning</span>
+        <span className="inline-flex items-center gap-1">
+          <Star className="h-3 w-3 text-amber-500 fill-amber-500" aria-hidden /> Peak
+        </span>
+        <span className="inline-flex items-center gap-1">
+          <Circle className="h-3 w-3 text-green-500 fill-green-500" aria-hidden /> Active
+        </span>
+        <span className="inline-flex items-center gap-1">
+          <Circle className="h-3 w-3 text-blue-500 fill-blue-500" aria-hidden /> Emerging
+        </span>
+        <span className="inline-flex items-center gap-1">
+          <Circle className="h-3 w-3 text-amber-500 fill-amber-500" aria-hidden /> Waning
+        </span>
       </div>
     </div>
   );

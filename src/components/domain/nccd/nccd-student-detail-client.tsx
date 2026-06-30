@@ -7,6 +7,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { AlertTriangle, CheckCircle2, User } from "lucide-react";
 
 import {
   NCCD_ADJUSTMENT_TYPE_CONFIG,
@@ -72,10 +73,10 @@ export function NccdStudentDetailClient({
               />
             ) : (
               <div
-                className="w-14 h-14 rounded-full flex items-center justify-center text-2xl shrink-0"
+                className="w-14 h-14 rounded-full flex items-center justify-center shrink-0"
                 style={{ background: "var(--muted)" }}
               >
-                👤
+                <User className="h-7 w-7" aria-hidden />
               </div>
             )}
             <div>
@@ -109,7 +110,12 @@ export function NccdStudentDetailClient({
               Disability Category
             </p>
             <div className="flex items-center gap-2">
-              <span className="text-xl">{categoryConfig.emoji}</span>
+              {(() => {
+                const CategoryIcon = categoryConfig.icon;
+                return (
+                  <CategoryIcon className="h-5 w-5 shrink-0" aria-hidden />
+                );
+              })()}
               <div>
                 <p className="text-sm font-semibold" style={{ color: "var(--foreground)" }}>
                   {categoryConfig.label}
@@ -146,13 +152,14 @@ export function NccdStudentDetailClient({
           <div className="flex flex-wrap gap-2">
             {entry.adjustment_types.map((type) => {
               const config = NCCD_ADJUSTMENT_TYPE_CONFIG[type];
+              const TypeIcon = config.icon;
               return (
                 <span
                   key={type}
                   className="inline-flex items-center gap-1 rounded-lg px-2.5 py-1 text-xs font-medium border border-border"
                   style={{ background: "var(--muted)", color: "var(--foreground)" }}
                 >
-                  {config.emoji} {config.label}
+                  <TypeIcon className="h-4 w-4" aria-hidden /> {config.label}
                 </span>
               );
             })}
@@ -325,10 +332,14 @@ function ComplianceRow({
   return (
     <div className="flex items-start gap-3">
       <span
-        className="mt-0.5 shrink-0 text-base"
+        className="mt-0.5 shrink-0"
         style={{ color: met ? "var(--nccd-status-active)" : "var(--nccd-status-under-review)" }}
       >
-        {met ? "✓" : "⚠️"}
+        {met ? (
+          <CheckCircle2 className="h-4 w-4" aria-hidden />
+        ) : (
+          <AlertTriangle className="h-4 w-4" aria-hidden />
+        )}
       </span>
       <div>
         <p className="text-sm font-medium" style={{ color: "var(--foreground)" }}>

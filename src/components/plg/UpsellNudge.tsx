@@ -20,6 +20,7 @@
 // ============================================================
 
 import { useState } from "react";
+import { Lock, Star, X } from "lucide-react";
 import type { PLGFeature } from "@/lib/plg/plan-gating";
 import { getFeatureUpsellCopy } from "@/lib/plg/plan-gating";
 
@@ -65,7 +66,7 @@ export function UpsellNudge({
           color: "var(--color-foreground)",
         }}
       >
-        <span style={{ fontSize: "1rem", flexShrink: 0 }}>🔒</span>
+        <Lock className="h-4 w-4 shrink-0" aria-hidden />
         <div className="flex-1 min-w-0">
           <p
             className="font-medium leading-snug"
@@ -114,7 +115,7 @@ export function UpsellNudge({
             backdropFilter: "blur(2px)",
           }}
         >
-          <span style={{ fontSize: "1.5rem" }}>🔒</span>
+          <Lock className="h-6 w-6" aria-hidden />
           <p
             className="text-sm font-semibold text-center px-4"
             style={{ color: "var(--color-foreground)" }}
@@ -152,9 +153,11 @@ export function UpsellNudge({
           "color-mix(in srgb, var(--color-warning, #d97706) 10%, transparent)",
       }}
     >
-      <span style={{ fontSize: "1.25rem", flexShrink: 0, marginTop: "1px" }}>
-        ⭐
-      </span>
+      <Star
+        className="h-5 w-5 shrink-0"
+        style={{ marginTop: "1px" }}
+        aria-hidden
+      />
       <div className="flex-1 min-w-0">
         <p
           className="text-sm font-semibold"
@@ -186,7 +189,7 @@ export function UpsellNudge({
           style={{ color: "var(--color-muted-foreground)" }}
           aria-label="Dismiss"
         >
-          ✕
+          <X className="h-4 w-4" aria-hidden />
         </button>
       </div>
     </div>

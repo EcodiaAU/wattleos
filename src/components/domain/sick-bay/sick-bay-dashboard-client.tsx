@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Stethoscope } from "lucide-react";
 import type { SickBayDashboardData } from "@/types/domain";
 import { SickBayStatusBadge } from "./sick-bay-status-badge";
 
@@ -150,9 +151,9 @@ export function SickBayDashboardClient({
       {data.visits_today.length === 0 && data.open_visits.length === 0 && (
         <div className="rounded-lg border border-border p-12 text-center"
              style={{ backgroundColor: "var(--card)" }}>
-          <div className="mx-auto mb-3 text-4xl"
+          <div className="mx-auto mb-3 flex justify-center"
                style={{ color: "var(--empty-state-icon)" }}>
-            🏥
+            <Stethoscope className="h-12 w-12" aria-hidden />
           </div>
           <p className="text-sm font-medium" style={{ color: "var(--foreground)" }}>
             No visits recorded

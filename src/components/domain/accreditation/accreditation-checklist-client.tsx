@@ -6,6 +6,7 @@
 // cards. Inline rating selector + narrative fields. Evidence panel.
 
 import { useState, useTransition } from "react";
+import { Square, Circle, Star, Paperclip, type LucideIcon } from "lucide-react";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import { upsertAccreditationAssessment, createAccreditationEvidence } from "@/lib/actions/accreditation";
 import type {
@@ -21,12 +22,17 @@ import {
   AccreditationCycleStatusBadge,
 } from "./accreditation-rating-badge";
 
-const RATING_OPTIONS: { value: AccreditationRating; label: string; emoji: string }[] = [
-  { value: "not_started",   label: "Not Started",   emoji: "⬜" },
-  { value: "not_met",       label: "Not Met",       emoji: "🔴" },
-  { value: "partially_met", label: "Partially Met", emoji: "🟡" },
-  { value: "met",           label: "Met",           emoji: "🟢" },
-  { value: "exceeds",       label: "Exceeds",       emoji: "⭐" },
+const RATING_OPTIONS: {
+  value: AccreditationRating;
+  label: string;
+  icon: LucideIcon;
+  iconClass?: string;
+}[] = [
+  { value: "not_started",   label: "Not Started",   icon: Square },
+  { value: "not_met",       label: "Not Met",       icon: Circle, iconClass: "fill-red-500 text-red-500" },
+  { value: "partially_met", label: "Partially Met", icon: Circle, iconClass: "fill-amber-500 text-amber-500" },
+  { value: "met",           label: "Met",           icon: Circle, iconClass: "fill-green-500 text-green-500" },
+  { value: "exceeds",       label: "Exceeds",       icon: Star },
 ];
 
 const EVIDENCE_TYPES: { value: AccreditationEvidenceType; label: string }[] = [
@@ -189,8 +195,8 @@ export function AccreditationChecklistClient({ cycle, domains: initialDomains, c
                             {criterion.criterion_code}
                           </span>
                           {evidence_count > 0 && (
-                            <span className="text-xs" style={{ color: "var(--muted-foreground)" }}>
-                              📎 {evidence_count} evidence item{evidence_count > 1 ? "s" : ""}
+                            <span className="inline-flex items-center gap-1 text-xs" style={{ color: "var(--muted-foreground)" }}>
+                              <Paperclip className="h-3 w-3" aria-hidden /> {evidence_count} evidence item{evidence_count > 1 ? "s" : ""}
                             </span>
                           )}
                         </div>
@@ -219,6 +225,7 @@ export function AccreditationChecklistClient({ cycle, domains: initialDomains, c
                       <div className="flex flex-wrap gap-1.5">
                         {RATING_OPTIONS.map(opt => {
                           const isCurrent = (assessment?.rating ?? "not_started") === opt.value;
+                          const OptIcon = opt.icon;
                           return (
                             <button
                               key={opt.value}
@@ -234,7 +241,7 @@ export function AccreditationChecklistClient({ cycle, domains: initialDomains, c
                                 borderColor: isCurrent ? "var(--primary)" : "var(--border)",
                               }}
                             >
-                              {opt.emoji} {opt.label}
+                              <OptIcon className={`h-3.5 w-3.5 ${opt.iconClass ?? ""}`} aria-hidden /> {opt.label}
                             </button>
                           );
                         })}

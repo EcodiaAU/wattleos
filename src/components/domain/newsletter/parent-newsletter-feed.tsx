@@ -8,6 +8,7 @@ import {
 } from "@/lib/actions/comms/newsletter";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import { sanitizeHtml } from "@/lib/utils/sanitize-html";
+import { Newspaper } from "lucide-react";
 
 interface ParentNewsletterFeedProps {
   initialNewsletters: NewsletterWithDetails[];
@@ -61,9 +62,11 @@ export function ParentNewsletterFeed({
 
       {newsletters.length === 0 ? (
         <div className="rounded-lg border border-border p-8 text-center">
-          <p className="text-3xl" style={{ color: "var(--empty-state-icon)" }}>
-            📰
-          </p>
+          <Newspaper
+            className="mx-auto h-10 w-10"
+            style={{ color: "var(--empty-state-icon)" }}
+            aria-hidden
+          />
           <p className="mt-2 text-sm" style={{ color: "var(--muted-foreground)" }}>
             No newsletters have been sent yet.
           </p>

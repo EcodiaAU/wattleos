@@ -5,6 +5,8 @@
 // Status badge for dismissal records: pending / confirmed / exception
 // and dismissal method badges: parent_pickup / bus / oshc / walker / other
 
+import type { LucideIcon } from "lucide-react";
+import { User, Bus, School, Footprints, ClipboardList } from "lucide-react";
 import type { DismissalMethod, DismissalStatus } from "@/types/domain";
 
 // ── Status badge ─────────────────────────────────────────────
@@ -65,11 +67,11 @@ export function DismissalStatusBadge({
 
 const METHOD_CONFIG: Record<
   DismissalMethod,
-  { label: string; emoji: string; style: React.CSSProperties }
+  { label: string; icon: LucideIcon; style: React.CSSProperties }
 > = {
   parent_pickup: {
     label: "Parent pickup",
-    emoji: "👤",
+    icon: User,
     style: {
       color: "var(--dismissal-parent-pickup-fg)",
       backgroundColor: "var(--dismissal-parent-pickup-bg)",
@@ -78,7 +80,7 @@ const METHOD_CONFIG: Record<
   },
   bus: {
     label: "Bus",
-    emoji: "🚌",
+    icon: Bus,
     style: {
       color: "var(--dismissal-bus-fg)",
       backgroundColor: "var(--dismissal-bus-bg)",
@@ -87,7 +89,7 @@ const METHOD_CONFIG: Record<
   },
   oshc: {
     label: "OSHC",
-    emoji: "🏫",
+    icon: School,
     style: {
       color: "var(--dismissal-oshc-fg)",
       backgroundColor: "var(--dismissal-oshc-bg)",
@@ -96,7 +98,7 @@ const METHOD_CONFIG: Record<
   },
   walker: {
     label: "Walker",
-    emoji: "🚶",
+    icon: Footprints,
     style: {
       color: "var(--dismissal-walker-fg)",
       backgroundColor: "var(--dismissal-walker-bg)",
@@ -105,7 +107,7 @@ const METHOD_CONFIG: Record<
   },
   other: {
     label: "Other",
-    emoji: "📋",
+    icon: ClipboardList,
     style: {
       color: "var(--dismissal-other-fg)",
       backgroundColor: "var(--dismissal-other-bg)",
@@ -126,6 +128,7 @@ export function DismissalMethodBadge({
   showEmoji = true,
 }: DismissalMethodBadgeProps) {
   const config = METHOD_CONFIG[method];
+  const Icon = config.icon;
   return (
     <span
       className={`inline-flex items-center gap-1 rounded-full font-medium ${
@@ -133,7 +136,7 @@ export function DismissalMethodBadge({
       }`}
       style={config.style}
     >
-      {showEmoji && <span>{config.emoji}</span>}
+      {showEmoji && <Icon className="h-3.5 w-3.5" aria-hidden />}
       {config.label}
     </span>
   );

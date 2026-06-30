@@ -30,6 +30,9 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 import type { MobileTabItem, SidebarNavGroup } from "@/app/(app)/layout";
+import { Settings } from "lucide-react";
+import { SIDEBAR_ICON_MAP } from "@/components/domain/sidebar-icon-map";
+
 import {
   GlowTarget,
   useGlowTargetRef,
@@ -288,16 +291,21 @@ function MobileTabLink({
         }}
       />
 
-      {/* Emoji icon - slight scale on active */}
-      <span
-        className="leading-none"
-        style={{
-          fontSize: isActive ? "21px" : "20px",
-          transition: "font-size 200ms ease",
-        }}
-      >
-        {item.emoji}
-      </span>
+      {/* Tab icon - slight scale on active */}
+      {(() => {
+        const Icon = SIDEBAR_ICON_MAP[item.icon];
+        return (
+          <span
+            className="leading-none"
+            style={{
+              transform: isActive ? "scale(1.05)" : "scale(1)",
+              transition: "transform 200ms ease",
+            }}
+          >
+            <Icon className="h-[22px] w-[22px]" aria-hidden />
+          </span>
+        );
+      })()}
 
       {/* Label */}
       <span
@@ -586,6 +594,8 @@ export function AppSidebar({
                     .replace(/^\//, "")
                     .replace(/\//g, "-");
 
+                  const Icon = SIDEBAR_ICON_MAP[item.icon];
+
                   return (
                     <GlowTarget
                       key={item.href}
@@ -613,10 +623,11 @@ export function AppSidebar({
                             />
                           )}
 
-                          {/* Emoji icon */}
-                          <span className="shrink-0 text-center text-[15px] leading-none">
-                            {item.emoji}
-                          </span>
+                          {/* Nav icon */}
+                          <Icon
+                            className="h-[18px] w-[18px] shrink-0"
+                            aria-hidden
+                          />
 
                           {/* Label + badge */}
                           {!collapsed && (
@@ -688,9 +699,7 @@ export function AppSidebar({
                           style={{ background: "var(--sidebar-primary)" }}
                         />
                       )}
-                      <span className="shrink-0 text-center text-[15px] leading-none">
-                        ⚙️
-                      </span>
+                      <Settings className="h-[18px] w-[18px] shrink-0" aria-hidden />
                       {!collapsed && (
                         <span className="min-w-0 flex-1 truncate">
                           Settings

@@ -10,7 +10,7 @@
 //
 // WHY collapsible: Parents scanning 10 sections of pre-filled
 // data need to quickly find what's changed. Collapsed-by-default
-// sections with a "Review ✓" badge let them skip unchanged ones.
+// sections with a "Reviewed" badge let them skip unchanged ones.
 // ============================================================
 
 "use client";

@@ -3,6 +3,16 @@
 
 import { useState, useTransition } from "react";
 import {
+  Brush,
+  Palette,
+  BookOpen,
+  Calculator,
+  Globe,
+  Package,
+  MapPin,
+  type LucideIcon,
+} from "lucide-react";
+import {
   createShelfLocation,
   updateShelfLocation,
   deleteShelfLocation,
@@ -16,13 +26,13 @@ interface ShelfLocationListClientProps {
   canManage: boolean;
 }
 
-const AREA_EMOJIS: Record<string, string> = {
-  practical_life: "🧹",
-  sensorial:      "🎨",
-  language:       "📖",
-  mathematics:    "🔢",
-  cultural:       "🌍",
-  other:          "📦",
+const AREA_ICONS: Record<string, LucideIcon> = {
+  practical_life: Brush,
+  sensorial:      Palette,
+  language:       BookOpen,
+  mathematics:    Calculator,
+  cultural:       Globe,
+  other:          Package,
 };
 
 export function ShelfLocationListClient({
@@ -164,7 +174,7 @@ export function ShelfLocationListClient({
     <div className="space-y-3">
       {locations.length === 0 && !showCreateForm ? (
         <div className="py-8 text-center">
-          <p style={{ color: "var(--empty-state-icon)" }} className="text-3xl mb-1">📍</p>
+          <MapPin style={{ color: "var(--empty-state-icon)" }} className="h-10 w-10 mx-auto mb-1" aria-hidden />
           <p className="text-sm" style={{ color: "var(--text-tertiary)" }}>No shelf locations configured.</p>
         </div>
       ) : (
@@ -176,7 +186,10 @@ export function ShelfLocationListClient({
               ) : (
                 <div className="flex items-center justify-between gap-3 border border-border rounded-xl px-4 py-3">
                   <div className="flex items-center gap-3">
-                    <span className="text-xl">{AREA_EMOJIS[loc.room_type ?? "other"] ?? "📦"}</span>
+                    {(() => {
+                      const LocIcon = AREA_ICONS[loc.room_type ?? "other"] ?? Package;
+                      return <LocIcon className="h-5 w-5 shrink-0" aria-hidden />;
+                    })()}
                     <div>
                       <p className="text-sm font-medium" style={{ color: "var(--text-primary)" }}>
                         {loc.name}

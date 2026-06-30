@@ -2,6 +2,7 @@
 "use client";
 
 import { GlowTarget } from "@/components/domain/glow/glow-registry";
+import { Camera } from "lucide-react";
 import type { ReportCompletionStats } from "@/lib/actions/reports";
 import { updateReportContent, updateReportStatus } from "@/lib/actions/reports";
 import type {
@@ -560,8 +561,8 @@ function AutoDataRenderer({
                   </span>
                 ))}
                 {obs.mediaCount > 0 && (
-                  <span className="status-badge bg-muted text-muted-foreground text-[10px] font-bold px-2 py-0 status-badge-plain">
-                    📷 {obs.mediaCount} photo{obs.mediaCount !== 1 ? 's' : ''}
+                  <span className="status-badge bg-muted text-muted-foreground text-[10px] font-bold px-2 py-0 status-badge-plain inline-flex items-center gap-1">
+                    <Camera className="h-3 w-3" aria-hidden /> {obs.mediaCount} photo{obs.mediaCount !== 1 ? 's' : ''}
                   </span>
                 )}
               </div>

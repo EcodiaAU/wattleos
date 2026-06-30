@@ -16,6 +16,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { Check } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { updateRole } from "@/lib/actions/staff-actions";
@@ -185,7 +186,13 @@ export function RoleEditorClient({ role }: RoleEditorClientProps) {
                           : "border-border bg-background"
                     }`}
                   >
-                    {allSelected ? "✓" : someSelected ? "−" : ""}
+                    {allSelected ? (
+                      <Check className="h-3 w-3" aria-hidden />
+                    ) : someSelected ? (
+                      "−"
+                    ) : (
+                      ""
+                    )}
                   </button>
                   <span className="text-xs font-semibold text-foreground">
                     {module.label}
@@ -222,7 +229,7 @@ export function RoleEditorClient({ role }: RoleEditorClientProps) {
                               : "border-border"
                           }`}
                         >
-                          {active && "✓"}
+                          {active && <Check className="h-3 w-3" aria-hidden />}
                         </span>
                         {label}
                       </button>

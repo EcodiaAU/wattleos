@@ -3,6 +3,7 @@
 
 import Link from "next/link";
 import { useState, useTransition } from "react";
+import { Flag, TrendingDown, User } from "lucide-react";
 
 import { AbsenceRateBar } from "@/components/domain/chronic-absence/absence-rate-bar";
 import { ChronicAbsenceStatusBadge } from "@/components/domain/chronic-absence/chronic-absence-status-badge";
@@ -86,7 +87,7 @@ export function ChronicAbsenceDashboardClient({
             color: `var(--chronic-absence-chronic-fg)`,
           }}
         >
-          <span className="text-base">🚩</span>
+          <Flag className="h-4 w-4 shrink-0" aria-hidden />
           <span>
             <strong>{summary.active_flags}</strong> student
             {summary.active_flags !== 1 ? "s are" : " is"} under active monitoring.
@@ -114,7 +115,7 @@ export function ChronicAbsenceDashboardClient({
       {/* Student list */}
       {filtered.length === 0 ? (
         <div className="py-12 text-center text-sm" style={{ color: "var(--muted-foreground)" }}>
-          <div className="text-4xl mb-3" style={{ color: "var(--empty-state-icon)" }}>📉</div>
+          <TrendingDown className="mx-auto mb-3 h-10 w-10" style={{ color: "var(--empty-state-icon)" }} aria-hidden />
           <p>No students match this filter.</p>
         </div>
       ) : (
@@ -135,8 +136,8 @@ export function ChronicAbsenceDashboardClient({
                       className="h-full w-full object-cover"
                     />
                   ) : (
-                    <div className="flex h-full w-full items-center justify-center text-lg">
-                      👤
+                    <div className="flex h-full w-full items-center justify-center text-muted-foreground">
+                      <User className="h-5 w-5" aria-hidden />
                     </div>
                   )}
                 </div>
@@ -160,7 +161,7 @@ export function ChronicAbsenceDashboardClient({
                           borderColor: "var(--chronic-absence-chronic)",
                         }}
                       >
-                        🚩 Flagged
+                        <Flag className="h-3 w-3" aria-hidden /> Flagged
                       </span>
                     )}
                   </div>
@@ -195,14 +196,20 @@ export function ChronicAbsenceDashboardClient({
                     <button
                       onClick={() => handleFlag(s)}
                       disabled={isPending || flaggingId === s.student.id}
-                      className="touch-target active-push rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors disabled:opacity-50"
+                      className="touch-target active-push inline-flex items-center gap-1 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors disabled:opacity-50"
                       style={{
                         borderColor: `var(--chronic-absence-chronic)`,
                         background: `var(--chronic-absence-chronic-bg)`,
                         color: `var(--chronic-absence-chronic-fg)`,
                       }}
                     >
-                      {flaggingId === s.student.id ? "…" : "🚩 Flag"}
+                      {flaggingId === s.student.id ? (
+                        "…"
+                      ) : (
+                        <>
+                          <Flag className="h-3.5 w-3.5" aria-hidden /> Flag
+                        </>
+                      )}
                     </button>
                   )}
                 </div>

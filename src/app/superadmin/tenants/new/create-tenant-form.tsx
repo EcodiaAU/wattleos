@@ -12,6 +12,7 @@
 
 import { createTenant } from '@/lib/actions/superadmin/tenants';
 import { useState, useTransition } from 'react';
+import { Check } from 'lucide-react';
 
 const TIMEZONES = [
   'Australia/Sydney',
@@ -84,7 +85,7 @@ export function CreateTenantForm() {
           style={{ borderColor: 'var(--border)', background: 'var(--card)' }}
         >
           <div className="mb-4 flex items-center gap-2">
-            <span className="text-lg">✓</span>
+            <Check className="h-5 w-5" aria-hidden />
             <h2 className="text-base font-semibold" style={{ color: 'var(--foreground)' }}>
               School provisioned
             </h2>

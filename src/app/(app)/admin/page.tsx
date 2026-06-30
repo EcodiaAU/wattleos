@@ -21,6 +21,23 @@
 // → Staff Operations → Financial.
 // ============================================================
 
+import {
+  BarChart3,
+  CheckCircle2,
+  ClipboardList,
+  CreditCard,
+  Download,
+  DollarSign,
+  FileText,
+  Plug,
+  School,
+  ScrollText,
+  Shield,
+  Syringe,
+  Timer,
+  Users,
+  type LucideIcon,
+} from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
@@ -33,7 +50,7 @@ type AdminCard = {
   label: string;
   description: string;
   href: string;
-  icon: string;
+  icon: LucideIcon;
   visible: boolean;
   group: "core" | "students" | "staff" | "financial" | "regulatory";
 };
@@ -125,7 +142,7 @@ export default async function AdminPage() {
       label: "School Settings",
       description: "Name, logo, timezone, colours, and theme.",
       href: "/admin/settings",
-      icon: "🏫",
+      icon: School,
       visible: canManageTenant,
     },
     {
@@ -133,7 +150,7 @@ export default async function AdminPage() {
       label: "Integrations",
       description: "Connect services and manage system integrations.",
       href: "/admin/integrations",
-      icon: "🔌",
+      icon: Plug,
       visible: canManageIntegrations || canManageTenant,
     },
     {
@@ -142,7 +159,7 @@ export default async function AdminPage() {
       description:
         "Import students, guardians, staff, attendance - and invite in bulk.",
       href: "/admin/data-import",
-      icon: "📥",
+      icon: Download,
       visible: canImportData,
     },
     {
@@ -150,7 +167,7 @@ export default async function AdminPage() {
       label: "Audit Logs",
       description: "Security event log - track who did what and when.",
       href: "/admin/audit-logs",
-      icon: "🛡️",
+      icon: Shield,
       visible: canViewAuditLogs,
     },
 
@@ -160,7 +177,7 @@ export default async function AdminPage() {
       label: "Admissions",
       description: "Waitlist pipeline, tours, and inquiry tracking.",
       href: "/admin/admissions",
-      icon: "📋",
+      icon: ClipboardList,
       visible: canManageAdmissions,
     },
     {
@@ -168,7 +185,7 @@ export default async function AdminPage() {
       label: "Enrollment",
       description: "Enrollment periods, applications, and invitations.",
       href: "/admin/enrollment",
-      icon: "📝",
+      icon: FileText,
       visible: canManageEnrollment,
     },
 
@@ -178,7 +195,7 @@ export default async function AdminPage() {
       label: "Staff",
       description: "Manage staff members, roles, and access permissions.",
       href: "/admin/staff",
-      icon: "👥",
+      icon: Users,
       visible: canManageUsers,
     },
     {
@@ -186,7 +203,7 @@ export default async function AdminPage() {
       label: "Timesheets",
       description: "Review and approve staff timesheets and pay periods.",
       href: "/admin/timesheets",
-      icon: "⏱️",
+      icon: Timer,
       visible: canApproveTimesheets,
     },
     {
@@ -194,7 +211,7 @@ export default async function AdminPage() {
       label: "Payroll Settings",
       description: "Payroll configuration and provider mapping.",
       href: "/admin/settings/payroll",
-      icon: "💰",
+      icon: DollarSign,
       visible: canViewPayrollSettings,
     },
 
@@ -204,7 +221,7 @@ export default async function AdminPage() {
       label: "Billing",
       description: "Subscription plan, invoices, and payment history.",
       href: "/admin/billing",
-      icon: "💳",
+      icon: CreditCard,
       visible: canViewBilling,
     },
 
@@ -215,7 +232,7 @@ export default async function AdminPage() {
       description:
         "Service policies, versioning, acknowledgements, and complaint register.",
       href: "/admin/policies",
-      icon: "📜",
+      icon: ScrollText,
       visible: canManagePolicies || canManageComplaints,
     },
     {
@@ -224,7 +241,7 @@ export default async function AdminPage() {
       description:
         "WWCC, first aid, qualifications, ECT ratios, worker register.",
       href: "/admin/compliance",
-      icon: "✅",
+      icon: CheckCircle2,
       visible: canViewCompliance,
     },
     {
@@ -233,7 +250,7 @@ export default async function AdminPage() {
       description:
         "Quality Improvement Plan - NQS assessments, goals, and evidence.",
       href: "/admin/qip",
-      icon: "📊",
+      icon: BarChart3,
       visible: canViewQIP,
     },
     {
@@ -242,7 +259,7 @@ export default async function AdminPage() {
       description:
         "IHS records, catch-up tracking, and No Jab No Pay/Play compliance.",
       href: "/admin/immunisation",
-      icon: "💉",
+      icon: Syringe,
       visible: canViewImmunisation,
     },
   ];
@@ -330,13 +347,15 @@ function Section({ title, cards }: { title: string; cards: AdminCard[] }) {
       </div>
 
       <div className="grid grid-cols-1 gap-[var(--density-card-padding)] sm:grid-cols-2 lg:grid-cols-3">
-        {cards.map((card) => (
+        {cards.map((card) => {
+          const Icon = card.icon;
+          return (
           <Link
             key={card.href}
             href={card.href}
             className="group rounded-lg border border-border bg-background p-[var(--density-card-padding)] shadow-sm transition-all hover:border-primary/30 hover:shadow-md"
           >
-            <span className="text-2xl">{card.icon}</span>
+            <Icon className="h-7 w-7 text-foreground" aria-hidden />
             <h3 className="mt-3 text-sm font-semibold text-foreground group-hover:text-primary">
               {card.label}
             </h3>
@@ -344,7 +363,8 @@ function Section({ title, cards }: { title: string; cards: AdminCard[] }) {
               {card.description}
             </p>
           </Link>
-        ))}
+          );
+        })}
       </div>
     </section>
   );

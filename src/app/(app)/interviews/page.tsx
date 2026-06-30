@@ -2,6 +2,7 @@
 // Staff: their own interview schedule across all open sessions
 // Families: list open sessions + book/view bookings
 
+import { Calendar } from "lucide-react";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { getTenantContext, hasPermission } from "@/lib/auth/tenant-context";
@@ -64,7 +65,7 @@ export default async function InterviewsPage() {
           className="rounded-2xl p-12 text-center"
           style={{ background: "var(--muted)", border: "1px solid var(--border)" }}
         >
-          <p className="text-4xl mb-3" style={{ color: "var(--empty-state-icon)" }}>🗓️</p>
+          <Calendar className="mx-auto mb-3 h-12 w-12" style={{ color: "var(--empty-state-icon)" }} aria-hidden />
           <p className="text-base font-medium mb-1" style={{ color: "var(--foreground)" }}>
             No sessions open right now
           </p>

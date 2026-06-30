@@ -14,6 +14,8 @@ import type {
   AccreditationCycleStatus,
   AccreditationEvidenceType,
 } from "@/types/domain";
+import type { LucideIcon } from "lucide-react";
+import { Camera, Eye, FileText, Link, SquarePen } from "lucide-react";
 
 // ============================================================
 // Accreditation Bodies
@@ -215,13 +217,13 @@ export const ACCREDITATION_CYCLE_STATUS_CONFIG: Record<
 
 export const EVIDENCE_TYPE_CONFIG: Record<
   AccreditationEvidenceType,
-  { label: string; icon: string }
+  { label: string; icon: LucideIcon }
 > = {
-  document: { label: "Document", icon: "📄" },
-  link: { label: "Link", icon: "🔗" },
-  observation: { label: "Observation", icon: "👁️" },
-  photo: { label: "Photo", icon: "📷" },
-  note: { label: "Note", icon: "📝" },
+  document: { label: "Document", icon: FileText },
+  link: { label: "Link", icon: Link },
+  observation: { label: "Observation", icon: Eye },
+  photo: { label: "Photo", icon: Camera },
+  note: { label: "Note", icon: SquarePen },
 };
 
 // ============================================================

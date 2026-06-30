@@ -10,6 +10,20 @@
 
 "use client";
 
+import {
+  AlertTriangle,
+  Check,
+  ClipboardList,
+  FileText,
+  GraduationCap,
+  PartyPopper,
+  Siren,
+  Stethoscope,
+  Undo2,
+  User,
+  Users,
+  type LucideIcon,
+} from "lucide-react";
 import { useCallback, useRef, useState } from "react";
 
 import {
@@ -41,20 +55,20 @@ import { MassInviteClient } from "./mass-invite-client";
 
 const IMPORT_TYPE_INFO: Record<
   ImportType,
-  { label: string; description: string; icon: string; order_hint: string }
+  { label: string; description: string; icon: LucideIcon; order_hint: string }
 > = {
   students: {
     label: "Students",
     description:
       "Student names, dates of birth, class assignments, and enrollment status.",
-    icon: "👩‍🎓",
+    icon: GraduationCap,
     order_hint: "Import this first - other imports reference students by name.",
   },
   guardians: {
     label: "Guardians / Parents",
     description:
       "Link parents and carers to their children. Requires students to exist first.",
-    icon: "👨‍👩+👧",
+    icon: Users,
     order_hint:
       "Import after students. Guardians are matched to students by name.",
   },
@@ -62,25 +76,25 @@ const IMPORT_TYPE_INFO: Record<
     label: "Emergency Contacts",
     description:
       "Emergency contact details for each student. Separate from guardians.",
-    icon: "🚨",
+    icon: Siren,
     order_hint: "Import after students.",
   },
   medical_conditions: {
     label: "Medical Conditions",
     description:
       "Allergies, medical conditions, action plans, and medication details.",
-    icon: "🏥",
+    icon: Stethoscope,
     order_hint: "Import after students.",
   },
   staff: {
-    icon: "🧑‍🏫",
+    icon: User,
     label: "Staff",
     description:
       "Import staff members with their roles. Sends invitation emails.",
     order_hint: "Import any time - staff records are independent.",
   },
   attendance: {
-    icon: "📋",
+    icon: ClipboardList,
     label: "Attendance History",
     description:
       "Import historical attendance records. Uses upsert - safe to re-import.",
@@ -490,7 +504,7 @@ function StepIndicator({ currentStep }: { currentStep: ImportWizardStep }) {
                     : "bg-muted text-muted-foreground"
               }`}
             >
-              {isCompleted ? "✓" : i + 1}
+              {isCompleted ? <Check className="h-4 w-4" aria-hidden /> : i + 1}
             </div>
             <span
               className={`text-sm ${
@@ -541,13 +555,14 @@ function SelectTypeStep({
       <div className="grid gap-3 sm:grid-cols-2">
         {IMPORT_TYPE_ORDER.map((type) => {
           const info = IMPORT_TYPE_INFO[type];
+          const TypeIcon = info.icon;
           return (
             <button
               key={type}
               onClick={() => onSelect(type)}
               className="card-interactive flex items-start gap-4 rounded-lg border bg-card p-4 text-left"
             >
-              <span className="text-2xl">{info.icon}</span>
+              <TypeIcon className="h-6 w-6 shrink-0 text-foreground" aria-hidden />
               <div className="flex-1">
                 <div className="font-medium">{info.label}</div>
                 <div className="mt-1 text-xs text-muted-foreground line-clamp-2">
@@ -691,7 +706,9 @@ function UploadStep({
           }
         }}
       >
-        <div className="text-5xl mb-4">📄</div>
+        <div className="mb-4 flex justify-center text-muted-foreground">
+          <FileText className="h-12 w-12" aria-hidden />
+        </div>
         <p className="font-semibold text-foreground">
           Drag and drop CSV here, or click to browse
         </p>
@@ -1078,12 +1095,14 @@ function ResultsStep({
 
   return (
     <div className="animate-scale-in text-center py-8">
-      <div className="text-6xl mb-4">
-        {importJob.status === "completed"
-          ? "🎉"
-          : importJob.status === "rolled_back"
-            ? "↩️"
-            : "⚠️"}
+      <div className="mb-4 flex justify-center">
+        {importJob.status === "completed" ? (
+          <PartyPopper className="h-14 w-14 text-success" aria-hidden />
+        ) : importJob.status === "rolled_back" ? (
+          <Undo2 className="h-14 w-14 text-muted-foreground" aria-hidden />
+        ) : (
+          <AlertTriangle className="h-14 w-14 text-warning" aria-hidden />
+        )}
       </div>
       <h2 className="text-2xl font-bold mb-8">
         {importJob.status === "completed"

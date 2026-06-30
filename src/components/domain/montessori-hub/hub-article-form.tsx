@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { X } from "lucide-react";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import {
   createHubArticle,
@@ -193,7 +194,7 @@ export function HubArticleForm({ article }: HubArticleFormProps) {
           >
             {HUB_CATEGORY_DISPLAY_ORDER.map((cat) => (
               <option key={cat} value={cat}>
-                {HUB_CATEGORY_CONFIG[cat].emoji} {HUB_CATEGORY_CONFIG[cat].label}
+                {HUB_CATEGORY_CONFIG[cat].label}
               </option>
             ))}
           </select>
@@ -277,10 +278,11 @@ export function HubArticleForm({ article }: HubArticleFormProps) {
                 <button
                   type="button"
                   onClick={() => setKeyTakeaways(keyTakeaways.filter((_, j) => j !== i))}
-                  className="touch-target px-2 rounded-lg border border-border text-xs"
+                  className="touch-target px-2 rounded-lg border border-border text-xs flex items-center justify-center"
                   style={{ color: "var(--destructive)" }}
+                  aria-label="Remove takeaway"
                 >
-                  ✕
+                  <X className="h-4 w-4" />
                 </button>
               )}
             </div>
@@ -318,10 +320,11 @@ export function HubArticleForm({ article }: HubArticleFormProps) {
                 <button
                   type="button"
                   onClick={() => setHomeTips(homeTips.filter((_, j) => j !== i))}
-                  className="touch-target px-2 rounded-lg border border-border text-xs"
+                  className="touch-target px-2 rounded-lg border border-border text-xs flex items-center justify-center"
                   style={{ color: "var(--destructive)" }}
+                  aria-label="Remove tip"
                 >
-                  ✕
+                  <X className="h-4 w-4" />
                 </button>
               )}
             </div>

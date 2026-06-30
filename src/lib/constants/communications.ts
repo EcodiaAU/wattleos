@@ -11,6 +11,27 @@
 // avoids bloating the shared bundle.
 // ============================================================
 
+import type { LucideIcon } from "lucide-react";
+import {
+  Activity,
+  AlertTriangle,
+  Backpack,
+  BookOpen,
+  Bus,
+  ClipboardList,
+  DollarSign,
+  Drama,
+  GraduationCap,
+  Home,
+  Info,
+  Megaphone,
+  MessageSquare,
+  PartyPopper,
+  Siren,
+  TreePalm,
+  Users,
+} from "lucide-react";
+
 // ============================================================
 // Message Thread Types
 // ============================================================
@@ -20,19 +41,19 @@ export type MessageThreadType = "class_broadcast" | "direct";
 
 export const THREAD_TYPE_CONFIG: Record<
   MessageThreadType,
-  { label: string; color: string; bgColor: string; icon: string }
+  { label: string; color: string; bgColor: string; icon: LucideIcon }
 > = {
   class_broadcast: {
     label: "Class",
     color: "text-blue-700",
     bgColor: "bg-blue-50",
-    icon: "📚",
+    icon: BookOpen,
   },
   direct: {
     label: "Direct",
     color: "text-purple-700",
     bgColor: "bg-purple-50",
-    icon: "💬",
+    icon: MessageSquare,
   },
 };
 
@@ -44,31 +65,31 @@ export type AnnouncementPriority = "low" | "normal" | "high" | "urgent";
 
 export const ANNOUNCEMENT_PRIORITY_CONFIG: Record<
   AnnouncementPriority,
-  { label: string; color: string; bgColor: string; icon: string }
+  { label: string; color: string; bgColor: string; icon: LucideIcon }
 > = {
   low: {
     label: "Low",
     color: "text-gray-600",
     bgColor: "bg-gray-100",
-    icon: "ℹ️",
+    icon: Info,
   },
   normal: {
     label: "Normal",
     color: "text-blue-700",
     bgColor: "bg-blue-50",
-    icon: "📢",
+    icon: Megaphone,
   },
   high: {
     label: "High",
     color: "text-orange-700",
     bgColor: "bg-orange-100",
-    icon: "⚠️",
+    icon: AlertTriangle,
   },
   urgent: {
     label: "Urgent",
     color: "text-red-700",
     bgColor: "bg-red-100",
-    icon: "🚨",
+    icon: Siren,
   },
 };
 
@@ -76,16 +97,16 @@ export const ANNOUNCEMENT_PRIORITY_CONFIG: Record<
 // Event Type Display
 // ============================================================
 
-export const EVENT_TYPE_ICONS: Record<string, string> = {
-  general: "📋",
-  excursion: "🚌",
-  parent_meeting: "👥",
-  performance: "🎭",
-  sports_day: "⚽",
-  fundraiser: "💰",
-  professional_development: "📚",
-  public_holiday: "🏖️",
-  pupil_free_day: "🏠",
-  term_start: "🎒",
-  term_end: "🎉",
+export const EVENT_TYPE_ICONS: Record<string, LucideIcon> = {
+  general: ClipboardList,
+  excursion: Bus,
+  parent_meeting: Users,
+  performance: Drama,
+  sports_day: Activity,
+  fundraiser: DollarSign,
+  professional_development: GraduationCap,
+  public_holiday: TreePalm,
+  pupil_free_day: Home,
+  term_start: Backpack,
+  term_end: PartyPopper,
 };

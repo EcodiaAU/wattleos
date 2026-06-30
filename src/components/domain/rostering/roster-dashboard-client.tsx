@@ -5,6 +5,7 @@ import type { RosterDashboardData } from "@/types/domain";
 import { RosterWeekStatusBadge } from "./roster-week-status-badge";
 import { LEAVE_TYPE_CONFIG } from "@/lib/constants/rostering";
 import type { LeaveType } from "@/types/domain";
+import { ClipboardList } from "lucide-react";
 
 export function RosterDashboardClient({
   data,
@@ -77,15 +78,20 @@ export function RosterDashboardClient({
             Staff on Leave Today
           </h3>
           <div className="flex flex-wrap gap-2">
-            {data.staff_on_leave_today.map((s) => (
-              <span
-                key={s.user_id}
-                className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1 text-sm"
-              >
-                <span>{LEAVE_TYPE_CONFIG[s.leave_type as LeaveType]?.emoji ?? "📋"}</span>
-                {s.user_name}
-              </span>
-            ))}
+            {data.staff_on_leave_today.map((s) => {
+              const Icon =
+                LEAVE_TYPE_CONFIG[s.leave_type as LeaveType]?.icon ??
+                ClipboardList;
+              return (
+                <span
+                  key={s.user_id}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1 text-sm"
+                >
+                  <Icon className="h-4 w-4" aria-hidden />
+                  {s.user_name}
+                </span>
+              );
+            })}
           </div>
         </div>
       )}

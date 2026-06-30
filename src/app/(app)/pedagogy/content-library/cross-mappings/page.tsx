@@ -12,6 +12,7 @@
 // Chair → EYLF Outcome 3.2" is exactly what NQS assessors need.
 // ============================================================
 
+import { Link as LinkIcon } from "lucide-react";
 import { CrossMappingFilters } from "@/components/domain/curriculum-content/cross-mapping-filters";
 import {
   listCrossMappings,
@@ -133,7 +134,7 @@ export default async function CrossMappingsPage({
           {/* Mapping Table */}
           {mappings.length === 0 ? (
             <div className="rounded-lg border border-dashed border-border p-8 text-center">
-              <div className="text-3xl mb-2">🔗</div>
+              <LinkIcon className="mx-auto mb-2 h-10 w-10 text-muted-foreground" aria-hidden />
               <h3 className="text-sm font-medium mb-1">
                 No cross-mappings found
               </h3>
@@ -169,7 +170,7 @@ export default async function CrossMappingsPage({
       ) : (
         /* No filters selected - show instructions */
         <div className="rounded-lg border border-dashed border-border p-12 text-center">
-          <div className="text-4xl mb-3">🔗</div>
+          <LinkIcon className="mx-auto mb-3 h-12 w-12 text-muted-foreground" aria-hidden />
           <h3 className="text-lg font-medium mb-1">
             Browse Cross-Framework Mappings
           </h3>

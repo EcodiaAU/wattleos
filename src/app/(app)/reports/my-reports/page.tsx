@@ -13,6 +13,7 @@
 
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { Star } from "lucide-react";
 import { getTenantContext } from "@/lib/auth/tenant-context";
 import { Permissions } from "@/lib/constants/permissions";
 import {
@@ -126,7 +127,7 @@ export default async function MyReportsPage() {
               "color-mix(in srgb, var(--color-warning, #d97706) 10%, transparent)",
           }}
         >
-          <span className="text-xl shrink-0 mt-0.5">⭐</span>
+          <Star className="h-5 w-5 shrink-0 mt-0.5" aria-hidden />
           <div className="flex-1">
             <p className="text-sm font-semibold text-foreground">
               You&apos;ve written {submissionCount} reports manually

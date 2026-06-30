@@ -5,6 +5,7 @@
 // NCCD annual collection export - CSV download + submission workflow.
 
 import { useState } from "react";
+import { CheckCircle2, Download } from "lucide-react";
 
 import { NCCD_LEVEL_CONFIG, NCCD_LEVELS_ORDERED } from "@/lib/constants/nccd";
 import { exportNccdCollection, submitNccdCollection } from "@/lib/actions/nccd";
@@ -107,13 +108,19 @@ export function NccdExportClient({
             type="button"
             onClick={handleExport}
             disabled={exporting || summary.total_students === 0}
-            className="touch-target active-push rounded-xl px-5 py-2.5 text-sm font-semibold disabled:opacity-50"
+            className="touch-target active-push inline-flex items-center gap-1.5 rounded-xl px-5 py-2.5 text-sm font-semibold disabled:opacity-50"
             style={{
               background: "var(--primary)",
               color: "var(--primary-foreground)",
             }}
           >
-            {exporting ? "Exporting…" : "⬇ Download CSV"}
+            {exporting ? (
+              "Exporting…"
+            ) : (
+              <>
+                <Download className="h-4 w-4" aria-hidden /> Download CSV
+              </>
+            )}
           </button>
         </div>
 
@@ -238,7 +245,7 @@ export function NccdExportClient({
             color: "var(--nccd-status-active-fg)",
           }}
         >
-          <span className="text-xl">✓</span>
+          <CheckCircle2 className="h-5 w-5 shrink-0" aria-hidden />
           <p className="text-sm font-medium">
             {submitResult.count} entr{submitResult.count === 1 ? "y" : "ies"}{" "}
             marked as submitted to the {summary.year} collection.

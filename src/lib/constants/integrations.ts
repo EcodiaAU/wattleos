@@ -8,6 +8,15 @@
 // and settings so the config form can be generated dynamically.
 // ============================================================
 
+import type { LucideIcon } from "lucide-react";
+import {
+  Folder,
+  FileText,
+  CreditCard,
+  BarChart3,
+  Key,
+} from "lucide-react";
+
 export type IntegrationProvider =
   | "google_drive"
   | "google_docs"
@@ -36,7 +45,7 @@ export interface ProviderDefinition {
   key: IntegrationProvider;
   label: string;
   description: string;
-  icon: string;
+  icon: LucideIcon;
   bgColor: string;
   color: string;
   credentialFields: CredentialField[];
@@ -54,7 +63,7 @@ export const INTEGRATION_PROVIDERS: Record<
     label: "Google Drive",
     description:
       "Portfolio folder provisioning and media storage for student observations.",
-    icon: "📁",
+    icon: Folder,
     bgColor: "bg-blue-50",
     color: "text-blue-700",
     implemented: true,
@@ -112,7 +121,7 @@ export const INTEGRATION_PROVIDERS: Record<
     label: "Google Docs",
     description:
       "Export student reports as Google Docs for editing and sharing.",
-    icon: "📄",
+    icon: FileText,
     bgColor: "bg-blue-50",
     color: "text-blue-700",
     implemented: false,
@@ -148,7 +157,7 @@ export const INTEGRATION_PROVIDERS: Record<
     label: "Stripe",
     description:
       "Tuition invoicing, parent auto-pay, and payment reconciliation.",
-    icon: "💳",
+    icon: CreditCard,
     bgColor: "bg-purple-50",
     color: "text-purple-700",
     // WHY implemented: true - Full Stripe client exists at
@@ -207,7 +216,7 @@ export const INTEGRATION_PROVIDERS: Record<
     key: "xero",
     label: "Xero",
     description: "Push approved timesheets to Xero for payroll processing.",
-    icon: "📊",
+    icon: BarChart3,
     bgColor: "bg-cyan-50",
     color: "text-cyan-700",
     implemented: false,
@@ -243,7 +252,7 @@ export const INTEGRATION_PROVIDERS: Record<
     label: "KeyPay",
     description:
       "Australian payroll integration for timesheet and leave management.",
-    icon: "🔑",
+    icon: Key,
     bgColor: "bg-green-50",
     color: "text-green-700",
     implemented: false,

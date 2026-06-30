@@ -23,6 +23,7 @@ export function GoalCard({ goal, canManage, onStatusChange }: GoalCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const domainCfg = DEVELOPMENTAL_DOMAIN_CONFIG[goal.developmental_domain];
+  const DomainIcon = domainCfg.icon;
   const validTransitions = VALID_GOAL_TRANSITIONS[goal.goal_status] ?? [];
 
   // Calculate a simple progress representation based on status
@@ -51,7 +52,7 @@ export function GoalCard({ goal, canManage, onStatusChange }: GoalCardProps) {
       >
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-start gap-2.5">
-            <span className="mt-0.5 text-lg">{domainCfg.emoji}</span>
+            <DomainIcon className="mt-0.5 h-5 w-5 shrink-0" style={{ color: "var(--muted-foreground)" }} aria-hidden />
             <div className="min-w-0 flex-1">
               <p
                 className="text-sm font-semibold"

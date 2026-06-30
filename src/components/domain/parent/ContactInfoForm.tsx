@@ -12,6 +12,7 @@
 import { GlowTarget } from "@/components/domain/glow/glow-registry";
 import { updateContactInfo } from "@/lib/actions/parent";
 import { useState, useTransition } from "react";
+import { Phone } from "lucide-react";
 
 interface ContactInfoFormProps {
   guardianId: string;
@@ -61,7 +62,9 @@ export function ContactInfoForm({
       <div className="mt-2 flex items-center gap-3">
         <div className="text-sm text-foreground">
           {savedPhone ? (
-            <span>📞 {savedPhone}</span>
+            <span className="inline-flex items-center gap-1.5">
+              <Phone className="h-4 w-4" aria-hidden /> {savedPhone}
+            </span>
           ) : (
             <span className="italic text-muted-foreground">
               No phone number set

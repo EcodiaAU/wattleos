@@ -7,6 +7,15 @@
 // ============================================================
 
 import Link from "next/link";
+import {
+  Brush,
+  Sparkles,
+  Languages,
+  Calculator,
+  Globe,
+  Check,
+  type LucideIcon,
+} from "lucide-react";
 
 import type { MaterialThreePeriodProgress, MontessoriArea } from "@/types/domain";
 
@@ -22,12 +31,12 @@ const AREA_LABELS: Record<MontessoriArea, string> = {
   cultural: "Cultural",
 };
 
-const AREA_EMOJI: Record<MontessoriArea, string> = {
-  practical_life: "🧹",
-  sensorial: "✨",
-  language: "🔤",
-  mathematics: "🔢",
-  cultural: "🌍",
+const AREA_ICON: Record<MontessoriArea, LucideIcon> = {
+  practical_life: Brush,
+  sensorial: Sparkles,
+  language: Languages,
+  mathematics: Calculator,
+  cultural: Globe,
 };
 
 // ── Stage progress strip ─────────────────────────────────────
@@ -83,7 +92,11 @@ function StageStrip({
                         }
               }
             >
-              {status === "completed" ? "✓" : p}
+              {status === "completed" ? (
+                <Check className="h-4 w-4" aria-hidden />
+              ) : (
+                p
+              )}
             </div>
           </div>
         );
@@ -120,9 +133,10 @@ export function ThreePeriodProgressCard({
       <div className="mb-3 flex items-start justify-between gap-3">
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-base">
-              {AREA_EMOJI[progress.area]}
-            </span>
+            {(() => {
+              const AreaIcon = AREA_ICON[progress.area];
+              return <AreaIcon className="h-4 w-4 shrink-0" aria-hidden />;
+            })()}
             <span
               className="truncate font-medium"
               style={{ color: "var(--foreground)" }}

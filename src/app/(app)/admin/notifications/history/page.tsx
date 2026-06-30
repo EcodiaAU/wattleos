@@ -1,6 +1,21 @@
 // src/app/(app)/admin/notifications/history/page.tsx
 // Paginated history of all dispatches.
 
+import {
+  Backpack,
+  BarChart3,
+  Bell,
+  Calendar,
+  CheckCircle2,
+  Eye,
+  Inbox,
+  LifeBuoy,
+  Megaphone,
+  MessageSquare,
+  Receipt,
+  Siren,
+  type LucideIcon,
+} from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getTenantContext, hasPermission } from "@/lib/auth/tenant-context";
@@ -11,10 +26,10 @@ import type { NotificationStatus, NotificationTopic } from "@/types/domain";
 
 export const metadata = { title: "Notification History" };
 
-const TOPIC_EMOJIS: Record<NotificationTopic, string> = {
-  announcements: "📢", messages: "💬", attendance: "✅", events: "📅",
-  incidents: "🚨", bookings: "🎒", reports: "📊", billing: "🧾",
-  rostering: "📅", observations: "👁", emergency: "🆘", general: "🔔",
+const TOPIC_ICONS: Record<NotificationTopic, LucideIcon> = {
+  announcements: Megaphone, messages: MessageSquare, attendance: CheckCircle2, events: Calendar,
+  incidents: Siren, bookings: Backpack, reports: BarChart3, billing: Receipt,
+  rostering: Calendar, observations: Eye, emergency: LifeBuoy, general: Bell,
 };
 
 interface Props {
@@ -90,19 +105,23 @@ export default async function NotificationHistoryPage({ searchParams }: Props) {
       {/* List */}
       {result.data.length === 0 ? (
         <div className="rounded-xl border border-border bg-card py-12 text-center">
-          <p className="text-3xl mb-2">📭</p>
+          <p className="mb-2 flex justify-center" style={{ color: "var(--muted-foreground)" }}>
+            <Inbox className="h-10 w-10" aria-hidden />
+          </p>
           <p className="text-sm" style={{ color: "var(--muted-foreground)" }}>
             No dispatches found.
           </p>
         </div>
       ) : (
         <div className="space-y-2">
-          {result.data.map((d) => (
+          {result.data.map((d) => {
+            const TopicIcon = TOPIC_ICONS[d.topic];
+            return (
             <div
               key={d.id}
               className="flex items-center gap-3 rounded-xl border border-border bg-card px-4 py-3"
             >
-              <span className="text-xl shrink-0">{TOPIC_EMOJIS[d.topic]}</span>
+              <TopicIcon className="h-5 w-5 shrink-0 text-muted-foreground" aria-hidden />
               <div className="min-w-0 flex-1">
                 <p className="text-sm font-medium truncate" style={{ color: "var(--foreground)" }}>
                   {d.title}
@@ -129,7 +148,8 @@ export default async function NotificationHistoryPage({ searchParams }: Props) {
                 </Link>
               )}
             </div>
-          ))}
+            );
+          })}
         </div>
       )}
 

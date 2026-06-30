@@ -8,6 +8,29 @@
 // and workflow transition rules.
 // ============================================================
 
+import type { LucideIcon } from "lucide-react";
+import {
+  Speech,
+  Hand,
+  Brain,
+  Handshake,
+  Footprints,
+  Baby,
+  MessageSquare,
+  ClipboardList,
+  Zap,
+  Heart,
+  Users,
+  Home,
+  Stethoscope,
+  BookOpen,
+  Angry,
+  Frown,
+  Meh,
+  Smile,
+  Laugh,
+} from "lucide-react";
+
 import type {
   WellbeingFlagSeverity,
   WellbeingFlagStatus,
@@ -136,16 +159,16 @@ export const VALID_REFERRAL_STATUS_TRANSITIONS: Record<
 
 export const REFERRAL_SPECIALTY_CONFIG: Record<
   ReferralSpecialty,
-  { label: string; emoji: string }
+  { label: string; icon: LucideIcon }
 > = {
-  speech_pathology: { label: "Speech Pathology", emoji: "🗣️" },
-  occupational_therapy: { label: "Occupational Therapy", emoji: "✋" },
-  psychology: { label: "Psychology", emoji: "🧠" },
-  social_work: { label: "Social Work", emoji: "🤝" },
-  physiotherapy: { label: "Physiotherapy", emoji: "🏃" },
-  paediatrics: { label: "Paediatrics", emoji: "👶" },
-  counselling: { label: "Counselling", emoji: "💬" },
-  other: { label: "Other", emoji: "📋" },
+  speech_pathology: { label: "Speech Pathology", icon: Speech },
+  occupational_therapy: { label: "Occupational Therapy", icon: Hand },
+  psychology: { label: "Psychology", icon: Brain },
+  social_work: { label: "Social Work", icon: Handshake },
+  physiotherapy: { label: "Physiotherapy", icon: Footprints },
+  paediatrics: { label: "Paediatrics", icon: Baby },
+  counselling: { label: "Counselling", icon: MessageSquare },
+  other: { label: "Other", icon: ClipboardList },
 };
 
 // ── Case note type config ─────────────────────────────────────────────
@@ -196,42 +219,42 @@ export const CHECKIN_STATUS_CONFIG: Record<
 
 export const PASTORAL_CATEGORY_CONFIG: Record<
   PastoralCategory,
-  { label: string; color: string; emoji: string }
+  { label: string; color: string; icon: LucideIcon }
 > = {
   behaviour: {
     label: "Behaviour",
     color: "var(--pastoral-behaviour)",
-    emoji: "⚡",
+    icon: Zap,
   },
   emotional: {
     label: "Emotional",
     color: "var(--pastoral-emotional)",
-    emoji: "💜",
+    icon: Heart,
   },
   social: {
     label: "Social",
     color: "var(--pastoral-social)",
-    emoji: "👥",
+    icon: Users,
   },
   family: {
     label: "Family",
     color: "var(--pastoral-family)",
-    emoji: "🏠",
+    icon: Home,
   },
   health: {
     label: "Health",
     color: "var(--pastoral-health)",
-    emoji: "🩺",
+    icon: Stethoscope,
   },
   academic: {
     label: "Academic",
     color: "var(--pastoral-academic)",
-    emoji: "📚",
+    icon: BookOpen,
   },
   other: {
     label: "Other",
     color: "var(--pastoral-other)",
-    emoji: "📋",
+    icon: ClipboardList,
   },
 };
 
@@ -256,11 +279,11 @@ export type WellbeingCheckInArea = (typeof WELLBEING_CHECK_IN_AREAS)[number];
 
 export const MOOD_RATING_CONFIG: Record<
   number,
-  { label: string; emoji: string; color: string }
+  { label: string; icon: LucideIcon; color: string }
 > = {
-  1: { label: "Very Sad", emoji: "😢", color: "var(--wellbeing-critical)" },
-  2: { label: "Sad", emoji: "😟", color: "var(--wellbeing-high)" },
-  3: { label: "Okay", emoji: "😐", color: "var(--wellbeing-medium)" },
-  4: { label: "Good", emoji: "🙂", color: "var(--wellbeing-low)" },
-  5: { label: "Great", emoji: "😄", color: "var(--wellbeing-resolved)" },
+  1: { label: "Very Sad", icon: Angry, color: "var(--wellbeing-critical)" },
+  2: { label: "Sad", icon: Frown, color: "var(--wellbeing-high)" },
+  3: { label: "Okay", icon: Meh, color: "var(--wellbeing-medium)" },
+  4: { label: "Good", icon: Smile, color: "var(--wellbeing-low)" },
+  5: { label: "Great", icon: Laugh, color: "var(--wellbeing-resolved)" },
 };

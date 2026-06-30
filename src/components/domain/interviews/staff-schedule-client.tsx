@@ -3,6 +3,7 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { MapPin, Hourglass, Calendar } from "lucide-react";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import { setSlotBlocked, cancelInterviewBooking } from "@/lib/actions/interviews";
 import { OutcomeForm } from "./outcome-form";
@@ -75,8 +76,8 @@ function SlotRow({ slot, onRefresh }: SlotRowProps) {
             {formatTime(slot.start_time)} – {formatTime(slot.end_time)}
           </p>
           {slot.location && (
-            <p className="text-xs" style={{ color: "var(--muted-foreground)" }}>
-              📍 {slot.location}
+            <p className="text-xs inline-flex items-center gap-1" style={{ color: "var(--muted-foreground)" }}>
+              <MapPin className="h-3.5 w-3.5" aria-hidden /> {slot.location}
             </p>
           )}
         </div>
@@ -201,7 +202,7 @@ export function StaffScheduleClient({ schedule }: StaffScheduleClientProps) {
             color: "var(--interview-outcome-pending-fg)",
           }}
         >
-          <span className="text-lg">⏳</span>
+          <Hourglass className="h-5 w-5 shrink-0" aria-hidden />
           <p className="text-sm font-medium">
             {schedule.outcomes_pending} interview{schedule.outcomes_pending !== 1 ? "s" : ""} need outcome notes
           </p>
@@ -214,7 +215,7 @@ export function StaffScheduleClient({ schedule }: StaffScheduleClientProps) {
           className="rounded-2xl p-12 text-center"
           style={{ background: "var(--muted)", border: "1px solid var(--border)" }}
         >
-          <p className="text-4xl mb-3" style={{ color: "var(--empty-state-icon)" }}>📅</p>
+          <Calendar className="h-12 w-12 mx-auto mb-3" style={{ color: "var(--empty-state-icon)" }} aria-hidden />
           <p className="text-sm" style={{ color: "var(--muted-foreground)" }}>
             No slots generated yet for this session.
           </p>

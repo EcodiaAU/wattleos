@@ -3,6 +3,7 @@
 
 import Link from "next/link";
 import { useState, useTransition } from "react";
+import { AlertTriangle, Logs } from "lucide-react";
 import { exportInventory } from "@/lib/actions/materials";
 import type { MaterialInventoryDashboardData } from "@/types/domain";
 import { MONTESSORI_AREA_CONFIG } from "@/lib/constants/materials";
@@ -95,19 +96,22 @@ export function InventoryDashboardClient({ data, canManage }: InventoryDashboard
           {Object.entries(MONTESSORI_AREA_CONFIG).map(([area, config]) => {
             const stats = data.by_area[area as keyof typeof data.by_area];
             if (!stats) return null;
+            const Icon = config.icon;
             return (
               <Link
                 key={area}
                 href={`/pedagogy/materials/inventory?area=${area}`}
                 className="card-interactive rounded-xl border border-border p-4"
               >
-                <p className="text-2xl mb-1">{config.emoji}</p>
+                <Icon className="h-7 w-7 mb-1" style={{ color: "var(--text-secondary)" }} aria-hidden />
                 <p className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>{config.label}</p>
                 <div className="mt-2 space-y-0.5 text-xs" style={{ color: "var(--text-tertiary)" }}>
                   <p>{stats.total} items</p>
                   <p style={{ color: "var(--material-status-available-fg)" }}>{stats.available} available</p>
                   {stats.needs_attention > 0 && (
-                    <p style={{ color: "var(--color-warning)" }}>⚠ {stats.needs_attention} need attention</p>
+                    <p className="inline-flex items-center gap-1" style={{ color: "var(--color-warning)" }}>
+                      <AlertTriangle className="h-3.5 w-3.5" aria-hidden /> {stats.needs_attention} need attention
+                    </p>
                   )}
                 </div>
               </Link>
@@ -161,7 +165,7 @@ export function InventoryDashboardClient({ data, canManage }: InventoryDashboard
       {/* Empty state */}
       {data.total_items === 0 && (
         <div className="py-16 text-center">
-          <p className="text-5xl mb-3" style={{ color: "var(--empty-state-icon)" }}>🪵</p>
+          <Logs className="h-12 w-12 mx-auto mb-3" style={{ color: "var(--empty-state-icon)" }} aria-hidden />
           <h2 className="text-lg font-semibold" style={{ color: "var(--text-primary)" }}>No inventory yet</h2>
           <p className="text-sm mt-1 mb-4" style={{ color: "var(--text-tertiary)" }}>
             Start by adding the physical materials in your prepared environment.

@@ -19,6 +19,7 @@
 //   - border border-border on all cards
 // ============================================================
 
+import { Check, Download, PartyPopper } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { useHaptics } from "@/lib/hooks/use-haptics";
@@ -521,11 +522,8 @@ function Step3Students({ onNext }: { onNext: () => void }) {
         className="card-interactive block rounded-xl border border-border p-5"
       >
         <div className="flex items-start gap-4">
-          <span
-            className="text-3xl"
-            style={{ color: "var(--empty-state-icon)" }}
-          >
-            📥
+          <span style={{ color: "var(--empty-state-icon)" }}>
+            <Download className="h-8 w-8" aria-hidden />
           </span>
           <div>
             <p className="text-sm font-semibold text-foreground">
@@ -588,7 +586,9 @@ function Step4Done({
   return (
     <div className="space-y-6 text-center">
       <div className="space-y-2">
-        <div className="text-5xl">🎉</div>
+        <div className="flex justify-center text-primary">
+          <PartyPopper className="h-12 w-12" aria-hidden />
+        </div>
         <h2 className="text-xl font-semibold text-foreground">
           You&apos;re all set!
         </h2>
@@ -606,12 +606,20 @@ function Step4Done({
         </p>
         <ul className="space-y-1.5">
           <li className="flex items-center gap-2 text-sm text-foreground">
-            <span style={{ color: "var(--attendance-present)" }}>✓</span>
+            <Check
+              className="h-4 w-4 shrink-0"
+              style={{ color: "var(--attendance-present)" }}
+              aria-hidden
+            />
             School details confirmed
           </li>
           {staffInvited > 0 && (
             <li className="flex items-center gap-2 text-sm text-foreground">
-              <span style={{ color: "var(--attendance-present)" }}>✓</span>
+              <Check
+                className="h-4 w-4 shrink-0"
+                style={{ color: "var(--attendance-present)" }}
+                aria-hidden
+              />
               {staffInvited} staff member{staffInvited !== 1 ? "s" : ""} invited
             </li>
           )}

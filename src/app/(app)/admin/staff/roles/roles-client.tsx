@@ -11,6 +11,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { Check, KeyRound } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { createRole, deleteRole } from "@/lib/actions/staff-actions";
@@ -205,7 +206,13 @@ function CreateRoleForm({ onSuccess }: { onSuccess: () => void }) {
                             : "border-border bg-background"
                       }`}
                     >
-                      {allSelected ? "✓" : someSelected ? "−" : ""}
+                      {allSelected ? (
+                        <Check className="h-3 w-3" aria-hidden />
+                      ) : someSelected ? (
+                        "−"
+                      ) : (
+                        ""
+                      )}
                     </button>
                     <span className="text-xs font-semibold text-foreground">
                       {module.label}
@@ -238,7 +245,7 @@ function CreateRoleForm({ onSuccess }: { onSuccess: () => void }) {
                                 : "border-border"
                             }`}
                           >
-                            {selected && "✓"}
+                            {selected && <Check className="h-3 w-3" aria-hidden />}
                           </span>
                           {label}
                         </button>
@@ -370,12 +377,11 @@ export function RolesClient({ systemRoles, customRoles }: RolesClientProps) {
 
         {customRoles.length === 0 && !showCreate ? (
           <div className="rounded-lg border border-border bg-card p-8 text-center">
-            <p
-              className="mx-auto mb-2 text-2xl"
+            <KeyRound
+              className="mx-auto mb-2 h-8 w-8"
               style={{ color: "var(--empty-state-icon)" }}
-            >
-              🔑
-            </p>
+              aria-hidden
+            />
             <p className="text-sm text-muted-foreground">
               No custom roles yet. Create one to give specific staff members a
               tailored set of permissions.

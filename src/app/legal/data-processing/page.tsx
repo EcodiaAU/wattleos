@@ -7,6 +7,7 @@
 
 import type { Metadata } from "next";
 import type { CSSProperties } from "react";
+import { AlertTriangle, MapPin } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Data Processing Agreement",
@@ -150,7 +151,11 @@ export default function DataProcessingPage() {
 
       <div style={callout}>
         <p style={calloutText}>
-          🇦🇺 Data Sovereignty Guarantee: All personal information processed
+          <MapPin
+            aria-hidden
+            style={{ display: "inline", verticalAlign: "-2px", width: 16, height: 16, marginRight: 6 }}
+          />
+          Data Sovereignty Guarantee: All personal information processed
           under this agreement is stored exclusively within Australia, in the
           Sydney (ap-southeast-2) AWS region. Ecodia commits to not transferring
           School Data outside Australia without prior written consent from the
@@ -494,7 +499,17 @@ export default function DataProcessingPage() {
 
       <div style={warningCallout}>
         <p style={warningText}>
-          ⚠️ Ecodia will not move the primary data storage location outside
+          <AlertTriangle
+            aria-hidden
+            style={{
+              display: "inline-block",
+              verticalAlign: "-2px",
+              width: 16,
+              height: 16,
+              marginRight: 6,
+            }}
+          />
+          Ecodia will not move the primary data storage location outside
           Australia without providing at least 90 days&apos; written notice and
           obtaining explicit written consent from all affected Schools.
         </p>

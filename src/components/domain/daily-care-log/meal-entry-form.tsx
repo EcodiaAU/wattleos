@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import type { LucideIcon } from "lucide-react";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import { addCareEntry } from "@/lib/actions/daily-care";
 import {
@@ -23,7 +24,7 @@ const MEAL_TYPES = Object.entries(MEAL_TYPE_CONFIG) as [
 
 const FOOD_CONSUMED_OPTIONS = Object.entries(FOOD_CONSUMED_CONFIG) as [
   FoodConsumed,
-  { label: string; emoji: string },
+  { label: string; icon: LucideIcon },
 ][];
 
 export function MealEntryForm({
@@ -165,7 +166,9 @@ export function MealEntryForm({
           Food Consumed
         </label>
         <div className="grid grid-cols-5 gap-1.5">
-          {FOOD_CONSUMED_OPTIONS.map(([value, cfg]) => (
+          {FOOD_CONSUMED_OPTIONS.map(([value, cfg]) => {
+            const Icon = cfg.icon;
+            return (
             <button
               key={value}
               type="button"
@@ -190,10 +193,11 @@ export function MealEntryForm({
                     : "var(--foreground)",
               }}
             >
-              <span className="text-base">{cfg.emoji}</span>
+              <Icon className="h-4 w-4" aria-hidden />
               <span>{cfg.label}</span>
             </button>
-          ))}
+            );
+          })}
         </div>
       </div>
 

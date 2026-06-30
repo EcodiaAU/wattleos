@@ -3,6 +3,7 @@
 
 import Link from "next/link";
 import { useState, useTransition } from "react";
+import { Logs } from "lucide-react";
 import { listInventoryItems } from "@/lib/actions/materials";
 import type {
   MaterialCondition,
@@ -166,7 +167,7 @@ export function InventoryListClient({
       {/* List */}
       {items.length === 0 ? (
         <div className="py-16 text-center">
-          <p className="text-4xl mb-2" style={{ color: "var(--empty-state-icon)" }}>🪵</p>
+          <Logs className="h-10 w-10 mx-auto mb-2" style={{ color: "var(--empty-state-icon)" }} aria-hidden />
           <p className="font-semibold" style={{ color: "var(--text-primary)" }}>No items found</p>
           <p className="text-sm mt-1" style={{ color: "var(--text-tertiary)" }}>
             {hasActiveFilters ? "Try clearing filters." : "Add the first inventory item to get started."}

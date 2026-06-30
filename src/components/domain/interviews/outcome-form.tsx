@@ -2,6 +2,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { Check, X } from "lucide-react";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import { recordInterviewOutcome } from "@/lib/actions/interviews";
 
@@ -80,7 +81,14 @@ export function OutcomeForm({ bookingId, studentName, onSuccess, onCancel }: Out
                 border: status === s ? "2px solid currentColor" : "1px solid var(--border)",
               }}
             >
-              {s === "completed" ? "✓ Held" : "✗ No show"}
+              <span className="inline-flex items-center justify-center gap-1.5">
+                {s === "completed" ? (
+                  <Check className="h-4 w-4" aria-hidden />
+                ) : (
+                  <X className="h-4 w-4" aria-hidden />
+                )}
+                {s === "completed" ? "Held" : "No show"}
+              </span>
             </button>
           ))}
         </div>

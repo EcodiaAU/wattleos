@@ -18,7 +18,7 @@ const DOMAIN_OPTIONS = Object.entries(DEVELOPMENTAL_DOMAIN_CONFIG).map(
   ([key, cfg]) => ({
     value: key as IlpDevelopmentalDomain,
     label: cfg.label,
-    emoji: cfg.emoji,
+    icon: cfg.icon,
   }),
 );
 
@@ -26,7 +26,8 @@ const PRIORITY_OPTIONS = Object.entries(ILP_PRIORITY_CONFIG).map(
   ([key, cfg]) => ({
     value: key as IlpGoalPriority,
     label: cfg.label,
-    emoji: cfg.emoji,
+    icon: cfg.icon,
+    iconClass: cfg.iconClass,
   }),
 );
 
@@ -183,6 +184,7 @@ export function GoalForm({ planId, goal, onComplete }: GoalFormProps) {
         <div className="flex flex-wrap gap-2">
           {DOMAIN_OPTIONS.map((opt) => {
             const isSelected = domain === opt.value;
+            const Icon = opt.icon;
             return (
               <button
                 key={opt.value}
@@ -191,7 +193,7 @@ export function GoalForm({ planId, goal, onComplete }: GoalFormProps) {
                   haptics.selection();
                   setDomain(opt.value);
                 }}
-                className="active-push rounded-full border px-3 py-1.5 text-xs font-medium transition-colors"
+                className="active-push inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition-colors"
                 style={{
                   borderColor: isSelected ? "var(--primary)" : "var(--border)",
                   background: isSelected ? "var(--primary)" : "transparent",
@@ -200,7 +202,7 @@ export function GoalForm({ planId, goal, onComplete }: GoalFormProps) {
                     : "var(--foreground)",
                 }}
               >
-                {opt.emoji} {opt.label}
+                <Icon className="h-3.5 w-3.5" aria-hidden /> {opt.label}
               </button>
             );
           })}
@@ -280,6 +282,7 @@ export function GoalForm({ planId, goal, onComplete }: GoalFormProps) {
           {PRIORITY_OPTIONS.map((opt) => {
             const isSelected = priority === opt.value;
             const cfg = ILP_PRIORITY_CONFIG[opt.value];
+            const Icon = opt.icon;
             return (
               <button
                 key={opt.value}
@@ -288,14 +291,14 @@ export function GoalForm({ planId, goal, onComplete }: GoalFormProps) {
                   haptics.selection();
                   setPriority(opt.value);
                 }}
-                className="active-push flex-1 rounded-[var(--radius-md)] border px-3 py-2 text-xs font-medium transition-colors"
+                className="active-push inline-flex flex-1 items-center justify-center gap-1.5 rounded-[var(--radius-md)] border px-3 py-2 text-xs font-medium transition-colors"
                 style={{
                   borderColor: isSelected ? cfg.cssVar : "var(--border)",
                   background: isSelected ? cfg.cssVar : "transparent",
                   color: isSelected ? cfg.cssVarFg : "var(--foreground)",
                 }}
               >
-                {opt.emoji} {opt.label}
+                <Icon className={`h-2.5 w-2.5 ${opt.iconClass}`} aria-hidden /> {opt.label}
               </button>
             );
           })}

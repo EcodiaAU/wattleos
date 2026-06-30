@@ -1,3 +1,4 @@
+import { Lock } from "lucide-react";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { getTenantContext, hasPermission } from "@/lib/auth/tenant-context";
@@ -76,7 +77,7 @@ export default async function CaseNotesPage() {
           color: "var(--foreground)",
         }}
       >
-        🔒 These records are confidential and only visible to staff with
+        <Lock className="mr-1 inline h-4 w-4 align-text-bottom" aria-hidden /> These records are confidential and only visible to staff with
         counsellor/principal access.
       </div>
 
@@ -85,12 +86,11 @@ export default async function CaseNotesPage() {
           className="rounded-lg border border-border p-12 text-center"
           style={{ backgroundColor: "var(--card)" }}
         >
-          <div
-            className="mx-auto mb-3 text-4xl"
+          <Lock
+            className="mx-auto mb-3 h-12 w-12"
             style={{ color: "var(--empty-state-icon)" }}
-          >
-            🔒
-          </div>
+            aria-hidden
+          />
           <p
             className="text-sm font-medium"
             style={{ color: "var(--foreground)" }}
@@ -154,12 +154,11 @@ export default async function CaseNotesPage() {
                       </span>
                     )}
                     {note.is_confidential && (
-                      <span
-                        className="text-xs"
+                      <Lock
+                        className="h-3 w-3"
                         style={{ color: "var(--muted-foreground)" }}
-                      >
-                        🔒
-                      </span>
+                        aria-label="Confidential"
+                      />
                     )}
                   </div>
                 </div>

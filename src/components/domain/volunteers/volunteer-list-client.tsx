@@ -5,6 +5,7 @@
 import Link from "next/link";
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { Hand } from "lucide-react";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import type { VolunteerStatus, VolunteerWithWwccStatus, VolunteerWwccStatus } from "@/types/domain";
 import { VolunteerCard } from "./volunteer-card";
@@ -149,9 +150,11 @@ export function VolunteerListClient({ initialVolunteers }: VolunteerListClientPr
             color: "var(--muted-foreground)",
           }}
         >
-          <div style={{ fontSize: "2.5rem", marginBottom: "0.5rem", color: "var(--empty-state-icon)" }}>
-            🙋
-          </div>
+          <Hand
+            className="mx-auto h-10 w-10"
+            style={{ marginBottom: "0.5rem", color: "var(--empty-state-icon)" }}
+            aria-hidden
+          />
           <p style={{ fontWeight: 600, marginBottom: "0.25rem" }}>No volunteers found</p>
           <p style={{ fontSize: "0.875rem" }}>
             {search || statusFilter || wwccFilter

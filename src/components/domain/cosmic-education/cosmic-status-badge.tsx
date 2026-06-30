@@ -2,6 +2,8 @@
 
 // src/components/domain/cosmic-education/cosmic-status-badge.tsx
 
+import type { LucideIcon } from "lucide-react";
+import { Sparkles, PawPrint, Users, PenLine, Calculator, Star } from "lucide-react";
 import type { CosmicUnitStatus, CosmicStudyStatus, CosmicStudyArea, CosmicGreatLesson } from "@/types/domain";
 
 // ── Unit Status Badge ─────────────────────────────────────────
@@ -84,13 +86,13 @@ export function getStudyAreaLabel(area: CosmicStudyArea): string {
 
 // ── Great Lesson Chip ─────────────────────────────────────────
 
-const LESSON_CONFIG: Record<CosmicGreatLesson, { label: string; accentVar: string; emoji: string }> = {
-  story_of_universe:       { label: "Universe",       accentVar: "--cosmic-lesson-universe",       emoji: "🌌" },
-  story_of_life:           { label: "Life",            accentVar: "--cosmic-lesson-life",           emoji: "🦕" },
-  story_of_humans:         { label: "Humans",          accentVar: "--cosmic-lesson-humans",         emoji: "🧑‍🤝‍🧑" },
-  story_of_communication:  { label: "Communication",   accentVar: "--cosmic-lesson-communication",  emoji: "✍️" },
-  story_of_numbers:        { label: "Numbers",         accentVar: "--cosmic-lesson-numbers",        emoji: "🔢" },
-  custom:                  { label: "Custom",          accentVar: "--cosmic-lesson-custom",         emoji: "⭐" },
+const LESSON_CONFIG: Record<CosmicGreatLesson, { label: string; accentVar: string; icon: LucideIcon }> = {
+  story_of_universe:       { label: "Universe",       accentVar: "--cosmic-lesson-universe",       icon: Sparkles },
+  story_of_life:           { label: "Life",            accentVar: "--cosmic-lesson-life",           icon: PawPrint },
+  story_of_humans:         { label: "Humans",          accentVar: "--cosmic-lesson-humans",         icon: Users },
+  story_of_communication:  { label: "Communication",   accentVar: "--cosmic-lesson-communication",  icon: PenLine },
+  story_of_numbers:        { label: "Numbers",         accentVar: "--cosmic-lesson-numbers",        icon: Calculator },
+  custom:                  { label: "Custom",          accentVar: "--cosmic-lesson-custom",         icon: Star },
 };
 
 export function getLessonConfig(key: CosmicGreatLesson) {
@@ -104,7 +106,7 @@ export function GreatLessonChip({ lessonKey }: { lessonKey: CosmicGreatLesson })
       className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium border"
       style={{ color: `var(${cfg.accentVar})`, borderColor: `var(${cfg.accentVar})` }}
     >
-      <span>{cfg.emoji}</span>
+      {(() => { const Icon = cfg.icon; return <Icon className="h-3.5 w-3.5" aria-hidden />; })()}
       {cfg.label}
     </span>
   );

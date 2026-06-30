@@ -50,6 +50,7 @@ export function HubArticleViewer({
   const [related, setRelated] = useState<HubArticleSummary[]>([]);
 
   const catCfg = HUB_CATEGORY_CONFIG[article.category];
+  const CategoryIcon = catCfg.icon;
 
   // Mark as read on mount
   useEffect(() => {
@@ -175,7 +176,8 @@ export function HubArticleViewer({
               backgroundColor: `color-mix(in srgb, ${catCfg.cssVar} 12%, transparent)`,
             }}
           >
-            {catCfg.emoji} {catCfg.label}
+            <CategoryIcon className="h-4 w-4" aria-hidden />
+            {catCfg.label}
           </span>
           {article.age_bands.map((band) => (
             <span

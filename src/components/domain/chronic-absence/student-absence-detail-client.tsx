@@ -3,6 +3,14 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import {
+  User,
+  AlertTriangle,
+  Flag,
+  Check,
+  CheckCircle2,
+  XCircle,
+} from "lucide-react";
 
 import { ChronicAbsenceStatusBadge } from "@/components/domain/chronic-absence/chronic-absence-status-badge";
 import {
@@ -49,8 +57,8 @@ export function StudentAbsenceDetailClient({
               className="h-full w-full object-cover"
             />
           ) : (
-            <div className="flex h-full w-full items-center justify-center text-2xl">
-              👤
+            <div className="flex h-full w-full items-center justify-center text-muted-foreground">
+              <User className="h-7 w-7" aria-hidden />
             </div>
           )}
         </div>
@@ -86,7 +94,7 @@ export function StudentAbsenceDetailClient({
             color: "var(--chronic-absence-severe-fg)",
           }}
         >
-          <span className="text-base shrink-0">⚠️</span>
+          <AlertTriangle className="h-4 w-4 shrink-0" aria-hidden />
           <div className="flex-1">
             <strong>Welfare concern:</strong> This student's attendance is{" "}
             {summary.absence_status === "severe" ? "severely" : "chronically"}{" "}
@@ -108,9 +116,9 @@ export function StudentAbsenceDetailClient({
               onClick={() =>
                 setActivePanel(activePanel === "flag" ? null : "flag")
               }
-              className="touch-target active-push rounded-lg border border-border bg-background px-3 py-1.5 text-xs font-medium hover:bg-muted transition-colors"
+              className="touch-target active-push inline-flex items-center gap-1.5 rounded-lg border border-border bg-background px-3 py-1.5 text-xs font-medium hover:bg-muted transition-colors"
             >
-              🚩 Create flag
+              <Flag className="h-3.5 w-3.5" aria-hidden /> Create flag
             </button>
           )}
         </div>
@@ -126,7 +134,7 @@ export function StudentAbsenceDetailClient({
               }}
             >
               <div className="flex items-center gap-2">
-                <span>🚩</span>
+                <Flag className="h-4 w-4" aria-hidden />
                 <span className="font-medium">
                   {FLAG_STATUS_CONFIG[active_flag.status].label}
                 </span>
@@ -150,9 +158,9 @@ export function StudentAbsenceDetailClient({
                   onClick={() =>
                     setActivePanel(activePanel === "resolve" ? null : "resolve")
                   }
-                  className="touch-target active-push rounded-lg border border-border bg-background px-3 py-1.5 text-xs font-medium hover:bg-muted transition-colors"
+                  className="touch-target active-push inline-flex items-center gap-1.5 rounded-lg border border-border bg-background px-3 py-1.5 text-xs font-medium hover:bg-muted transition-colors"
                 >
-                  ✓ Resolve
+                  <Check className="h-3.5 w-3.5" aria-hidden /> Resolve
                 </button>
                 <button
                   onClick={() =>
@@ -310,7 +318,11 @@ export function StudentAbsenceDetailClient({
           <div className="space-y-2">
             {flag_history.map((f) => (
               <div key={f.id} className="text-sm flex items-start gap-2">
-                <span>{f.status === "resolved" ? "✅" : "❌"}</span>
+                {f.status === "resolved" ? (
+                  <CheckCircle2 className="h-4 w-4 mt-0.5 shrink-0" aria-hidden />
+                ) : (
+                  <XCircle className="h-4 w-4 mt-0.5 shrink-0" aria-hidden />
+                )}
                 <div>
                   <span className="font-medium">
                     {FLAG_STATUS_CONFIG[f.status].label}

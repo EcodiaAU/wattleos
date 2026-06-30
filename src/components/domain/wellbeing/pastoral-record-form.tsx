@@ -123,7 +123,7 @@ export function PastoralRecordForm({ students, record, canManage, defaultStudent
               style={{ backgroundColor: "var(--input)", color: "var(--foreground)" }}>
               {CATEGORIES.map((c) => <option key={c.value} value={c.value}>{c.label}</option>)}
             </select>
-            <PastoralCategoryBadge category={category} showEmoji />
+            <PastoralCategoryBadge category={category} showIcon />
           </div>
         </div>
         <div className="space-y-1.5">

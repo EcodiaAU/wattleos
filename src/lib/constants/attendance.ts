@@ -8,6 +8,9 @@
 // attendance_records.status column.
 // ============================================================
 
+import type { LucideIcon } from "lucide-react";
+import { AlarmClock, Check, Clock, SquarePen, X } from "lucide-react";
+
 export const ATTENDANCE_STATUSES = [
   { value: "present", label: "Present" },
   { value: "absent", label: "Absent" },
@@ -31,7 +34,7 @@ export const ATTENDANCE_STATUS_CONFIG: Record<
     badgeText: string;
     buttonBg: string;
     buttonHover: string;
-    icon: string;
+    icon: LucideIcon;
   }
 > = {
   present: {
@@ -40,7 +43,7 @@ export const ATTENDANCE_STATUS_CONFIG: Record<
     badgeText: "text-green-700",
     buttonBg: "bg-[var(--mastery-mastered)]",
     buttonHover: "hover:bg-green-700",
-    icon: "✓",
+    icon: Check,
   },
   absent: {
     label: "Absent",
@@ -48,7 +51,7 @@ export const ATTENDANCE_STATUS_CONFIG: Record<
     badgeText: "text-red-700",
     buttonBg: "bg-[var(--attendance-absent)]",
     buttonHover: "hover:bg-red-700",
-    icon: "✗",
+    icon: X,
   },
   late: {
     label: "Late",
@@ -56,7 +59,7 @@ export const ATTENDANCE_STATUS_CONFIG: Record<
     badgeText: "text-amber-700",
     buttonBg: "bg-primary",
     buttonHover: "hover:bg-amber-700",
-    icon: "⏰",
+    icon: AlarmClock,
   },
   excused: {
     label: "Excused",
@@ -64,7 +67,7 @@ export const ATTENDANCE_STATUS_CONFIG: Record<
     badgeText: "text-blue-700",
     buttonBg: "bg-blue-600",
     buttonHover: "hover:bg-blue-700",
-    icon: "📝",
+    icon: SquarePen,
   },
   half_day: {
     label: "Half Day",
@@ -72,6 +75,6 @@ export const ATTENDANCE_STATUS_CONFIG: Record<
     badgeText: "text-purple-700",
     buttonBg: "bg-purple-600",
     buttonHover: "hover:bg-purple-700",
-    icon: "½",
+    icon: Clock,
   },
 };

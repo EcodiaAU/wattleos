@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Heart } from "lucide-react";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import type { WellbeingDashboardData } from "@/types/domain";
 import { WellbeingSeverityBadge } from "./wellbeing-severity-badge";
@@ -205,6 +206,7 @@ export function WellbeingDashboardClient({
           <div className="space-y-2">
             {data.active_referrals.map((ref) => {
               const specCfg = REFERRAL_SPECIALTY_CONFIG[ref.specialty];
+              const SpecIcon = specCfg?.icon;
               return (
                 <Link
                   key={ref.id}
@@ -225,7 +227,13 @@ export function WellbeingDashboardClient({
                         className="mt-0.5 text-xs"
                         style={{ color: "var(--muted-foreground)" }}
                       >
-                        {specCfg?.emoji} {specCfg?.label}
+                        {SpecIcon && (
+                          <SpecIcon
+                            className="inline-block h-3.5 w-3.5 align-text-bottom"
+                            aria-hidden
+                          />
+                        )}{" "}
+                        {specCfg?.label}
                         {ref.referred_to_name
                           ? ` - ${ref.referred_to_name}`
                           : ""}
@@ -334,7 +342,7 @@ export function WellbeingDashboardClient({
                     <PastoralCategoryBadge
                       category={rec.category}
                       size="sm"
-                      showEmoji
+                      showIcon
                     />
                     {!rec.parent_contacted && (
                       <span
@@ -364,12 +372,11 @@ export function WellbeingDashboardClient({
             className="rounded-lg border border-border p-12 text-center"
             style={{ backgroundColor: "var(--card)" }}
           >
-            <div
-              className="mx-auto mb-3 text-4xl"
+            <Heart
+              className="mx-auto mb-3 h-10 w-10"
               style={{ color: "var(--empty-state-icon)" }}
-            >
-              💚
-            </div>
+              aria-hidden
+            />
             <p
               className="text-sm font-medium"
               style={{ color: "var(--foreground)" }}

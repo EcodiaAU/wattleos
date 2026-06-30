@@ -16,6 +16,7 @@ export function ProgramTypeBadge({
   size = "sm",
 }: ProgramTypeBadgeProps) {
   const config = PROGRAM_TYPE_CONFIG[type] ?? PROGRAM_TYPE_CONFIG.other;
+  const Icon = config.icon;
 
   const sizeClasses =
     size === "sm" 
@@ -26,7 +27,7 @@ export function ProgramTypeBadge({
     <span
       className={`inline-flex items-center gap-1 rounded-full font-black uppercase tracking-tighter ${config.badgeBg} ${config.badgeText} ${sizeClasses} shadow-sm border border-black/5`}
     >
-      {showIcon && <span className="text-[1.2em]">{config.icon}</span>}
+      {showIcon && <Icon className="h-[1.2em] w-[1.2em]" aria-hidden />}
       {config.shortLabel}
     </span>
   );

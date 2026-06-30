@@ -7,6 +7,7 @@
 
 import type { Metadata } from "next";
 import type { CSSProperties } from "react";
+import { CheckCircle2 } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
@@ -211,7 +212,17 @@ export default function TermsOfServicePage() {
 
       <div style={callout}>
         <p style={calloutText}>
-          ✅ Your data is yours. Ecodia does not claim ownership of any School
+          <CheckCircle2
+            aria-hidden
+            style={{
+              display: "inline-block",
+              verticalAlign: "-2px",
+              width: 16,
+              height: 16,
+              marginRight: 6,
+            }}
+          />
+          Your data is yours. Ecodia does not claim ownership of any School
           Data. You retain all rights, title, and interest in your data at all
           times.
         </p>

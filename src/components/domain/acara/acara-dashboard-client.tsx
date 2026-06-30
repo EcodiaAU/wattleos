@@ -7,6 +7,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { BarChart3 } from "lucide-react";
 
 import { AcaraStatusBadge } from "./acara-status-badge";
 import { exportAcaraStudentProfileCsv } from "@/lib/actions/acara";
@@ -35,10 +36,10 @@ export function AcaraDashboardClient({ data, canManage }: Props) {
           style={{ background: "var(--card)" }}
         >
           <div
-            className="text-4xl mb-3"
+            className="flex justify-center mb-3"
             style={{ color: "var(--empty-state-icon)" }}
           >
-            📊
+            <BarChart3 className="h-10 w-10" aria-hidden />
           </div>
           <p className="font-medium text-base">No report periods yet</p>
           <p

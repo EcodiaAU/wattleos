@@ -3,6 +3,7 @@
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { Check, Flower2 } from "lucide-react";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import { NormalizationLevelBadge } from "./normalization-level-badge";
 import { RadarChart } from "./radar-chart";
@@ -203,7 +204,9 @@ export function StudentDetailClient({
                     color: "var(--normalization-flourishing-fg)",
                   }}
                 >
-                  Joyful ✓
+                  <span className="inline-flex items-center gap-1">
+                    Joyful <Check className="h-3.5 w-3.5" aria-hidden />
+                  </span>
                 </span>
               )}
             </div>
@@ -214,12 +217,11 @@ export function StudentDetailClient({
           className="flex flex-col items-center justify-center rounded-xl border border-border py-12"
           style={{ backgroundColor: "var(--card)" }}
         >
-          <div
-            className="text-4xl mb-2"
+          <Flower2
+            className="h-12 w-12 mb-2"
             style={{ color: "var(--empty-state-icon)" }}
-          >
-            🧘
-          </div>
+            aria-hidden
+          />
           <p
             className="text-sm font-medium"
             style={{ color: "var(--foreground)" }}

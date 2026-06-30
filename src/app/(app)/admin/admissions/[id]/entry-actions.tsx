@@ -29,6 +29,7 @@ import {
   updateWaitlistEntry,
   withdrawEntry,
 } from "@/lib/actions/admissions/waitlist-pipeline";
+import { X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -197,8 +198,9 @@ export function EntryActions({ entry, initialAction }: EntryActionsProps) {
           <button
             onClick={() => setSuccess(null)}
             className="ml-2 text-success hover:text-success"
+            aria-label="Dismiss"
           >
-            ✕
+            <X className="h-4 w-4" aria-hidden />
           </button>
         </div>
       )}

@@ -1,5 +1,6 @@
 // src/app/(app)/attendance/absence-followup/page.tsx
 
+import { Settings } from "lucide-react";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { AbsenceFollowupDashboardClient } from "@/components/domain/absence-followup/absence-followup-dashboard-client";
@@ -60,9 +61,9 @@ export default async function AbsenceFollowupPage({
           {canManage && (
             <Link
               href="/attendance/absence-followup/config"
-              className="touch-target active-push rounded-lg border border-border bg-background px-4 py-2 text-sm font-medium hover:bg-muted transition-colors"
+              className="touch-target active-push inline-flex items-center gap-1.5 rounded-lg border border-border bg-background px-4 py-2 text-sm font-medium hover:bg-muted transition-colors"
             >
-              ⚙️ Settings
+              <Settings className="h-4 w-4" aria-hidden /> Settings
             </Link>
           )}
         </div>

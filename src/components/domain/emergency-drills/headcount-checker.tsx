@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { Check } from "lucide-react";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import {
   updateParticipant,
@@ -173,7 +174,7 @@ export function HeadcountChecker({
                     : "transparent",
                 }}
               >
-                {p.accounted_for ? "✓" : ""}
+                {p.accounted_for && <Check className="h-3.5 w-3.5" aria-hidden />}
               </div>
 
               {/* Student info */}

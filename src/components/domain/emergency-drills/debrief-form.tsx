@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { Check } from "lucide-react";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import { submitDebrief } from "@/lib/actions/emergency-drills";
 import type { DrillEffectivenessRating } from "@/types/domain";
@@ -179,7 +180,7 @@ export function DebriefForm({ drillId }: DebriefFormProps) {
               : "var(--foreground)",
           }}
         >
-          <span>{followUpRequired ? "✓" : ""}</span>
+          {followUpRequired && <Check className="h-4 w-4" aria-hidden />}
           Follow-up action required
         </button>
 

@@ -7,6 +7,7 @@
 
 import { useState, useTransition, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import { Check, X, HelpCircle, type LucideIcon } from "lucide-react";
 import {
   respondToEvent,
   type RSVPStatus,
@@ -26,25 +27,25 @@ interface RSVPWidgetProps {
 const RSVP_OPTIONS: {
   value: RSVPStatus;
   label: string;
-  icon: string;
+  icon: LucideIcon;
   activeClass: string;
 }[] = [
   {
     value: "going",
     label: "Going",
-    icon: "✓",
+    icon: Check,
     activeClass: "bg-[var(--badge-success-bg)] text-[var(--badge-success-fg)] ring-[var(--badge-success)]",
   },
   {
     value: "maybe",
     label: "Maybe",
-    icon: "?",
+    icon: HelpCircle,
     activeClass: "bg-primary/15 text-primary ring-primary/30",
   },
   {
     value: "not_going",
     label: "Not Going",
-    icon: "✗",
+    icon: X,
     activeClass: "bg-muted text-foreground ring-border",
   },
 ];
@@ -216,6 +217,7 @@ export function RSVPWidget({
       {/* ── RSVP Buttons ──────────────────────────────── */}
       <div className="flex gap-2">
         {RSVP_OPTIONS.map((opt) => {
+          const Icon = opt.icon;
           const isActive = selectedStatus === opt.value;
           const isDisabled =
             isPending || (opt.value === "going" && isFull && !isActive);
@@ -239,7 +241,9 @@ export function RSVPWidget({
                     : "bg-muted text-muted-foreground hover:bg-muted"
                 } disabled:cursor-not-allowed disabled:opacity-50`}
               >
-                <span className="mr-1">{opt.icon}</span> {opt.label}
+                <span className="inline-flex items-center justify-center gap-1">
+                  <Icon className="h-4 w-4" aria-hidden /> {opt.label}
+                </span>
               </button>
             </GlowTarget>
           );

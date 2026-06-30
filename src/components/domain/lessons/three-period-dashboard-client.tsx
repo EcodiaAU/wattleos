@@ -8,6 +8,15 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import {
+  Brush,
+  Sparkles,
+  Languages,
+  Calculator,
+  Globe,
+  Leaf,
+  type LucideIcon,
+} from "lucide-react";
 
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import type {
@@ -16,12 +25,12 @@ import type {
   ThreePeriodDashboardData,
 } from "@/types/domain";
 
-const AREA_EMOJI: Record<MontessoriArea, string> = {
-  practical_life: "🧹",
-  sensorial: "✨",
-  language: "🔤",
-  mathematics: "🔢",
-  cultural: "🌍",
+const AREA_ICON: Record<MontessoriArea, LucideIcon> = {
+  practical_life: Brush,
+  sensorial: Sparkles,
+  language: Languages,
+  mathematics: Calculator,
+  cultural: Globe,
 };
 
 const AREA_LABELS: Record<MontessoriArea, string> = {
@@ -126,7 +135,7 @@ export function ThreePeriodDashboardClient({
           onClick={() => haptics.light()}
         >
           <div className="flex items-center gap-3">
-            <span className="text-2xl">🌿</span>
+            <Leaf className="h-7 w-7 shrink-0" aria-hidden />
             <div>
               <p className="font-medium" style={{ color: "var(--foreground)" }}>
                 {dashboard.active_sensitive_periods} active sensitive period
@@ -157,7 +166,10 @@ export function ThreePeriodDashboardClient({
                 key={area}
                 className="rounded-xl border border-border p-3 text-center"
               >
-                <div className="text-xl">{AREA_EMOJI[area]}</div>
+                {(() => {
+                  const AreaIcon = AREA_ICON[area];
+                  return <AreaIcon className="h-6 w-6 mx-auto" aria-hidden />;
+                })()}
                 <div
                   className="mt-1 text-xs font-medium"
                   style={{ color: "var(--foreground)" }}
@@ -225,7 +237,7 @@ export function ThreePeriodDashboardClient({
 
         {filteredStudents.length === 0 ? (
           <div className="py-10 text-center" style={{ color: "var(--empty-state-icon)" }}>
-            <div className="text-3xl">🔢</div>
+            <Calculator className="h-10 w-10 mx-auto" aria-hidden />
             <p className="mt-2 text-sm">
               {studentSearch ? "No students match your search" : "No students yet"}
             </p>

@@ -7,6 +7,7 @@
 // student's departure here.
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { Bus, AlertTriangle, Check } from "lucide-react";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import {
   getDismissalDashboard,
@@ -100,7 +101,7 @@ export function DismissalDashboardClient({
     return (
       <div className="flex items-center justify-center py-20" style={{ color: "var(--muted-foreground)" }}>
         <div className="text-center space-y-2">
-          <div className="text-3xl">🚌</div>
+          <Bus className="h-10 w-10 mx-auto" aria-hidden />
           <p className="text-sm">Loading dismissal records…</p>
         </div>
       </div>
@@ -231,7 +232,7 @@ export function DismissalDashboardClient({
             border: "1px solid var(--dismissal-exception)",
           }}
         >
-          <span className="text-xl flex-shrink-0">⚠️</span>
+          <AlertTriangle className="h-5 w-5 flex-shrink-0" aria-hidden />
           <div>
             <p className="font-semibold">
               {data.summary.exceptions} exception{data.summary.exceptions !== 1 ? "s" : ""} require attention
@@ -246,7 +247,7 @@ export function DismissalDashboardClient({
       {/* ── Record list ── */}
       {filteredRecords.length === 0 ? (
         <div className="text-center py-16 space-y-3">
-          <div className="text-4xl" style={{ color: "var(--empty-state-icon)" }}>🚌</div>
+          <Bus className="h-10 w-10 mx-auto" style={{ color: "var(--empty-state-icon)" }} aria-hidden />
           <p className="font-medium" style={{ color: "var(--foreground)" }}>
             {data?.summary.total === 0
               ? "No records for this date"
@@ -298,8 +299,8 @@ export function DismissalDashboardClient({
             />
           </div>
           {data.summary.pending === 0 && (
-            <p className="text-sm font-medium" style={{ color: "var(--dismissal-confirmed)" }}>
-              ✓ All students accounted for
+            <p className="inline-flex items-center gap-1.5 text-sm font-medium" style={{ color: "var(--dismissal-confirmed)" }}>
+              <Check className="h-4 w-4" aria-hidden /> All students accounted for
             </p>
           )}
         </div>

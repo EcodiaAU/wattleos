@@ -6,15 +6,16 @@ import { PASTORAL_CATEGORY_CONFIG } from "@/lib/constants/wellbeing";
 interface PastoralCategoryBadgeProps {
   category: PastoralCategory;
   size?: "sm" | "md";
-  showEmoji?: boolean;
+  showIcon?: boolean;
 }
 
 export function PastoralCategoryBadge({
   category,
   size = "md",
-  showEmoji = false,
+  showIcon = false,
 }: PastoralCategoryBadgeProps) {
   const config = PASTORAL_CATEGORY_CONFIG[category];
+  const Icon = config.icon;
   const padding = size === "sm" ? "0.2rem 0.5rem" : "0.25rem 0.625rem";
   const fontSize = size === "sm" ? "0.7rem" : "0.75rem";
 
@@ -35,7 +36,7 @@ export function PastoralCategoryBadge({
         whiteSpace: "nowrap",
       }}
     >
-      {showEmoji && config.emoji} {config.label}
+      {showIcon && <Icon className="h-3.5 w-3.5" aria-hidden />} {config.label}
     </span>
   );
 }

@@ -19,6 +19,8 @@
 // the browser.
 // ============================================================
 
+import { DoorOpen } from "lucide-react";
+
 import { RollCallClient } from "@/components/domain/attendance/roll-call-client";
 import { listClasses } from "@/lib/actions/classes";
 import { getTenantContext, hasPermission } from "@/lib/auth/tenant-context";
@@ -57,7 +59,7 @@ export default async function AttendancePage() {
               color: "var(--foreground)",
             }}
           >
-            🚪 Kiosk
+            <DoorOpen className="h-4 w-4" aria-hidden /> Kiosk
           </Link>
           <Link
             href="/attendance/sign-in-out"

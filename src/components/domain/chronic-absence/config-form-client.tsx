@@ -3,6 +3,7 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { Check } from "lucide-react";
 
 import { updateAbsenceMonitoringConfig } from "@/lib/actions/chronic-absence";
 import { ROLLING_WINDOW_OPTIONS } from "@/lib/constants/chronic-absence";
@@ -179,8 +180,8 @@ export function ConfigFormClient({ config }: ConfigFormClientProps) {
       {error && <p className="text-sm text-destructive">{error}</p>}
 
       {saved && (
-        <p className="text-sm" style={{ color: "var(--chronic-absence-good)" }}>
-          ✓ Settings saved successfully.
+        <p className="inline-flex items-center gap-1.5 text-sm" style={{ color: "var(--chronic-absence-good)" }}>
+          <Check className="h-4 w-4" aria-hidden /> Settings saved successfully.
         </p>
       )}
 

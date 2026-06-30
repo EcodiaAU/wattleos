@@ -1,5 +1,6 @@
 // src/app/(app)/admin/volunteers/assignments/page.tsx
 
+import { Hand } from "lucide-react";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { getTenantContext, hasPermission } from "@/lib/auth/tenant-context";
@@ -90,15 +91,14 @@ export default async function AssignmentsPage() {
                 color: "var(--muted-foreground)",
               }}
             >
-              <div
+              <Hand
+                className="mx-auto h-12 w-12"
                 style={{
-                  fontSize: "2.5rem",
                   marginBottom: "0.5rem",
                   color: "var(--empty-state-icon)",
                 }}
-              >
-                🙋
-              </div>
+                aria-hidden
+              />
               <p style={{ fontWeight: 600 }}>No upcoming assignments</p>
               <p style={{ fontSize: "0.875rem" }}>
                 Assign a volunteer to an upcoming event to see them here.

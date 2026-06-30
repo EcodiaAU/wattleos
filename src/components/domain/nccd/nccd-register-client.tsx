@@ -6,6 +6,7 @@
 
 import Link from "next/link";
 import { useState, useMemo } from "react";
+import { Accessibility } from "lucide-react";
 
 import {
   NCCD_CATEGORIES,
@@ -194,9 +195,11 @@ export function NccdRegisterClient({
       {/* List */}
       {filtered.length === 0 ? (
         <div className="py-16 text-center space-y-2">
-          <p className="text-3xl" style={{ color: "var(--empty-state-icon)" }}>
-            ♿
-          </p>
+          <Accessibility
+            className="h-10 w-10 mx-auto"
+            style={{ color: "var(--empty-state-icon)" }}
+            aria-hidden
+          />
           <p className="font-medium" style={{ color: "var(--foreground)" }}>
             No entries found
           </p>

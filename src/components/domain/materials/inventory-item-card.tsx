@@ -2,6 +2,7 @@
 "use client";
 
 import Link from "next/link";
+import { MapPin, AlertTriangle } from "lucide-react";
 import type { MaterialInventoryItemWithDetails } from "@/types/domain";
 import { MaterialConditionBadge } from "./material-condition-badge";
 import { MaterialStatusBadge } from "./material-status-badge";
@@ -54,8 +55,10 @@ export function InventoryItemCard({
               className="text-xs mt-1"
               style={{ color: "var(--text-secondary)" }}
             >
-              📍 {item.location.name}
-              {item.shelf_position && ` - ${item.shelf_position}`}
+              <span className="inline-flex items-center gap-1">
+                <MapPin className="h-3.5 w-3.5" aria-hidden /> {item.location.name}
+                {item.shelf_position && ` - ${item.shelf_position}`}
+              </span>
             </p>
           )}
         </div>
@@ -76,7 +79,7 @@ export function InventoryItemCard({
             className="flex items-center gap-1"
             style={{ color: "var(--color-warning)" }}
           >
-            ⚠ Inspection overdue
+            <AlertTriangle className="h-3.5 w-3.5" aria-hidden /> Inspection overdue
           </span>
         )}
         {item.last_inspected_at && !overdue && (

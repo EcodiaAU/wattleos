@@ -18,6 +18,42 @@ import type {
   IlpSupportCategory,
   TransitionStatementStatus,
 } from "@/types/domain";
+import type { LucideIcon } from "lucide-react";
+import {
+  Accessibility,
+  Activity,
+  Backpack,
+  BarChart3,
+  Bath,
+  Bone,
+  BookOpen,
+  Brain,
+  Calculator,
+  Calendar,
+  CalendarDays,
+  Camera,
+  Circle,
+  ClipboardList,
+  Eye,
+  FileText,
+  Footprints,
+  Globe,
+  HandHelping,
+  Handshake,
+  Heart,
+  MessageSquare,
+  Palette,
+  Paperclip,
+  Pencil,
+  Puzzle,
+  SquarePen,
+  Speech,
+  Star,
+  Stethoscope,
+  Target,
+  Users,
+  Video,
+} from "lucide-react";
 
 // ── Status Config Interface ──────────────────────────────────
 
@@ -91,7 +127,8 @@ export const ILP_GOAL_STATUS_CONFIG: Record<IlpGoalStatus, IlpStatusConfig> = {
 
 export interface IlpPriorityConfig {
   label: string;
-  emoji: string;
+  icon: LucideIcon;
+  iconClass: string;
   cssVar: string;
   cssVarFg: string;
 }
@@ -99,19 +136,22 @@ export interface IlpPriorityConfig {
 export const ILP_PRIORITY_CONFIG: Record<IlpGoalPriority, IlpPriorityConfig> = {
   high: {
     label: "High",
-    emoji: "🔴",
+    icon: Circle,
+    iconClass: "text-red-500 fill-red-500",
     cssVar: "var(--ilp-priority-high)",
     cssVarFg: "var(--ilp-priority-high-fg)",
   },
   medium: {
     label: "Medium",
-    emoji: "🟡",
+    icon: Circle,
+    iconClass: "text-amber-500 fill-amber-500",
     cssVar: "var(--ilp-priority-medium)",
     cssVarFg: "var(--ilp-priority-medium-fg)",
   },
   low: {
     label: "Low",
-    emoji: "🟢",
+    icon: Circle,
+    iconClass: "text-green-500 fill-green-500",
     cssVar: "var(--ilp-priority-low)",
     cssVarFg: "var(--ilp-priority-low-fg)",
   },
@@ -121,47 +161,47 @@ export const ILP_PRIORITY_CONFIG: Record<IlpGoalPriority, IlpPriorityConfig> = {
 
 export interface DomainConfig {
   label: string;
-  emoji: string;
+  icon: LucideIcon;
 }
 
 export const DEVELOPMENTAL_DOMAIN_CONFIG: Record<
   IlpDevelopmentalDomain,
   DomainConfig
 > = {
-  communication: { label: "Communication", emoji: "💬" },
-  social_emotional: { label: "Social & Emotional", emoji: "🤝" },
-  cognitive: { label: "Cognitive", emoji: "🧠" },
-  physical: { label: "Physical", emoji: "🏃" },
-  self_help: { label: "Self-Help / Daily Living", emoji: "🪥" },
-  play: { label: "Play", emoji: "🧩" },
-  behaviour: { label: "Behaviour", emoji: "🎯" },
-  sensory: { label: "Sensory Processing", emoji: "👁" },
-  fine_motor: { label: "Fine Motor", emoji: "✏" },
-  gross_motor: { label: "Gross Motor", emoji: "⚽" },
-  literacy: { label: "Literacy", emoji: "📖" },
-  numeracy: { label: "Numeracy", emoji: "🔢" },
-  other: { label: "Other", emoji: "📋" },
+  communication: { label: "Communication", icon: MessageSquare },
+  social_emotional: { label: "Social & Emotional", icon: Handshake },
+  cognitive: { label: "Cognitive", icon: Brain },
+  physical: { label: "Physical", icon: Footprints },
+  self_help: { label: "Self-Help / Daily Living", icon: Bath },
+  play: { label: "Play", icon: Puzzle },
+  behaviour: { label: "Behaviour", icon: Target },
+  sensory: { label: "Sensory Processing", icon: Eye },
+  fine_motor: { label: "Fine Motor", icon: Pencil },
+  gross_motor: { label: "Gross Motor", icon: Activity },
+  literacy: { label: "Literacy", icon: BookOpen },
+  numeracy: { label: "Numeracy", icon: Calculator },
+  other: { label: "Other", icon: ClipboardList },
 };
 
 // ── Support Categories ───────────────────────────────────────
 
 export const SUPPORT_CATEGORY_CONFIG: Record<
   IlpSupportCategory,
-  { label: string; emoji: string }
+  { label: string; icon: LucideIcon }
 > = {
-  speech_language: { label: "Speech & Language", emoji: "🗣" },
-  occupational_therapy: { label: "Occupational Therapy", emoji: "🤲" },
-  physiotherapy: { label: "Physiotherapy", emoji: "🦿" },
-  behavioural: { label: "Behavioural Support", emoji: "🎯" },
-  autism_spectrum: { label: "Autism Spectrum", emoji: "🧩" },
-  intellectual: { label: "Intellectual", emoji: "📚" },
-  sensory: { label: "Sensory", emoji: "👁" },
-  physical: { label: "Physical", emoji: "♿" },
-  medical: { label: "Medical", emoji: "🏥" },
-  gifted: { label: "Gifted & Talented", emoji: "⭐" },
-  english_additional_language: { label: "EAL/D", emoji: "🌏" },
-  social_emotional: { label: "Social-Emotional", emoji: "💛" },
-  other: { label: "Other", emoji: "📝" },
+  speech_language: { label: "Speech & Language", icon: Speech },
+  occupational_therapy: { label: "Occupational Therapy", icon: HandHelping },
+  physiotherapy: { label: "Physiotherapy", icon: Bone },
+  behavioural: { label: "Behavioural Support", icon: Target },
+  autism_spectrum: { label: "Autism Spectrum", icon: Puzzle },
+  intellectual: { label: "Intellectual", icon: BookOpen },
+  sensory: { label: "Sensory", icon: Eye },
+  physical: { label: "Physical", icon: Accessibility },
+  medical: { label: "Medical", icon: Stethoscope },
+  gifted: { label: "Gifted & Talented", icon: Star },
+  english_additional_language: { label: "EAL/D", icon: Globe },
+  social_emotional: { label: "Social-Emotional", icon: Heart },
+  other: { label: "Other", icon: SquarePen },
 };
 
 // ── Funding Sources ──────────────────────────────────────────
@@ -218,13 +258,13 @@ export const STRATEGY_TYPE_CONFIG: Record<IlpStrategyType, { label: string }> =
 
 export const REVIEW_TYPE_CONFIG: Record<
   IlpReviewType,
-  { label: string; emoji: string }
+  { label: string; icon: LucideIcon }
 > = {
-  scheduled: { label: "Scheduled Review", emoji: "📅" },
-  interim: { label: "Interim Check-in", emoji: "📊" },
-  transition: { label: "Transition Review", emoji: "🎒" },
-  annual: { label: "Annual Review", emoji: "📆" },
-  parent_requested: { label: "Parent-Requested Review", emoji: "👪" },
+  scheduled: { label: "Scheduled Review", icon: Calendar },
+  interim: { label: "Interim Check-in", icon: BarChart3 },
+  transition: { label: "Transition Review", icon: Backpack },
+  annual: { label: "Annual Review", icon: CalendarDays },
+  parent_requested: { label: "Parent-Requested Review", icon: Users },
 };
 
 // ── Progress Ratings ─────────────────────────────────────────
@@ -264,16 +304,16 @@ export const PROGRESS_RATING_CONFIG: Record<
 
 export const EVIDENCE_TYPE_CONFIG: Record<
   IlpEvidenceType,
-  { label: string; emoji: string }
+  { label: string; icon: LucideIcon }
 > = {
-  observation: { label: "Observation", emoji: "📝" },
-  photo: { label: "Photo", emoji: "📸" },
-  document: { label: "Document", emoji: "📄" },
-  assessment_result: { label: "Assessment Result", emoji: "📊" },
-  allied_health_report: { label: "Allied Health Report", emoji: "🏥" },
-  work_sample: { label: "Work Sample", emoji: "🎨" },
-  video: { label: "Video", emoji: "🎬" },
-  other: { label: "Other", emoji: "📎" },
+  observation: { label: "Observation", icon: SquarePen },
+  photo: { label: "Photo", icon: Camera },
+  document: { label: "Document", icon: FileText },
+  assessment_result: { label: "Assessment Result", icon: BarChart3 },
+  allied_health_report: { label: "Allied Health Report", icon: Stethoscope },
+  work_sample: { label: "Work Sample", icon: Palette },
+  video: { label: "Video", icon: Video },
+  other: { label: "Other", icon: Paperclip },
 };
 
 // ── Transition Statement Status ──────────────────────────────

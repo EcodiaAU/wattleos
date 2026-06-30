@@ -20,6 +20,7 @@
 "use client";
 
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
+import { GraduationCap } from "lucide-react";
 import { useState } from "react";
 
 interface InviteAcceptClientProps {
@@ -84,7 +85,7 @@ export function InviteAcceptClient({
   return (
     <div className="w-full max-w-md">
       <div className="rounded-lg border border-border bg-card p-8 text-center shadow-sm">
-        <div className="mb-4 text-4xl">🎓</div>
+        <GraduationCap className="mx-auto mb-4 h-10 w-10 text-foreground" aria-hidden />
         <h2 className="text-xl font-bold text-foreground">
           You&apos;re Invited!
         </h2>

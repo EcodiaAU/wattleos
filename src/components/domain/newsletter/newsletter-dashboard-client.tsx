@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useState, useTransition } from "react";
+import { Newspaper } from "lucide-react";
 import type { NewsletterDashboardData } from "@/types/domain";
 import { createNewsletter } from "@/lib/actions/comms/newsletter";
 import { useHaptics } from "@/lib/hooks/use-haptics";
@@ -160,12 +161,11 @@ export function NewsletterDashboardClient({
         </div>
         {recent_newsletters.length === 0 ? (
           <div className="rounded-lg border border-border p-8 text-center">
-            <p
-              className="text-3xl"
+            <Newspaper
+              className="mx-auto h-10 w-10"
               style={{ color: "var(--empty-state-icon)" }}
-            >
-              📰
-            </p>
+              aria-hidden
+            />
             <p
               className="mt-2 text-sm"
               style={{ color: "var(--muted-foreground)" }}

@@ -4,6 +4,7 @@
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { X } from "lucide-react";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import type {
   GrantWithDetails,
@@ -638,6 +639,7 @@ function MilestonesTab({
                 <button
                   onClick={() => handleDelete(m.id)}
                   disabled={isPending}
+                  aria-label="Delete milestone"
                   style={{
                     padding: "0.3rem 0.5rem",
                     borderRadius: "var(--radius)",
@@ -648,7 +650,7 @@ function MilestonesTab({
                     cursor: "pointer",
                   }}
                 >
-                  ✕
+                  <X className="h-3.5 w-3.5" aria-hidden />
                 </button>
               )}
             </div>
@@ -960,6 +962,7 @@ function ExpendituresTab({
                         <button
                           onClick={() => handleDelete(ex.id)}
                           disabled={isPending}
+                          aria-label="Delete expenditure"
                           style={{
                             padding: "0.2rem 0.4rem",
                             background: "transparent",
@@ -969,7 +972,7 @@ function ExpendituresTab({
                             cursor: "pointer",
                           }}
                         >
-                          ✕
+                          <X className="h-3.5 w-3.5" aria-hidden />
                         </button>
                       )}
                     </td>

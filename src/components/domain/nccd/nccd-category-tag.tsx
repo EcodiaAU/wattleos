@@ -2,7 +2,7 @@
 
 // src/components/domain/nccd/nccd-category-tag.tsx
 //
-// Tag showing the NCCD disability category with emoji.
+// Tag showing the NCCD disability category with icon.
 
 import { NCCD_CATEGORY_CONFIG } from "@/lib/constants/nccd";
 import type { NccdDisabilityCategory } from "@/types/domain";
@@ -27,7 +27,7 @@ export function NccdCategoryTag({
       }}
       title={config.description}
     >
-      {showEmoji && <span>{config.emoji}</span>}
+      {showEmoji && <config.icon className="h-3.5 w-3.5" aria-hidden />}
       {config.label}
     </span>
   );

@@ -15,6 +15,7 @@
 // buttons at the bottom.
 // ============================================================
 
+import { Check, X } from "lucide-react";
 import { getApplicationDetails } from "@/lib/actions/enroll";
 import type {
   ApplicationCustodyRestriction,
@@ -110,13 +111,27 @@ function Field({
   value,
 }: {
   label: string;
-  value: string | null | undefined;
+  value: React.ReactNode;
 }) {
   return (
     <div>
       <dt className="text-xs font-medium text-muted-foreground">{label}</dt>
       <dd className="mt-0.5 text-sm text-foreground">{value || " - "}</dd>
     </div>
+  );
+}
+
+// Consent yes/no value with leading icon.
+function ConsentValue({ granted, label }: { granted: boolean; label: string }) {
+  return (
+    <span className="inline-flex items-center gap-1">
+      {granted ? (
+        <Check className="h-4 w-4 text-success" aria-hidden />
+      ) : (
+        <X className="h-4 w-4 text-destructive" aria-hidden />
+      )}
+      {label}
+    </span>
   );
 }
 
@@ -409,23 +424,43 @@ export default async function ApplicationDetailPage({
         <dl className="grid grid-cols-2 gap-x-6 gap-y-3 sm:grid-cols-4">
           <Field
             label="Media Consent"
-            value={app.media_consent ? "✓ Granted" : "✗ Declined"}
+            value={
+              <ConsentValue
+                granted={!!app.media_consent}
+                label={app.media_consent ? "Granted" : "Declined"}
+              />
+            }
           />
           <Field
             label="Directory Consent"
-            value={app.directory_consent ? "✓ Granted" : "✗ Declined"}
+            value={
+              <ConsentValue
+                granted={!!app.directory_consent}
+                label={app.directory_consent ? "Granted" : "Declined"}
+              />
+            }
           />
           <Field
             label="Terms Accepted"
             value={
-              app.terms_accepted
-                ? `✓ ${formatDate(app.terms_accepted_at)}`
-                : "✗ Not accepted"
+              <ConsentValue
+                granted={!!app.terms_accepted}
+                label={
+                  app.terms_accepted
+                    ? formatDate(app.terms_accepted_at)
+                    : "Not accepted"
+                }
+              />
             }
           />
           <Field
             label="Privacy Accepted"
-            value={app.privacy_accepted ? "✓ Accepted" : "✗ Not accepted"}
+            value={
+              <ConsentValue
+                granted={!!app.privacy_accepted}
+                label={app.privacy_accepted ? "Accepted" : "Not accepted"}
+              />
+            }
           />
         </dl>
       </SectionCard>

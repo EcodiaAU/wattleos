@@ -13,6 +13,7 @@ export function CareEntryTypeBadge({
   size = "sm",
 }: CareEntryTypeBadgeProps) {
   const cfg = CARE_ENTRY_TYPE_CONFIG[entryType];
+  const Icon = cfg.icon;
 
   return (
     <span
@@ -24,7 +25,7 @@ export function CareEntryTypeBadge({
         color: cfg.cssVarFg,
       }}
     >
-      <span>{cfg.emoji}</span>
+      <Icon className={size === "sm" ? "h-3.5 w-3.5" : "h-4 w-4"} aria-hidden />
       <span>{cfg.label}</span>
     </span>
   );

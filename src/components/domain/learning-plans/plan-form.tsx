@@ -18,7 +18,7 @@ const SUPPORT_CATEGORY_OPTIONS = Object.entries(SUPPORT_CATEGORY_CONFIG).map(
   ([key, cfg]) => ({
     value: key as IlpSupportCategory,
     label: cfg.label,
-    emoji: cfg.emoji,
+    icon: cfg.icon,
   }),
 );
 
@@ -205,6 +205,7 @@ export function PlanForm({ plan, students, onComplete }: PlanFormProps) {
         <div className="flex flex-wrap gap-2">
           {SUPPORT_CATEGORY_OPTIONS.map((opt) => {
             const isSelected = supportCategories.includes(opt.value);
+            const Icon = opt.icon;
             return (
               <button
                 key={opt.value}
@@ -213,7 +214,7 @@ export function PlanForm({ plan, students, onComplete }: PlanFormProps) {
                   haptics.selection();
                   toggleCategory(opt.value);
                 }}
-                className="active-push rounded-full border px-3 py-1.5 text-xs font-medium transition-colors"
+                className="active-push inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition-colors"
                 style={{
                   borderColor: isSelected ? "var(--primary)" : "var(--border)",
                   background: isSelected ? "var(--primary)" : "transparent",
@@ -222,7 +223,7 @@ export function PlanForm({ plan, students, onComplete }: PlanFormProps) {
                     : "var(--foreground)",
                 }}
               >
-                {opt.emoji} {opt.label}
+                <Icon className="h-3.5 w-3.5" aria-hidden /> {opt.label}
               </button>
             );
           })}

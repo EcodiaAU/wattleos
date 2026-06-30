@@ -1,5 +1,6 @@
 "use client";
 
+import { Check } from "lucide-react";
 import type { EmergencyDrill } from "@/types/domain";
 
 interface DrillTimelineProps {
@@ -96,7 +97,7 @@ export function DrillTimeline({ drill }: DrillTimelineProps) {
                     : "var(--muted-foreground)",
               }}
             >
-              {step.done ? "✓" : i + 1}
+              {step.done ? <Check className="h-3.5 w-3.5" aria-hidden /> : i + 1}
             </div>
             <span
               className="text-[10px] font-medium"

@@ -5,24 +5,39 @@
 import Link from "next/link";
 import { useTransition, useState } from "react";
 import { useRouter } from "next/navigation";
+import {
+  Megaphone,
+  MessageSquare,
+  CheckCircle2,
+  Calendar,
+  Siren,
+  Backpack,
+  BarChart3,
+  Receipt,
+  Eye,
+  Bell,
+  X,
+  Trash2,
+  type LucideIcon,
+} from "lucide-react";
 import { sendDispatch, cancelDispatch, deleteDispatch } from "@/lib/actions/push-notifications";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import { DispatchStatusBadge } from "./dispatch-status-badge";
 import type { NotificationDashboardData, NotificationDispatchWithAuthor, NotificationTopic } from "@/types/domain";
 
-const TOPIC_EMOJIS: Record<NotificationTopic, string> = {
-  announcements: "📢",
-  messages: "💬",
-  attendance: "✅",
-  events: "📅",
-  incidents: "🚨",
-  bookings: "🎒",
-  reports: "📊",
-  billing: "🧾",
-  rostering: "📅",
-  observations: "👁",
-  emergency: "🆘",
-  general: "🔔",
+const TOPIC_ICONS: Record<NotificationTopic, LucideIcon> = {
+  announcements: Megaphone,
+  messages: MessageSquare,
+  attendance: CheckCircle2,
+  events: Calendar,
+  incidents: Siren,
+  bookings: Backpack,
+  reports: BarChart3,
+  billing: Receipt,
+  rostering: Calendar,
+  observations: Eye,
+  emergency: Siren,
+  general: Bell,
 };
 
 interface Props {
@@ -121,13 +136,15 @@ export function NotificationsDashboardClient({ data }: Props) {
             Topics sent (last 30 days)
           </h3>
           <div className="flex flex-wrap gap-2">
-            {data.topic_breakdown.map(({ topic, count }) => (
+            {data.topic_breakdown.map(({ topic, count }) => {
+              const TopicIcon = TOPIC_ICONS[topic];
+              return (
               <div
                 key={topic}
                 className="flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium border border-border"
                 style={{ background: "var(--muted)", color: "var(--foreground)" }}
               >
-                <span>{TOPIC_EMOJIS[topic]}</span>
+                <TopicIcon className="h-4 w-4" aria-hidden />
                 <span>{topic}</span>
                 <span
                   className="ml-1 rounded-full px-1.5 py-0.5 text-[10px]"
@@ -136,7 +153,8 @@ export function NotificationsDashboardClient({ data }: Props) {
                   {count}
                 </span>
               </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       )}
@@ -158,7 +176,7 @@ export function NotificationsDashboardClient({ data }: Props) {
 
         {data.recent_dispatches.length === 0 ? (
           <div className="rounded-xl border border-border bg-card py-12 text-center">
-            <p className="text-3xl mb-2">🔔</p>
+            <Bell className="h-10 w-10 mx-auto mb-2" style={{ color: "var(--muted-foreground)" }} aria-hidden />
             <p className="text-sm font-medium" style={{ color: "var(--foreground)" }}>
               No dispatches yet
             </p>
@@ -175,7 +193,10 @@ export function NotificationsDashboardClient({ data }: Props) {
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-start gap-3 min-w-0">
-                    <span className="text-xl shrink-0">{TOPIC_EMOJIS[d.topic]}</span>
+                    {(() => {
+                      const TopicIcon = TOPIC_ICONS[d.topic];
+                      return <TopicIcon className="h-5 w-5 shrink-0" aria-hidden />;
+                    })()}
                     <div className="min-w-0">
                       <p className="font-medium text-sm truncate" style={{ color: "var(--foreground)" }}>
                         {d.title}
@@ -227,8 +248,9 @@ export function NotificationsDashboardClient({ data }: Props) {
                           className="touch-target rounded-lg border border-border px-2 py-1.5 text-xs active-push"
                           style={{ color: "var(--muted-foreground)" }}
                           title="Cancel"
+                          aria-label="Cancel"
                         >
-                          ✕
+                          <X className="h-4 w-4" aria-hidden />
                         </button>
                       </>
                     )}
@@ -240,8 +262,9 @@ export function NotificationsDashboardClient({ data }: Props) {
                         className="touch-target rounded-lg border border-border px-2 py-1.5 text-xs active-push"
                         style={{ color: "var(--muted-foreground)" }}
                         title="Delete"
+                        aria-label="Delete"
                       >
-                        🗑
+                        <Trash2 className="h-4 w-4" aria-hidden />
                       </button>
                     )}
                     {d.status === "sent" && (

@@ -3,6 +3,7 @@
 import { useState, useTransition } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { Flower2 } from "lucide-react";
 import { StudentNormalizationCard } from "./student-normalization-card";
 import { IndicatorBar } from "./indicator-bar";
 import { ALL_INDICATORS, WORK_CYCLE_ENGAGEMENT_CONFIG } from "@/lib/constants/normalization";
@@ -175,7 +176,7 @@ export function NormalizationDashboardClient({
       {/* Student grid */}
       {sorted.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-12 text-center">
-          <div className="text-4xl mb-2" style={{ color: "var(--empty-state-icon)" }}>🧘</div>
+          <Flower2 className="h-12 w-12 mb-2" style={{ color: "var(--empty-state-icon)" }} aria-hidden />
           <p className="text-sm font-medium" style={{ color: "var(--foreground)" }}>
             No students found
           </p>

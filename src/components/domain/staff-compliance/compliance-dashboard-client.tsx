@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
+import { IdCard } from "lucide-react";
 import { GlowTarget } from "@/components/domain/glow/glow-registry";
 import type { ComplianceDashboardData } from "@/lib/actions/staff-compliance";
 import type { StaffComplianceSummary, ComplianceItemStatus } from "@/types/domain";
@@ -156,13 +157,11 @@ export function ComplianceDashboardClient({
       {/* Staff Table */}
       {filtered.length === 0 ? (
         <div className="py-12 text-center">
-          <p
-            className="text-3xl"
+          <IdCard
+            className="mx-auto h-12 w-12"
             style={{ color: "var(--empty-state-icon)" }}
             aria-hidden
-          >
-            🪪
-          </p>
+          />
           <p
             className="mt-2 text-sm"
             style={{ color: "var(--muted-foreground)" }}

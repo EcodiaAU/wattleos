@@ -5,6 +5,7 @@
 // List and manage authorized pickup persons for a student.
 
 import { useState } from "react";
+import { User } from "lucide-react";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import {
   createPickupAuthorization,
@@ -336,8 +337,8 @@ export function PickupAuthorizationList({
               >
                 <div className="min-w-0">
                   <div className="flex items-center gap-2">
-                    <span className="font-medium text-sm" style={{ color: "var(--foreground)" }}>
-                      👤 {auth.authorized_name}
+                    <span className="inline-flex items-center gap-1.5 font-medium text-sm" style={{ color: "var(--foreground)" }}>
+                      <User className="h-4 w-4" aria-hidden /> {auth.authorized_name}
                     </span>
                     {auth.id_verified && (
                       <span

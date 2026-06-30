@@ -12,6 +12,8 @@
 // alongside "what's been achieved" (mastery).
 // ============================================================
 
+import { Camera, Video } from "lucide-react";
+
 import {
   getChildMastery,
   getChildObservations,
@@ -152,9 +154,9 @@ export default async function ChildPortfolioPage({
                         ) : (
                           <div
                             key={m.id}
-                            className="flex h-24 w-24 flex-shrink-0 items-center justify-center rounded-md bg-muted text-xs text-muted-foreground"
+                            className="flex h-24 w-24 flex-shrink-0 items-center justify-center gap-1 rounded-md bg-muted text-xs text-muted-foreground"
                           >
-                            🎥 Video
+                            <Video className="h-4 w-4" aria-hidden /> Video
                           </div>
                         ),
                       )}
@@ -198,8 +200,8 @@ export default async function ChildPortfolioPage({
                     {obs.media.length > 0 && (
                       <>
                         <span>&middot;</span>
-                        <span>
-                          📷 {obs.media.length} photo
+                        <span className="inline-flex items-center gap-1">
+                          <Camera className="h-3.5 w-3.5" aria-hidden /> {obs.media.length} photo
                           {obs.media.length !== 1 ? "s" : ""}
                         </span>
                       </>

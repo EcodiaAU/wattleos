@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import Link from "next/link";
+import { Check } from "lucide-react";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import type { SickBayVisitWithStudent, SickBayVisitStatus, SickBayVisitType } from "@/types/domain";
 import { listSickBayVisits } from "@/lib/actions/sick-bay";
@@ -232,7 +233,9 @@ export function VisitListClient({
                     </td>
                     <td className="px-4 py-3">
                       {visit.parent_notified ? (
-                        <span style={{ color: "var(--primary)" }}>✓ Yes</span>
+                        <span className="inline-flex items-center gap-1" style={{ color: "var(--primary)" }}>
+                          <Check className="h-4 w-4" aria-hidden /> Yes
+                        </span>
                       ) : (
                         <span style={{ color: "var(--muted-foreground)" }}>−</span>
                       )}

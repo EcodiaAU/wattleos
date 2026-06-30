@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { MapPin } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 // ============================================================
@@ -1012,7 +1013,11 @@ export function MarketingFooter() {
             margin: 0,
           }}
         >
-          Made on Gubbi Gubbi country - Sunshine Coast, Australia 🇦🇺
+          Made on Gubbi Gubbi country - Sunshine Coast, Australia{" "}
+          <MapPin
+            aria-hidden
+            style={{ display: "inline", verticalAlign: "-2px", width: 14, height: 14 }}
+          />
         </p>
       </div>
     </footer>

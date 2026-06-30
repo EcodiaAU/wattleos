@@ -7,6 +7,7 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { Check } from "lucide-react";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import {
   upsertCosmicStudyRecord,
@@ -178,8 +179,8 @@ export function CosmicStudyRollClient({ unit, study, participants, canManage, on
                   </span>
                 )}
                 {canManage && (
-                  <span className="text-xs" style={{ color: "var(--muted-foreground)" }}>
-                    {status !== 'completed' ? '→' : '✓'}
+                  <span className="text-xs inline-flex items-center" style={{ color: "var(--muted-foreground)" }}>
+                    {status !== 'completed' ? '→' : <Check className="h-3.5 w-3.5" aria-hidden />}
                   </span>
                 )}
               </div>

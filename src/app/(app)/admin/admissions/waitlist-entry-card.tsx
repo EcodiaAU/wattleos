@@ -20,6 +20,7 @@
 "use client";
 
 import type { WaitlistEntry } from "@/lib/actions/admissions/waitlist-pipeline";
+import { School } from "lucide-react";
 import Link from "next/link";
 
 interface WaitlistEntryCardProps {
@@ -172,8 +173,8 @@ export function WaitlistEntryCard({
         {/* Siblings flag */}
         {entry.siblings_at_school && (
           <div className="mt-1">
-            <span className="text-[10px] text-info">
-              🏫 Sibling at school
+            <span className="inline-flex items-center gap-1 text-[10px] text-info">
+              <School className="h-3 w-3" aria-hidden /> Sibling at school
             </span>
           </div>
         )}

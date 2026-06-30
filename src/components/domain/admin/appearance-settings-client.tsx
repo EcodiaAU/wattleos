@@ -41,6 +41,7 @@ import {
 } from "@/types/display";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState, useTransition } from "react";
+import { Check } from "lucide-react";
 
 // ============================================================
 // Color Utilities
@@ -310,8 +311,8 @@ export function AppearanceSettingsClient({
           </GlowTarget>
 
           {saveStatus === "saved" && (
-            <span className="text-sm text-success animate-fade-in">
-              ✓ Saved successfully
+            <span className="inline-flex items-center gap-1 text-sm text-success animate-fade-in">
+              <Check className="h-4 w-4" aria-hidden /> Saved successfully
             </span>
           )}
           {saveStatus === "error" && (

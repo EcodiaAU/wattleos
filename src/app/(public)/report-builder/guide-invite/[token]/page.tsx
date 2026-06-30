@@ -14,6 +14,13 @@
 // for the account creation form.
 // ============================================================
 
+import {
+  Link as LinkIcon,
+  CheckCircle2,
+  XCircle,
+  AlarmClock,
+  type LucideIcon,
+} from "lucide-react";
 import { createSupabaseAdminClient } from "@/lib/supabase/server";
 import { GuideInviteAcceptClient } from "./guide-invite-accept-client";
 
@@ -46,7 +53,7 @@ export default async function GuideInvitePage({ params }: PageProps) {
   if (!invite || !tenantRow) {
     return (
       <ErrorPage
-        icon="🔗"
+        icon={LinkIcon}
         title="Invalid invitation"
         message="This invitation link is not valid. It may have been revoked or the URL may be incorrect. Please contact the coordinator for a new invitation."
       />
@@ -56,7 +63,7 @@ export default async function GuideInvitePage({ params }: PageProps) {
   if (invite.status === "accepted") {
     return (
       <ErrorPage
-        icon="✓"
+        icon={CheckCircle2}
         title="Already accepted"
         message={`This invitation has already been accepted. Sign in to ${tenantRow.name} to access your reports.`}
         cta={{ label: "Sign in", href: "/report-builder/login" }}
@@ -67,7 +74,7 @@ export default async function GuideInvitePage({ params }: PageProps) {
   if (invite.status !== "pending") {
     return (
       <ErrorPage
-        icon="✕"
+        icon={XCircle}
         title="Invitation no longer valid"
         message="This invitation has been revoked. Please contact your coordinator for a new one."
       />
@@ -77,7 +84,7 @@ export default async function GuideInvitePage({ params }: PageProps) {
   if (new Date(invite.expires_at) < new Date()) {
     return (
       <ErrorPage
-        icon="⏰"
+        icon={AlarmClock}
         title="Invitation expired"
         message={`This invitation has expired. Ask your coordinator at ${tenantRow.name} to send a new one.`}
       />
@@ -127,15 +134,18 @@ function ErrorPage({
   message,
   cta,
 }: {
-  icon: string;
+  icon: LucideIcon;
   title: string;
   message: string;
   cta?: { label: string; href: string };
 }) {
+  const Icon = icon;
   return (
     <div className="flex min-h-screen items-center justify-center px-4">
       <div className="max-w-sm text-center">
-        <div className="mb-4 text-5xl">{icon}</div>
+        <div className="mb-4 flex justify-center text-muted-foreground">
+          <Icon className="h-12 w-12" aria-hidden />
+        </div>
         <h1 className="text-xl font-bold text-foreground">{title}</h1>
         <p className="mt-2 text-sm text-muted-foreground">{message}</p>
         {cta && (

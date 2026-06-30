@@ -10,6 +10,26 @@
 // School Students with Disability (federal obligation).
 // ============================================================
 
+import {
+  Accessibility,
+  BarChart3,
+  BookOpen,
+  Brain,
+  ClipboardList,
+  Ear,
+  Eye,
+  FileText,
+  FolderOpen,
+  Heart,
+  Paperclip,
+  School,
+  SquarePen,
+  Stethoscope,
+  TrendingUp,
+  Users,
+  type LucideIcon,
+} from "lucide-react";
+
 import type {
   NccdAdjustmentLevel,
   NccdAdjustmentType,
@@ -23,41 +43,41 @@ import type {
 
 export const NCCD_CATEGORY_CONFIG: Record<
   NccdDisabilityCategory,
-  { label: string; description: string; emoji: string; cssVar: string }
+  { label: string; description: string; icon: LucideIcon; cssVar: string }
 > = {
   physical: {
     label: "Physical",
     description:
       "Students with permanent or temporary physical disability affecting mobility, self-care, or participation",
-    emoji: "♿",
+    icon: Accessibility,
     cssVar: "var(--nccd-physical)",
   },
   cognitive: {
     label: "Cognitive/Neurological",
     description:
       "Students with cognitive, intellectual, or neurological disability affecting learning and participation",
-    emoji: "🧠",
+    icon: Brain,
     cssVar: "var(--nccd-cognitive)",
   },
   sensory_hearing: {
     label: "Sensory - Hearing",
     description:
       "Students who are Deaf, hard of hearing, or have an auditory processing disability",
-    emoji: "👂",
+    icon: Ear,
     cssVar: "var(--nccd-sensory-hearing)",
   },
   sensory_vision: {
     label: "Sensory - Vision",
     description:
       "Students who are blind, have low vision, or have a visual processing disability",
-    emoji: "👁️",
+    icon: Eye,
     cssVar: "var(--nccd-sensory-vision)",
   },
   social_emotional: {
     label: "Social/Emotional",
     description:
       "Students with social/emotional or mental health disability that affects learning and participation",
-    emoji: "💛",
+    icon: Heart,
     cssVar: "var(--nccd-social-emotional)",
   },
 };
@@ -123,31 +143,31 @@ export const NCCD_LEVEL_CONFIG: Record<
 
 export const NCCD_ADJUSTMENT_TYPE_CONFIG: Record<
   NccdAdjustmentType,
-  { label: string; description: string; emoji: string }
+  { label: string; description: string; icon: LucideIcon }
 > = {
   curriculum: {
     label: "Curriculum",
     description:
       "Adjustments to learning outcomes, content, or complexity; alternative or modified curriculum",
-    emoji: "📚",
+    icon: BookOpen,
   },
   environment: {
     label: "Environmental",
     description:
       "Physical or social environment modifications - seating, lighting, sensory supports, assistive technology",
-    emoji: "🏫",
+    icon: School,
   },
   instruction: {
     label: "Instructional",
     description:
       "Changes to teaching methods, delivery mode, additional time, or differentiated instruction strategies",
-    emoji: "📝",
+    icon: SquarePen,
   },
   assessment: {
     label: "Assessment",
     description:
       "Modified assessment tasks, alternative formats, additional time, or scribe/reader support",
-    emoji: "📋",
+    icon: ClipboardList,
   },
 };
 
@@ -220,20 +240,26 @@ export const NCCD_STATUS_CONFIG: Record<
 
 export const NCCD_EVIDENCE_CONFIG: Record<
   NccdEvidenceType,
-  { label: string; emoji: string }
+  { label: string; icon: LucideIcon }
 > = {
-  professional_report: { label: "Professional Assessment Report", emoji: "🩺" },
-  school_assessment: { label: "School-Based Assessment", emoji: "📊" },
+  professional_report: {
+    label: "Professional Assessment Report",
+    icon: Stethoscope,
+  },
+  school_assessment: { label: "School-Based Assessment", icon: BarChart3 },
   classroom_observation: {
     label: "Classroom Observation Record",
-    emoji: "👁️",
+    icon: Eye,
   },
-  parent_report: { label: "Parent/Family Information", emoji: "👨‍👩‍👧" },
-  medical_certificate: { label: "Medical Certificate/Diagnosis", emoji: "🏥" },
-  ndis_plan: { label: "NDIS Plan", emoji: "📄" },
-  naplan_results: { label: "NAPLAN Results", emoji: "📈" },
-  work_sample: { label: "Work Sample / Portfolio", emoji: "🗂️" },
-  other: { label: "Other Evidence", emoji: "📎" },
+  parent_report: { label: "Parent/Family Information", icon: Users },
+  medical_certificate: {
+    label: "Medical Certificate/Diagnosis",
+    icon: Stethoscope,
+  },
+  ndis_plan: { label: "NDIS Plan", icon: FileText },
+  naplan_results: { label: "NAPLAN Results", icon: TrendingUp },
+  work_sample: { label: "Work Sample / Portfolio", icon: FolderOpen },
+  other: { label: "Other Evidence", icon: Paperclip },
 };
 
 // ── Derived Helpers ───────────────────────────────────────────

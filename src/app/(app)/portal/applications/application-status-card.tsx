@@ -12,6 +12,7 @@
 
 "use client";
 
+import { PartyPopper } from "lucide-react";
 import { withdrawApplication } from "@/lib/actions/enroll";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -124,9 +125,12 @@ export function ApplicationStatusCard({
       {/* Approved message */}
       {application.status === "approved" && (
         <div className="mt-3 rounded-lg border border-success/30 bg-success/10 px-4 py-3">
-          <p className="text-sm text-success">
-            🎉 Enrollment approved! Check your email for an invitation to set up
-            your parent portal access.
+          <p className="flex items-start gap-1.5 text-sm text-success">
+            <PartyPopper className="h-4 w-4 shrink-0 mt-0.5" aria-hidden />
+            <span>
+              Enrollment approved! Check your email for an invitation to set up
+              your parent portal access.
+            </span>
           </p>
         </div>
       )}

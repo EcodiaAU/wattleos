@@ -1,6 +1,7 @@
 "use client";
 
 import type { DailyCareLogWithEntries } from "@/types/domain";
+import type { LucideIcon } from "lucide-react";
 import { CARE_ENTRY_TYPE_CONFIG } from "@/lib/constants/daily-care";
 
 interface ParentCareSummaryProps {
@@ -57,7 +58,7 @@ function formatSleepDuration(totalMinutes: number): string {
 }
 
 interface SummaryItem {
-  emoji: string;
+  icon: LucideIcon;
   label: string;
   value: string;
 }
@@ -77,27 +78,27 @@ export function ParentCareSummary({ log }: ParentCareSummaryProps) {
 
   const summaryItems: SummaryItem[] = [
     {
-      emoji: CARE_ENTRY_TYPE_CONFIG.nappy_change.emoji,
+      icon: CARE_ENTRY_TYPE_CONFIG.nappy_change.icon,
       label: "Nappy changes",
       value: String(nappyCount),
     },
     {
-      emoji: CARE_ENTRY_TYPE_CONFIG.meal.emoji,
+      icon: CARE_ENTRY_TYPE_CONFIG.meal.icon,
       label: "Meals",
       value: String(mealCount),
     },
     {
-      emoji: CARE_ENTRY_TYPE_CONFIG.bottle.emoji,
+      icon: CARE_ENTRY_TYPE_CONFIG.bottle.icon,
       label: "Bottles",
       value: String(bottleCount),
     },
     {
-      emoji: CARE_ENTRY_TYPE_CONFIG.sleep_start.emoji,
+      icon: CARE_ENTRY_TYPE_CONFIG.sleep_start.icon,
       label: "Sleep",
       value: formatSleepDuration(sleepMinutes),
     },
     {
-      emoji: CARE_ENTRY_TYPE_CONFIG.sunscreen.emoji,
+      icon: CARE_ENTRY_TYPE_CONFIG.sunscreen.icon,
       label: "Sunscreen",
       value: `${sunscreenCount} time${sunscreenCount !== 1 ? "s" : ""}`,
     },
@@ -126,13 +127,15 @@ export function ParentCareSummary({ log }: ParentCareSummaryProps) {
 
       {/* Summary counts grid */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-        {summaryItems.map((item) => (
+        {summaryItems.map((item) => {
+          const Icon = item.icon;
+          return (
           <div
             key={item.label}
             className="flex items-center gap-2.5 rounded-[var(--radius-md)] border border-border px-3 py-2.5"
             style={{ background: "var(--background)" }}
           >
-            <span className="text-lg">{item.emoji}</span>
+            <Icon className="h-5 w-5 shrink-0" style={{ color: "var(--muted-foreground)" }} aria-hidden />
             <div>
               <p
                 className="text-sm font-semibold tabular-nums"
@@ -148,7 +151,8 @@ export function ParentCareSummary({ log }: ParentCareSummaryProps) {
               </p>
             </div>
           </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* General notes from educator */}

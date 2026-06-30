@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { Lock } from "lucide-react";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import type { CounsellorCaseNoteWithStudent, Student } from "@/types/domain";
 import {
@@ -88,7 +89,7 @@ export function CaseNoteForm({ students, note, canManage, defaultStudentId }: Ca
       )}
 
       <div className="rounded-lg border p-3 text-sm" style={{ borderColor: "var(--wellbeing-high)", backgroundColor: "var(--wellbeing-high-bg)", color: "var(--foreground)" }}>
-        🔒 These notes are confidential. Only staff with Counsellor or Principal roles can view them.
+        <Lock className="inline h-4 w-4 align-text-bottom" aria-hidden /> These notes are confidential. Only staff with Counsellor or Principal roles can view them.
       </div>
 
       <div className="space-y-1.5">

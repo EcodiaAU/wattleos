@@ -4,6 +4,15 @@
 // Material / Shelf Inventory - Constants
 // ============================================================
 
+import {
+  BookOpen,
+  Brush,
+  Calculator,
+  Globe,
+  Palette,
+  type LucideIcon,
+} from "lucide-react";
+
 import type {
   MaterialCondition,
   MaterialInventoryStatus,
@@ -112,13 +121,13 @@ export const MATERIAL_STATUS_CONFIG: Record<
 
 export const MONTESSORI_AREA_CONFIG: Record<
   MontessoriArea,
-  { label: string; emoji: string; sortOrder: number }
+  { label: string; icon: LucideIcon; sortOrder: number }
 > = {
-  practical_life: { label: "Practical Life", emoji: "🧹", sortOrder: 0 },
-  sensorial: { label: "Sensorial", emoji: "🎨", sortOrder: 1 },
-  language: { label: "Language", emoji: "📖", sortOrder: 2 },
-  mathematics: { label: "Mathematics", emoji: "🔢", sortOrder: 3 },
-  cultural: { label: "Cultural", emoji: "🌍", sortOrder: 4 },
+  practical_life: { label: "Practical Life", icon: Brush, sortOrder: 0 },
+  sensorial: { label: "Sensorial", icon: Palette, sortOrder: 1 },
+  language: { label: "Language", icon: BookOpen, sortOrder: 2 },
+  mathematics: { label: "Mathematics", icon: Calculator, sortOrder: 3 },
+  cultural: { label: "Cultural", icon: Globe, sortOrder: 4 },
 } as const;
 
 // ============================================================

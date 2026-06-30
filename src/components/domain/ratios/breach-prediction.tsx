@@ -5,6 +5,7 @@
 // Buffer card: shows how many educators can leave before a breach occurs.
 // If buffer is 0 it shows a warning; if already breached it shows the shortfall.
 
+import { AlertTriangle, Circle } from "lucide-react";
 import type { RatioBreakdown } from "@/lib/actions/ratios";
 
 interface BreachPredictionProps {
@@ -34,8 +35,6 @@ export function BreachPrediction({ breakdown }: BreachPredictionProps) {
       ? "var(--warning-fg, #92400e)"
       : "var(--attendance-present-fg, #166534)";
 
-  const icon = isBreached ? "🔴" : isWarning ? "⚠️" : "🟢";
-
   const headline = isBreached
     ? `${required_educators - educators_on_floor} educator${required_educators - educators_on_floor !== 1 ? "s" : ""} short`
     : buffer_educators === 0
@@ -64,7 +63,13 @@ export function BreachPrediction({ breakdown }: BreachPredictionProps) {
       </p>
 
       <div className="mt-2 flex items-center gap-2">
-        <span className="text-xl leading-none">{icon}</span>
+        {isBreached ? (
+          <Circle className="h-5 w-5 shrink-0 text-red-500 fill-red-500" aria-hidden />
+        ) : isWarning ? (
+          <AlertTriangle className="h-5 w-5 shrink-0" style={{ color: fgVar }} aria-hidden />
+        ) : (
+          <Circle className="h-5 w-5 shrink-0 text-green-500 fill-green-500" aria-hidden />
+        )}
         <p className="text-sm font-semibold" style={{ color: fgVar }}>
           {headline}
         </p>

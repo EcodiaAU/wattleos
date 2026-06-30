@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { Flower2 } from "lucide-react";
 import type { LessonWorkCycleSession } from "@/types/domain";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import { createLessonWorkCycleSession } from "@/lib/actions/lesson-tracking";
@@ -130,12 +131,11 @@ export function WorkCycleListClient({
       {/* Sessions list */}
       {sessions.length === 0 ? (
         <div className="py-12 text-center">
-          <div
-            className="text-4xl mb-2"
+          <Flower2
+            className="h-10 w-10 mx-auto mb-2"
             style={{ color: "var(--empty-state-icon)" }}
-          >
-            🧘
-          </div>
+            aria-hidden
+          />
           <p
             className="text-sm"
             style={{ color: "var(--muted-foreground)" }}

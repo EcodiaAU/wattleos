@@ -20,6 +20,7 @@ import {
   importJsonTemplate,
   type JsonTemplateImport,
 } from "@/lib/actions/curriculum-content";
+import { Hourglass, FileText } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useCallback, useRef, useState } from "react";
 
@@ -223,8 +224,12 @@ export function JsonTemplateUploader() {
             onChange={handleFileSelect}
             className="sr-only"
           />
-          <div className="text-3xl mb-2">
-            {state.status === "validating" ? "⏳" : "📄"}
+          <div className="mb-2 flex justify-center">
+            {state.status === "validating" ? (
+              <Hourglass className="h-10 w-10" aria-hidden />
+            ) : (
+              <FileText className="h-10 w-10" aria-hidden />
+            )}
           </div>
           <p className="text-sm font-medium">
             {state.status === "validating"
@@ -367,7 +372,9 @@ export function JsonTemplateUploader() {
       {/* Importing */}
       {state.status === "importing" && (
         <div className="rounded-lg border border-border p-8 text-center">
-          <div className="text-3xl mb-2 animate-pulse">⏳</div>
+          <div className="mb-2 flex justify-center animate-pulse">
+            <Hourglass className="h-10 w-10" aria-hidden />
+          </div>
           <p className="text-sm font-medium">Importing template...</p>
           <p className="text-xs text-muted-foreground mt-1">
             Creating nodes and cross-mappings. This may take a moment for large

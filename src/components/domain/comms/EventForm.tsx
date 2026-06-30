@@ -12,6 +12,20 @@ import {
   type SchoolEvent,
 } from "@/lib/actions/comms/school-events";
 import { GlowTarget } from "@/components/domain/glow/glow-registry";
+import {
+  ClipboardList,
+  Bus,
+  Users,
+  Drama,
+  Activity,
+  DollarSign,
+  BookOpen,
+  TreePalm,
+  Home,
+  Backpack,
+  Sparkles,
+  type LucideIcon,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
@@ -20,18 +34,18 @@ interface EventFormProps {
   existing?: SchoolEvent;
 }
 
-const EVENT_TYPES: { value: EventType; label: string; icon: string }[] = [
-  { value: "general", label: "General", icon: "📋" },
-  { value: "excursion", label: "Excursion", icon: "🚌" },
-  { value: "parent_meeting", label: "Parent Meeting", icon: "👥" },
-  { value: "performance", label: "Performance", icon: "🎭" },
-  { value: "sports_day", label: "Sports Day", icon: "⚽" },
-  { value: "fundraiser", label: "Fundraiser", icon: "💰" },
-  { value: "professional_development", label: "PD Day", icon: "📚" },
-  { value: "public_holiday", label: "Public Holiday", icon: "🏖️" },
-  { value: "pupil_free_day", label: "Pupil Free Day", icon: "🏠" },
-  { value: "term_start", label: "Term Start", icon: "🎒" },
-  { value: "term_end", label: "Term End", icon: "🎉" },
+const EVENT_TYPES: { value: EventType; label: string; icon: LucideIcon }[] = [
+  { value: "general", label: "General", icon: ClipboardList },
+  { value: "excursion", label: "Excursion", icon: Bus },
+  { value: "parent_meeting", label: "Parent Meeting", icon: Users },
+  { value: "performance", label: "Performance", icon: Drama },
+  { value: "sports_day", label: "Sports Day", icon: Activity },
+  { value: "fundraiser", label: "Fundraiser", icon: DollarSign },
+  { value: "professional_development", label: "PD Day", icon: BookOpen },
+  { value: "public_holiday", label: "Public Holiday", icon: TreePalm },
+  { value: "pupil_free_day", label: "Pupil Free Day", icon: Home },
+  { value: "term_start", label: "Term Start", icon: Backpack },
+  { value: "term_end", label: "Term End", icon: Sparkles },
 ];
 
 export function EventForm({ classes, existing }: EventFormProps) {
@@ -132,21 +146,24 @@ export function EventForm({ classes, existing }: EventFormProps) {
           Event Type
         </label>
         <div className="mt-2 flex flex-wrap gap-2">
-          {EVENT_TYPES.map((et) => (
-            <button
-              key={et.value}
-              type="button"
-              onClick={() => setEventType(et.value)}
-              className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
-                eventType === et.value
-                  ? "bg-primary/15 text-primary ring-2 ring-primary/30"
-                  : "bg-muted text-muted-foreground hover:bg-muted"
-              }`}
-            >
-              <span>{et.icon}</span>
-              {et.label}
-            </button>
-          ))}
+          {EVENT_TYPES.map((et) => {
+            const Icon = et.icon;
+            return (
+              <button
+                key={et.value}
+                type="button"
+                onClick={() => setEventType(et.value)}
+                className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
+                  eventType === et.value
+                    ? "bg-primary/15 text-primary ring-2 ring-primary/30"
+                    : "bg-muted text-muted-foreground hover:bg-muted"
+                }`}
+              >
+                <Icon className="h-4 w-4" aria-hidden />
+                {et.label}
+              </button>
+            );
+          })}
         </div>
       </div>
 

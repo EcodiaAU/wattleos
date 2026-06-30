@@ -9,6 +9,7 @@ interface PriorityBadgeProps {
 
 export function PriorityBadge({ priority }: PriorityBadgeProps) {
   const cfg = ILP_PRIORITY_CONFIG[priority];
+  const Icon = cfg.icon;
   return (
     <span
       className="inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium"
@@ -17,7 +18,7 @@ export function PriorityBadge({ priority }: PriorityBadgeProps) {
         color: cfg.cssVarFg,
       }}
     >
-      <span>{cfg.emoji}</span>
+      <Icon className={`h-2.5 w-2.5 ${cfg.iconClass}`} aria-hidden />
       {cfg.label}
     </span>
   );

@@ -1,3 +1,4 @@
+import { ClipboardList } from "lucide-react";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { getTenantContext, hasPermission } from "@/lib/auth/tenant-context";
@@ -75,12 +76,11 @@ export default async function ReferralsPage() {
           className="rounded-lg border border-border p-12 text-center"
           style={{ backgroundColor: "var(--card)" }}
         >
-          <div
-            className="mx-auto mb-3 text-4xl"
+          <ClipboardList
+            className="mx-auto mb-3 h-12 w-12"
             style={{ color: "var(--empty-state-icon)" }}
-          >
-            📋
-          </div>
+            aria-hidden
+          />
           <p
             className="text-sm font-medium"
             style={{ color: "var(--foreground)" }}
@@ -98,6 +98,7 @@ export default async function ReferralsPage() {
         <div className="space-y-2">
           {referrals.map((ref) => {
             const specCfg = REFERRAL_SPECIALTY_CONFIG[ref.specialty];
+            const SpecIcon = specCfg?.icon;
             return (
               <Link
                 key={ref.id}
@@ -118,7 +119,13 @@ export default async function ReferralsPage() {
                       className="mt-0.5 text-sm"
                       style={{ color: "var(--muted-foreground)" }}
                     >
-                      {specCfg?.emoji} {specCfg?.label}
+                      {SpecIcon && (
+                        <SpecIcon
+                          className="inline-block h-3.5 w-3.5 align-text-bottom"
+                          aria-hidden
+                        />
+                      )}{" "}
+                      {specCfg?.label}
                       {ref.referred_to_name ? ` - ${ref.referred_to_name}` : ""}
                       {ref.referred_to_organisation
                         ? ` (${ref.referred_to_organisation})`

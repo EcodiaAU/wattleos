@@ -15,6 +15,7 @@
 "use client";
 
 import { useState, useTransition, useOptimistic } from "react";
+import { Users } from "lucide-react";
 import Link from "next/link";
 import {
   suspendStaffMember,
@@ -228,12 +229,11 @@ export function StaffListClient({
       {/* Empty state */}
       {filtered.length === 0 && (
         <div className="rounded-lg border border-border bg-card p-12 text-center">
-          <p
-            className="mx-auto mb-3 text-3xl"
+          <Users
+            className="mx-auto mb-3 h-10 w-10"
             style={{ color: "var(--empty-state-icon)" }}
-          >
-            👥
-          </p>
+            aria-hidden
+          />
           <p className="text-sm font-medium text-foreground">
             {search || statusFilter !== "all" || roleFilter !== "all"
               ? "No staff match your filters"

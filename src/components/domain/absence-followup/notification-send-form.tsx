@@ -3,6 +3,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { Check } from "lucide-react";
 import { sendGuardianNotification } from "@/lib/actions/absence-followup";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import type { AbsenceFollowupAlertWithStudent } from "@/types/domain";
@@ -113,9 +114,14 @@ export function NotificationSendForm({
                   className="text-xs"
                   style={{ color: "var(--muted-foreground)" }}
                 >
-                  {canNotify
-                    ? "Has app account ✓"
-                    : "No app account - push unavailable"}
+                  {canNotify ? (
+                    <>
+                      Has app account{" "}
+                      <Check className="inline h-3 w-3 align-text-bottom" aria-hidden />
+                    </>
+                  ) : (
+                    "No app account - push unavailable"
+                  )}
                   {guardian.phone && ` · ${guardian.phone}`}
                 </p>
               </div>

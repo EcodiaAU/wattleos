@@ -6,6 +6,20 @@
 // Shown in /notifications for any logged-in user.
 
 import { useState, useTransition } from "react";
+import {
+  Megaphone,
+  MessageSquare,
+  CheckCircle2,
+  Calendar,
+  Siren,
+  Backpack,
+  BarChart3,
+  Receipt,
+  Eye,
+  Bell,
+  Check,
+  type LucideIcon,
+} from "lucide-react";
 import { updateMyTopicPrefs } from "@/lib/actions/push-notifications";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import type { NotificationTopicPref, NotificationTopic } from "@/types/domain";
@@ -13,79 +27,79 @@ import type { NotificationTopicPref, NotificationTopic } from "@/types/domain";
 const TOPIC_CONFIG: {
   value: NotificationTopic;
   label: string;
-  emoji: string;
+  icon: LucideIcon;
   description: string;
 }[] = [
   {
     value: "announcements",
     label: "Announcements",
-    emoji: "📢",
+    icon: Megaphone,
     description: "School-wide and class notices from staff",
   },
   {
     value: "messages",
     label: "Messages",
-    emoji: "💬",
+    icon: MessageSquare,
     description: "Direct and class group messages",
   },
   {
     value: "attendance",
     label: "Attendance",
-    emoji: "✅",
+    icon: CheckCircle2,
     description: "Sign-in alerts, absence notifications",
   },
   {
     value: "events",
     label: "Events",
-    emoji: "📅",
+    icon: Calendar,
     description: "Upcoming events, excursions, RSVPs",
   },
   {
     value: "incidents",
     label: "Incidents",
-    emoji: "🚨",
+    icon: Siren,
     description: "Child safety and incident reports",
   },
   {
     value: "bookings",
     label: "Bookings",
-    emoji: "🎒",
+    icon: Backpack,
     description: "Booking confirmations and changes",
   },
   {
     value: "reports",
     label: "Reports",
-    emoji: "📊",
+    icon: BarChart3,
     description: "Learning reports and updates",
   },
   {
     value: "billing",
     label: "Billing",
-    emoji: "🧾",
+    icon: Receipt,
     description: "Invoices, payments, and fee notices",
   },
   {
     value: "observations",
     label: "Observations",
-    emoji: "👁",
+    icon: Eye,
     description: "Published learning observations",
   },
   {
     value: "rostering",
     label: "My Schedule",
-    emoji: "📅",
+    icon: Calendar,
     description: "Shift changes, leave updates",
   },
   {
     value: "emergency",
     label: "Emergency alerts",
-    emoji: "🆘",
+    icon: Siren,
     description: "Critical safety and emergency alerts",
   },
   {
     value: "general",
     label: "General",
-    emoji: "🔔",
+    icon: Bell,
     description: "General service updates",
   },
 ];
@@ -176,7 +190,10 @@ export function TopicPrefsClient({ initialPrefs }: Props) {
               className={`flex items-center justify-between px-4 py-3.5 ${i !== 0 ? "border-t border-border" : ""}`}
             >
               <div className="flex items-start gap-3 min-w-0">
-                <span className="text-xl shrink-0">{t.emoji}</span>
+                {(() => {
+                  const Icon = t.icon;
+                  return <Icon className="h-5 w-5 shrink-0" aria-hidden />;
+                })()}
                 <div>
                   <p
                     className="text-sm font-medium"
@@ -243,7 +260,15 @@ export function TopicPrefsClient({ initialPrefs }: Props) {
             color: "var(--primary-foreground)",
           }}
         >
-          {isPending ? "Saving…" : saved ? "✓ Saved" : "Save Preferences"}
+          {isPending ? (
+            "Saving…"
+          ) : saved ? (
+            <span className="inline-flex items-center gap-1">
+              <Check className="h-4 w-4" aria-hidden /> Saved
+            </span>
+          ) : (
+            "Save Preferences"
+          )}
         </button>
       </div>
     </div>

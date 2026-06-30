@@ -5,6 +5,7 @@ import { GlowTarget } from "@/components/domain/glow/glow-registry";
 import { bulkGenerateReports } from "@/lib/actions/reports";
 import { listStudents } from "@/lib/actions/sis";
 import type { Student } from "@/types/domain";
+import { Ban, Check, XCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -161,19 +162,19 @@ export function GenerateReportsForm({
 
           <div className="mt-6 space-y-3">
             {result.generated > 0 && (
-              <p className="text-success font-semibold">
-                ✓ {result.generated} report{result.generated !== 1 ? "s" : ""} generated
+              <p className="text-success font-semibold inline-flex items-center justify-center gap-1.5">
+                <Check className="h-4 w-4" aria-hidden /> {result.generated} report{result.generated !== 1 ? "s" : ""} generated
               </p>
             )}
             {result.skipped > 0 && (
-              <p className="text-warning font-semibold">
-                ⊘ {result.skipped} skipped (already exist for this term)
+              <p className="text-warning font-semibold inline-flex items-center justify-center gap-1.5">
+                <Ban className="h-4 w-4" aria-hidden /> {result.skipped} skipped (already exist for this term)
               </p>
             )}
             {result.errors.length > 0 && (
               <div className="text-left bg-destructive/5 border border-destructive/10 p-4 rounded-lg mt-4">
-                <p className="font-bold text-destructive text-sm mb-2">
-                  ✕ {result.errors.length} error{result.errors.length !== 1 ? "s" : ""}:
+                <p className="font-bold text-destructive text-sm mb-2 inline-flex items-center gap-1.5">
+                  <XCircle className="h-4 w-4" aria-hidden /> {result.errors.length} error{result.errors.length !== 1 ? "s" : ""}:
                 </p>
                 <ul className="list-inside list-disc text-xs text-destructive/80 space-y-1">
                   {result.errors.slice(0, 5).map((err, i) => (

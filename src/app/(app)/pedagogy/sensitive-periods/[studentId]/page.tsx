@@ -7,6 +7,20 @@
 
 import Link from "next/link";
 import { redirect, notFound } from "next/navigation";
+import {
+  Speech,
+  Ruler,
+  Footprints,
+  Search,
+  Music,
+  Handshake,
+  BookOpen,
+  Pencil,
+  Calculator,
+  Eye,
+  Leaf,
+  type LucideIcon,
+} from "lucide-react";
 
 import { SensitivePeriodForm } from "@/components/domain/lessons/sensitive-period-form";
 import { PeriodCard } from "@/components/domain/sensitive-periods/period-card";
@@ -35,17 +49,17 @@ const PERIOD_LABELS: Record<MontessoriSensitivePeriod, string> = {
   refinement_of_senses: "Refinement of Senses",
 };
 
-const PERIOD_EMOJI: Record<MontessoriSensitivePeriod, string> = {
-  language: "🗣️",
-  order: "📐",
-  movement: "🏃",
-  small_objects: "🔍",
-  music: "🎵",
-  social_behavior: "🤝",
-  reading: "📖",
-  writing: "✏️",
-  mathematics: "🔢",
-  refinement_of_senses: "👁️",
+const PERIOD_ICON: Record<MontessoriSensitivePeriod, LucideIcon> = {
+  language: Speech,
+  order: Ruler,
+  movement: Footprints,
+  small_objects: Search,
+  music: Music,
+  social_behavior: Handshake,
+  reading: BookOpen,
+  writing: Pencil,
+  mathematics: Calculator,
+  refinement_of_senses: Eye,
 };
 
 interface StudentSensitivePageProps {
@@ -247,9 +261,10 @@ export default async function StudentSensitivePeriodsPage({
                 key={period.id}
                 className="flex items-center gap-3 rounded-xl border border-border px-4 py-3 opacity-70"
               >
-                <span className="text-base">
-                  {PERIOD_EMOJI[period.sensitive_period]}
-                </span>
+                {(() => {
+                  const Icon = PERIOD_ICON[period.sensitive_period];
+                  return <Icon className="h-4 w-4" aria-hidden />;
+                })()}
                 <p
                   className="flex-1 text-sm"
                   style={{ color: "var(--foreground)" }}
@@ -285,7 +300,7 @@ export default async function StudentSensitivePeriodsPage({
           className="py-16 text-center"
           style={{ color: "var(--empty-state-icon)" }}
         >
-          <div className="text-4xl">🌿</div>
+          <Leaf className="mx-auto h-10 w-10" aria-hidden />
           <p
             className="mt-3 text-base font-medium"
             style={{ color: "var(--foreground)" }}

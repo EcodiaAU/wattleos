@@ -35,6 +35,7 @@
 // ============================================================
 
 import type { ReactNode } from "react";
+import type { SidebarIconName } from "@/components/domain/sidebar-icon-map";
 
 import { AskWattleProvider } from "@/components/domain/ask-wattle/ask-wattle-provider";
 import { SessionTimeout } from "@/components/domain/auth/session-timeout";
@@ -91,7 +92,7 @@ function inferWattleRole(
 export type SidebarNavItem = {
   label: string;
   href: string;
-  emoji: string;
+  icon: SidebarIconName;
   badge?: number;
 };
 
@@ -186,13 +187,13 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Dashboard",
               href: "/dashboard",
-              emoji: "🏠",
+              icon: "Home",
               visible: true,
             },
             {
               label: "Admin",
               href: "/admin",
-              emoji: "🛡️",
+              icon: "Shield",
               visible:
                 can(Permissions.MANAGE_USERS) ||
                 can(Permissions.MANAGE_TENANT_SETTINGS),
@@ -205,7 +206,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Observations",
               href: "/pedagogy/observations",
-              emoji: "📝",
+              icon: "SquarePen",
               visible:
                 can(Permissions.VIEW_ALL_OBSERVATIONS) ||
                 can(Permissions.CREATE_OBSERVATION) ||
@@ -214,25 +215,25 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Curriculum",
               href: "/pedagogy/curriculum",
-              emoji: "🧩",
+              icon: "Puzzle",
               visible: can(Permissions.MANAGE_CURRICULUM),
             },
             {
               label: "Mastery",
               href: "/pedagogy/mastery",
-              emoji: "⭐",
+              icon: "Star",
               visible: can(Permissions.MANAGE_MASTERY),
             },
             {
               label: "Report Periods",
               href: "/reports/periods",
-              emoji: "📄",
+              icon: "FileText",
               visible: can(Permissions.MANAGE_REPORT_PERIODS),
             },
             {
               label: "My Reports",
               href: "/reports/my-reports",
-              emoji: "📝",
+              icon: "SquarePen",
               visible:
                 can(Permissions.VIEW_REPORT_PERIODS) ||
                 can(Permissions.MANAGE_REPORTS),
@@ -245,7 +246,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Students",
               href: "/students",
-              emoji: "👧",
+              icon: "User",
               visible:
                 can(Permissions.VIEW_STUDENTS) ||
                 can(Permissions.MANAGE_STUDENTS),
@@ -253,7 +254,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Classes",
               href: "/classes",
-              emoji: "🏫",
+              icon: "School",
               visible:
                 can(Permissions.VIEW_CLASSES) ||
                 can(Permissions.MANAGE_CLASSES),
@@ -261,7 +262,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Enrollment",
               href: "/admin/enrollment",
-              emoji: "🧾",
+              icon: "Receipt",
               visible:
                 can(Permissions.MANAGE_ENROLLMENT) ||
                 can(Permissions.MANAGE_ENROLLMENT_PERIODS) ||
@@ -272,7 +273,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Admissions",
               href: "/admin/admissions",
-              emoji: "📥",
+              icon: "Inbox",
               visible:
                 can(Permissions.VIEW_WAITLIST) ||
                 can(Permissions.MANAGE_WAITLIST) ||
@@ -282,7 +283,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Previous Schools",
               href: "/students/previous-schools",
-              emoji: "🏫",
+              icon: "School",
               visible:
                 can(Permissions.VIEW_PREVIOUS_SCHOOL_RECORDS) ||
                 can(Permissions.MANAGE_PREVIOUS_SCHOOL_RECORDS),
@@ -295,7 +296,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Attendance",
               href: "/attendance",
-              emoji: "🗓️",
+              icon: "Calendar",
               visible:
                 can(Permissions.MANAGE_ATTENDANCE) ||
                 can(Permissions.VIEW_ATTENDANCE_REPORTS),
@@ -303,19 +304,19 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Kiosk",
               href: "/attendance/kiosk",
-              emoji: "🚪",
+              icon: "DoorOpen",
               visible: can(Permissions.MANAGE_ATTENDANCE),
             },
             {
               label: "Sign-In/Out Log",
               href: "/attendance/sign-in-out",
-              emoji: "📋",
+              icon: "ClipboardList",
               visible: can(Permissions.MANAGE_ATTENDANCE),
             },
             {
               label: "Programs",
               href: "/admin/programs",
-              emoji: "🎒",
+              icon: "Backpack",
               visible:
                 can(Permissions.MANAGE_PROGRAMS) ||
                 can(Permissions.MANAGE_BOOKINGS) ||
@@ -326,7 +327,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Comms",
               href: "/comms",
-              emoji: "💬",
+              icon: "MessageSquare",
               visible:
                 can(Permissions.SEND_ANNOUNCEMENTS) ||
                 can(Permissions.SEND_CLASS_MESSAGES) ||
@@ -339,7 +340,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Newsletter",
               href: "/comms/newsletters",
-              emoji: "📰",
+              icon: "Newspaper",
               visible:
                 can(Permissions.VIEW_NEWSLETTER) ||
                 can(Permissions.MANAGE_NEWSLETTER),
@@ -347,7 +348,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Push Notifications",
               href: "/admin/notifications",
-              emoji: "🔔",
+              icon: "Bell",
               visible:
                 can(Permissions.MANAGE_PUSH_NOTIFICATIONS) ||
                 can(Permissions.VIEW_NOTIFICATION_ANALYTICS),
@@ -355,7 +356,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "My Schedule",
               href: "/my-schedule",
-              emoji: "🗓️",
+              icon: "Calendar",
               visible:
                 can(Permissions.VIEW_ROSTER) ||
                 can(Permissions.REQUEST_LEAVE) ||
@@ -364,7 +365,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "School Photos",
               href: "/admin/school-photos",
-              emoji: "📸",
+              icon: "Camera",
               visible:
                 can(Permissions.VIEW_SCHOOL_PHOTOS) ||
                 can(Permissions.MANAGE_SCHOOL_PHOTOS),
@@ -372,7 +373,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Dismissal",
               href: "/attendance/dismissal",
-              emoji: "🏃",
+              icon: "Footprints",
               visible:
                 can(Permissions.VIEW_DISMISSAL) ||
                 can(Permissions.MANAGE_DISMISSAL),
@@ -380,7 +381,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Visitor Log",
               href: "/attendance/visitors",
-              emoji: "🪪",
+              icon: "IdCard",
               visible:
                 can(Permissions.VIEW_VISITOR_LOG) ||
                 can(Permissions.MANAGE_VISITOR_LOG),
@@ -388,7 +389,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Contractor Log",
               href: "/attendance/contractors",
-              emoji: "🔧",
+              icon: "Wrench",
               visible:
                 can(Permissions.VIEW_CONTRACTOR_LOG) ||
                 can(Permissions.MANAGE_CONTRACTOR_LOG),
@@ -396,7 +397,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Chronic Absence",
               href: "/attendance/chronic-absence",
-              emoji: "📉",
+              icon: "TrendingDown",
               visible:
                 can(Permissions.VIEW_CHRONIC_ABSENCE) ||
                 can(Permissions.MANAGE_CHRONIC_ABSENCE),
@@ -404,7 +405,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "ACARA Reporting",
               href: "/attendance/acara-reporting",
-              emoji: "📋",
+              icon: "ClipboardList",
               visible:
                 can(Permissions.VIEW_ACARA_REPORTING) ||
                 can(Permissions.MANAGE_ACARA_REPORTING),
@@ -412,7 +413,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Absence Follow-up",
               href: "/attendance/absence-followup",
-              emoji: "📞",
+              icon: "Phone",
               visible:
                 can(Permissions.VIEW_ABSENCE_FOLLOWUP) ||
                 can(Permissions.MANAGE_ABSENCE_FOLLOWUP),
@@ -420,7 +421,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "PT Interviews",
               href: "/interviews",
-              emoji: "🎙️",
+              icon: "Mic",
               visible:
                 can(Permissions.BOOK_INTERVIEW) ||
                 can(Permissions.VIEW_INTERVIEW_SCHEDULE) ||
@@ -434,13 +435,13 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "My Timesheet",
               href: "/timesheets",
-              emoji: "⏱️",
+              icon: "Timer",
               visible: can(Permissions.LOG_TIME),
             },
             {
               label: "Timesheet Approvals",
               href: "/admin/timesheets",
-              emoji: "✅",
+              icon: "CheckCircle2",
               visible:
                 can(Permissions.APPROVE_TIMESHEETS) ||
                 can(Permissions.VIEW_ALL_TIMESHEETS),
@@ -448,7 +449,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Rostering",
               href: "/admin/rostering",
-              emoji: "📅",
+              icon: "Calendar",
               visible:
                 can(Permissions.MANAGE_ROSTER) ||
                 can(Permissions.MANAGE_LEAVE) ||
@@ -457,7 +458,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Payroll Settings",
               href: "/admin/settings/payroll",
-              emoji: "💰",
+              icon: "DollarSign",
               visible: can(Permissions.MANAGE_TENANT_SETTINGS),
             },
           ],
@@ -468,7 +469,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Billing",
               href: "/admin/billing",
-              emoji: "🧾",
+              icon: "Receipt",
               visible:
                 can(Permissions.VIEW_BILLING) ||
                 can(Permissions.MANAGE_BILLING),
@@ -476,7 +477,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Recurring Billing",
               href: "/admin/recurring-billing",
-              emoji: "♻️",
+              icon: "Recycle",
               visible:
                 can(Permissions.VIEW_RECURRING_BILLING) ||
                 can(Permissions.MANAGE_RECURRING_BILLING),
@@ -484,7 +485,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Debt Management",
               href: "/admin/debt",
-              emoji: "💳",
+              icon: "CreditCard",
               visible:
                 can(Permissions.VIEW_DEBT_MANAGEMENT) ||
                 can(Permissions.MANAGE_DEBT_MANAGEMENT),
@@ -492,7 +493,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Grant Tracking",
               href: "/admin/grant-tracking",
-              emoji: "🏦",
+              icon: "Landmark",
               visible:
                 can(Permissions.VIEW_GRANT_TRACKING) ||
                 can(Permissions.MANAGE_GRANT_TRACKING),
@@ -500,7 +501,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Fee Notices",
               href: "/admin/fee-notice-comms",
-              emoji: "📨",
+              icon: "Mail",
               visible:
                 can(Permissions.VIEW_FEE_NOTICE_COMMS) ||
                 can(Permissions.MANAGE_FEE_NOTICE_COMMS),
@@ -508,7 +509,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Tuckshop",
               href: "/admin/tuckshop",
-              emoji: "🥪",
+              icon: "Sandwich",
               visible: can(Permissions.MANAGE_TUCKSHOP),
             },
           ],
@@ -519,7 +520,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Incidents",
               href: "/incidents",
-              emoji: "🚨",
+              icon: "Siren",
               visible:
                 can(Permissions.CREATE_INCIDENT) ||
                 can(Permissions.VIEW_INCIDENTS),
@@ -527,7 +528,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Medication",
               href: "/medication",
-              emoji: "💊",
+              icon: "Pill",
               visible:
                 can(Permissions.VIEW_MEDICATION_RECORDS) ||
                 can(Permissions.ADMINISTER_MEDICATION) ||
@@ -536,7 +537,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Daily Care Log",
               href: "/admin/daily-care-log",
-              emoji: "🍼",
+              icon: "Baby",
               visible:
                 can(Permissions.VIEW_DAILY_CARE_LOGS) ||
                 can(Permissions.MANAGE_DAILY_CARE_LOGS),
@@ -544,7 +545,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Sick Bay",
               href: "/admin/sick-bay",
-              emoji: "🩹",
+              icon: "Bandage",
               visible:
                 can(Permissions.VIEW_SICK_BAY) ||
                 can(Permissions.MANAGE_SICK_BAY),
@@ -552,7 +553,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Excursions",
               href: "/excursions",
-              emoji: "🚌",
+              icon: "Bus",
               visible:
                 can(Permissions.MANAGE_EXCURSIONS) ||
                 can(Permissions.VIEW_EXCURSIONS),
@@ -560,7 +561,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Volunteers",
               href: "/admin/volunteers",
-              emoji: "🙋",
+              icon: "Hand",
               visible:
                 can(Permissions.VIEW_VOLUNTEERS) ||
                 can(Permissions.MANAGE_VOLUNTEERS),
@@ -568,7 +569,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Staff Compliance",
               href: "/admin/staff-compliance",
-              emoji: "🪪",
+              icon: "IdCard",
               visible:
                 can(Permissions.VIEW_STAFF_COMPLIANCE) ||
                 can(Permissions.MANAGE_STAFF_COMPLIANCE),
@@ -576,7 +577,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Ratios",
               href: "/admin/ratios",
-              emoji: "👥",
+              icon: "Users",
               visible:
                 can(Permissions.VIEW_RATIOS) ||
                 can(Permissions.MANAGE_FLOOR_SIGNIN),
@@ -584,13 +585,13 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "QIP",
               href: "/admin/qip",
-              emoji: "📊",
+              icon: "BarChart3",
               visible: can(Permissions.VIEW_QIP) || can(Permissions.MANAGE_QIP),
             },
             {
               label: "Immunisation",
               href: "/admin/immunisation",
-              emoji: "💉",
+              icon: "Syringe",
               visible:
                 can(Permissions.VIEW_IMMUNISATION) ||
                 can(Permissions.MANAGE_IMMUNISATION),
@@ -598,7 +599,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "CCS Reports",
               href: "/admin/ccs",
-              emoji: "📑",
+              icon: "Files",
               visible:
                 can(Permissions.VIEW_CCS_REPORTS) ||
                 can(Permissions.MANAGE_CCS_REPORTS),
@@ -606,7 +607,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Policies",
               href: "/admin/policies",
-              emoji: "📋",
+              icon: "ClipboardList",
               visible:
                 can(Permissions.MANAGE_POLICIES) ||
                 can(Permissions.VIEW_COMPLAINTS) ||
@@ -615,7 +616,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Emergency Drills",
               href: "/admin/emergency-drills",
-              emoji: "🔔",
+              icon: "Bell",
               visible:
                 can(Permissions.VIEW_EMERGENCY_DRILLS) ||
                 can(Permissions.MANAGE_EMERGENCY_DRILLS),
@@ -623,7 +624,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Emergency Live",
               href: "/admin/emergency-coordination",
-              emoji: "🆘",
+              icon: "LifeBuoy",
               visible:
                 can(Permissions.VIEW_EMERGENCY_COORDINATION) ||
                 can(Permissions.COORDINATE_EMERGENCY) ||
@@ -632,7 +633,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Lessons",
               href: "/pedagogy/lessons",
-              emoji: "🔤",
+              icon: "Languages",
               visible:
                 can(Permissions.VIEW_LESSON_RECORDS) ||
                 can(Permissions.MANAGE_LESSON_RECORDS),
@@ -640,7 +641,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "3P Lessons",
               href: "/pedagogy/three-period-lessons",
-              emoji: "🔢",
+              icon: "Calculator",
               visible:
                 can(Permissions.VIEW_LESSON_RECORDS) ||
                 can(Permissions.MANAGE_LESSON_RECORDS),
@@ -648,7 +649,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Sensitive Periods",
               href: "/pedagogy/sensitive-periods",
-              emoji: "🌿",
+              icon: "Leaf",
               visible:
                 can(Permissions.VIEW_LESSON_RECORDS) ||
                 can(Permissions.MANAGE_LESSON_RECORDS),
@@ -656,7 +657,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Normalization",
               href: "/pedagogy/normalization",
-              emoji: "🧘",
+              icon: "Flower2",
               visible:
                 can(Permissions.VIEW_NORMALIZATION) ||
                 can(Permissions.MANAGE_NORMALIZATION),
@@ -664,7 +665,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Work Cycles",
               href: "/pedagogy/work-cycles",
-              emoji: "⏱️",
+              icon: "Timer",
               visible:
                 can(Permissions.VIEW_WORK_CYCLES) ||
                 can(Permissions.MANAGE_WORK_CYCLES),
@@ -672,7 +673,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Materials",
               href: "/pedagogy/materials",
-              emoji: "🪵",
+              icon: "Logs",
               visible:
                 can(Permissions.VIEW_MATERIAL_INVENTORY) ||
                 can(Permissions.MANAGE_MATERIAL_INVENTORY),
@@ -680,7 +681,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Environment",
               href: "/pedagogy/environment-planner",
-              emoji: "🌿",
+              icon: "Leaf",
               visible:
                 can(Permissions.VIEW_ENVIRONMENT_PLANNER) ||
                 can(Permissions.MANAGE_ENVIRONMENT_PLANNER),
@@ -688,7 +689,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "3yr Cycle",
               href: "/pedagogy/three-year-cycle",
-              emoji: "🔁",
+              icon: "Repeat",
               visible:
                 can(Permissions.VIEW_LESSON_RECORDS) ||
                 can(Permissions.MANAGE_LESSON_RECORDS),
@@ -696,14 +697,14 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "MQ:AP",
               href: "/admin/mqap",
-              emoji: "🎓",
+              icon: "GraduationCap",
               visible:
                 can(Permissions.VIEW_MQAP) || can(Permissions.MANAGE_MQAP),
             },
             {
               label: "Accreditation",
               href: "/pedagogy/accreditation",
-              emoji: "🏅",
+              icon: "Medal",
               visible:
                 can(Permissions.VIEW_ACCREDITATION) ||
                 can(Permissions.MANAGE_ACCREDITATION),
@@ -711,7 +712,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Cosmic Education",
               href: "/pedagogy/cosmic-education",
-              emoji: "🌌",
+              icon: "Sparkles",
               visible:
                 can(Permissions.VIEW_COSMIC_EDUCATION) ||
                 can(Permissions.MANAGE_COSMIC_EDUCATION),
@@ -719,7 +720,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Montessori Hub",
               href: "/pedagogy/montessori-hub",
-              emoji: "📖",
+              icon: "BookOpen",
               visible:
                 can(Permissions.VIEW_MONTESSORI_HUB) ||
                 can(Permissions.MANAGE_MONTESSORI_HUB),
@@ -727,20 +728,20 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Learning Plans",
               href: "/admin/learning-plans",
-              emoji: "🌱",
+              icon: "Sprout",
               visible: can(Permissions.VIEW_ILP) || can(Permissions.MANAGE_ILP),
             },
             {
               label: "NCCD Register",
               href: "/admin/nccd",
-              emoji: "♿",
+              icon: "Accessibility",
               visible:
                 can(Permissions.VIEW_NCCD) || can(Permissions.MANAGE_NCCD),
             },
             {
               label: "Wellbeing",
               href: "/admin/wellbeing",
-              emoji: "💚",
+              icon: "Heart",
               visible:
                 can(Permissions.VIEW_WELLBEING) ||
                 can(Permissions.MANAGE_WELLBEING),
@@ -748,20 +749,20 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Interview Sessions",
               href: "/admin/interviews",
-              emoji: "🎙️",
+              icon: "Mic",
               visible: can(Permissions.MANAGE_INTERVIEW_SESSIONS),
             },
             {
               label: "NAPLAN",
               href: "/admin/naplan",
-              emoji: "📝",
+              icon: "SquarePen",
               visible:
                 can(Permissions.VIEW_NAPLAN) || can(Permissions.MANAGE_NAPLAN),
             },
             {
               label: "SMS Gateway",
               href: "/admin/sms-gateway",
-              emoji: "📲",
+              icon: "Phone",
               visible:
                 can(Permissions.VIEW_SMS_GATEWAY) ||
                 can(Permissions.MANAGE_SMS_GATEWAY),
@@ -774,19 +775,19 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Content Library",
               href: "/pedagogy/content-library",
-              emoji: "📚",
+              icon: "Library",
               visible: can(Permissions.MANAGE_CURRICULUM_TEMPLATES),
             },
             {
               label: "Cross-mappings",
               href: "/pedagogy/content-library/cross-mappings",
-              emoji: "🧠",
+              icon: "Brain",
               visible: can(Permissions.MANAGE_CROSS_MAPPINGS),
             },
             {
               label: "Compliance Reports",
               href: "/admin/compliance",
-              emoji: "✅",
+              icon: "CheckCircle2",
               visible: can(Permissions.VIEW_COMPLIANCE_REPORTS),
             },
           ],
@@ -797,7 +798,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Notification Prefs",
               href: "/settings/notifications",
-              emoji: "🔔",
+              icon: "Bell",
               visible: true,
             },
           ],
@@ -813,13 +814,13 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Dashboard",
               href: "/dashboard",
-              emoji: "🏠",
+              icon: "Home",
               visible: true,
             },
             {
               label: "My Children",
               href: "/parent",
-              emoji: "💛",
+              icon: "Heart",
               visible: true,
             },
           ],
@@ -830,32 +831,32 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Announcements",
               href: "/parent/announcements",
-              emoji: "📢",
+              icon: "Megaphone",
               visible: true,
               badge: totalUnreadComms > 0 ? totalUnreadComms : undefined,
             },
             {
               label: "Messages",
               href: "/parent/messages",
-              emoji: "💬",
+              icon: "MessageSquare",
               visible: true,
             },
             {
               label: "Events",
               href: "/parent/events",
-              emoji: "✨",
+              icon: "Sparkles",
               visible: true,
             },
             {
               label: "Newsletter",
               href: "/parent/newsletters",
-              emoji: "📰",
+              icon: "Newspaper",
               visible: true,
             },
             {
               label: "Tuckshop",
               href: "/parent-portal/tuckshop",
-              emoji: "🥪",
+              icon: "Sandwich",
               visible: can(Permissions.PLACE_TUCKSHOP_ORDER),
             },
           ],
@@ -866,13 +867,13 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Invoices",
               href: "/parent/billing",
-              emoji: "🧾",
+              icon: "Receipt",
               visible: true,
             },
             {
               label: "Direct Debit",
               href: "/parent/recurring-billing",
-              emoji: "♻️",
+              icon: "Recycle",
               visible: true,
             },
           ],
@@ -883,7 +884,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             {
               label: "Notifications",
               href: "/settings/notifications",
-              emoji: "🔔",
+              icon: "Bell",
               visible: true,
             },
           ],
@@ -907,7 +908,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
       : [
           {
             label: "Home",
-            items: [{ label: "Dashboard", href: "/dashboard", emoji: "🏠" }],
+            items: [{ label: "Dashboard", href: "/dashboard", icon: "Home" }],
           },
         ];
 
@@ -919,11 +920,11 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
   // always room for the "More" tab at position 5.
   const rawMobileTabs: Array<MobileTabItem & { visible: boolean }> = isStaff
     ? [
-        { label: "Dashboard", href: "/dashboard", emoji: "🏠", visible: true },
+        { label: "Dashboard", href: "/dashboard", icon: "Home", visible: true },
         {
           label: "Observations",
           href: "/pedagogy/observations",
-          emoji: "📝",
+          icon: "SquarePen",
           visible:
             can(Permissions.CREATE_OBSERVATION) ||
             can(Permissions.VIEW_ALL_OBSERVATIONS),
@@ -931,7 +932,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
         {
           label: "Attendance",
           href: "/attendance",
-          emoji: "🗓️",
+          icon: "Calendar",
           visible:
             can(Permissions.MANAGE_ATTENDANCE) ||
             can(Permissions.VIEW_ATTENDANCE_REPORTS),
@@ -939,7 +940,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
         {
           label: "Comms",
           href: "/comms",
-          emoji: "💬",
+          icon: "MessageSquare",
           visible:
             can(Permissions.SEND_ANNOUNCEMENTS) ||
             can(Permissions.SEND_CLASS_MESSAGES) ||
@@ -948,19 +949,19 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
         },
       ]
     : [
-        { label: "Home", href: "/dashboard", emoji: "🏠", visible: true },
-        { label: "My Children", href: "/parent", emoji: "💛", visible: true },
+        { label: "Home", href: "/dashboard", icon: "Home", visible: true },
+        { label: "My Children", href: "/parent", icon: "Heart", visible: true },
         {
           label: "Announcements",
           href: "/parent/announcements",
-          emoji: "📢",
+          icon: "Megaphone",
           visible: true,
           badge: totalUnreadComms > 0 ? totalUnreadComms : undefined,
         },
         {
           label: "Messages",
           href: "/parent/messages",
-          emoji: "💬",
+          icon: "MessageSquare",
           visible: true,
         },
       ];

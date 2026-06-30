@@ -13,6 +13,21 @@
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import {
+  Speech,
+  Ruler,
+  Footprints,
+  Search,
+  Music,
+  Handshake,
+  BookOpen,
+  Pencil,
+  Calculator,
+  Eye,
+  Circle,
+  X,
+  type LucideIcon,
+} from "lucide-react";
+import {
   addMaterialToSensitivePeriod,
   removeMaterialFromSensitivePeriod,
 } from "@/lib/actions/three-period-lessons";
@@ -38,17 +53,17 @@ const PERIOD_LABELS: Record<MontessoriSensitivePeriod, string> = {
   refinement_of_senses: "Refinement of Senses",
 };
 
-const PERIOD_EMOJI: Record<MontessoriSensitivePeriod, string> = {
-  language: "🗣️",
-  order: "📐",
-  movement: "🏃",
-  small_objects: "🔍",
-  music: "🎵",
-  social_behavior: "🤝",
-  reading: "📖",
-  writing: "✏️",
-  mathematics: "🔢",
-  refinement_of_senses: "👁️",
+const PERIOD_ICON: Record<MontessoriSensitivePeriod, LucideIcon> = {
+  language: Speech,
+  order: Ruler,
+  movement: Footprints,
+  small_objects: Search,
+  music: Music,
+  social_behavior: Handshake,
+  reading: BookOpen,
+  writing: Pencil,
+  mathematics: Calculator,
+  refinement_of_senses: Eye,
 };
 
 const INTENSITY_STYLES: Record<
@@ -113,19 +128,19 @@ function getPeriodStatus(
 function StatusDot({ status }: { status: "active" | "ending_soon" | "past" }) {
   if (status === "past")
     return (
-      <span className="text-xs" style={{ color: "var(--muted-foreground)" }}>
-        ⚪ Past
+      <span className="inline-flex items-center gap-1 text-xs" style={{ color: "var(--muted-foreground)" }}>
+        <Circle className="h-2.5 w-2.5 fill-current" aria-hidden /> Past
       </span>
     );
   if (status === "ending_soon")
     return (
-      <span className="text-xs" style={{ color: "var(--warning)" }}>
-        🟡 Ending soon
+      <span className="inline-flex items-center gap-1 text-xs" style={{ color: "var(--warning)" }}>
+        <Circle className="h-2.5 w-2.5 fill-current" aria-hidden /> Ending soon
       </span>
     );
   return (
-    <span className="text-xs" style={{ color: "var(--success)" }}>
-      🟢 Active
+    <span className="inline-flex items-center gap-1 text-xs" style={{ color: "var(--success)" }}>
+      <Circle className="h-2.5 w-2.5 fill-current" aria-hidden /> Active
     </span>
   );
 }
@@ -206,9 +221,10 @@ export function PeriodCard({
       {/* Header row */}
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-3 min-w-0">
-          <span className="text-xl flex-shrink-0">
-            {PERIOD_EMOJI[sensitivePeriod]}
-          </span>
+          {(() => {
+            const PeriodIcon = PERIOD_ICON[sensitivePeriod];
+            return <PeriodIcon className="h-6 w-6 flex-shrink-0" aria-hidden />;
+          })()}
           <div className="min-w-0">
             <p
               className="font-medium truncate"
@@ -308,7 +324,7 @@ export function PeriodCard({
                     style={{ color: "var(--muted-foreground)" }}
                     aria-label={`Remove ${lm.material.name}`}
                   >
-                    ✕
+                    <X className="h-4 w-4" aria-hidden />
                   </button>
                 )}
               </div>

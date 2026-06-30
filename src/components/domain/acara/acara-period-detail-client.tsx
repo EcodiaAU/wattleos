@@ -7,6 +7,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
+import { Check } from "lucide-react";
 
 import { AcaraStatusBadge, AcaraRateBadge } from "./acara-status-badge";
 import {
@@ -188,7 +189,7 @@ export function AcaraPeriodDetailClient({
                   color: "var(--acara-verified-fg)",
                 }}
               >
-                ✓ Verify
+                <Check className="inline h-4 w-4 align-text-bottom" aria-hidden /> Verify
               </button>
             )}
             {(period.status === "verified" || period.status === "draft") &&
@@ -215,7 +216,7 @@ export function AcaraPeriodDetailClient({
                   color: "var(--acara-submitted-fg)",
                 }}
               >
-                ✓ Mark Submitted
+                <Check className="inline h-4 w-4 align-text-bottom" aria-hidden /> Mark Submitted
               </button>
             )}
           </>

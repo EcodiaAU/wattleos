@@ -7,6 +7,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
+import { Check } from "lucide-react";
 import {
   InterruptionSourceBadge,
   InterruptionSeverityBadge,
@@ -163,9 +164,14 @@ export function SessionDetailClient({
             <QualityRatingDisplay rating={session.quality_rating} showLabel />
           </div>
           <p className="text-xs text-muted-foreground mt-1">
-            {session.completed_full_cycle
-              ? "✓ Full cycle sustained"
-              : "Cycle not completed"}
+            {session.completed_full_cycle ? (
+              <span className="inline-flex items-center gap-1">
+                <Check className="h-3.5 w-3.5" aria-hidden />
+                Full cycle sustained
+              </span>
+            ) : (
+              "Cycle not completed"
+            )}
           </p>
         </div>
       </div>

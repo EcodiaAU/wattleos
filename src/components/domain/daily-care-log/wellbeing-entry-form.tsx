@@ -5,6 +5,7 @@ import { useHaptics } from "@/lib/hooks/use-haptics";
 import { addCareEntry } from "@/lib/actions/daily-care";
 import { WELLBEING_MOOD_CONFIG } from "@/lib/constants/daily-care";
 import type { WellbeingMood } from "@/types/domain";
+import type { LucideIcon } from "lucide-react";
 
 interface WellbeingEntryFormProps {
   studentId: string;
@@ -15,7 +16,7 @@ interface WellbeingEntryFormProps {
 
 const MOOD_OPTIONS = Object.entries(WELLBEING_MOOD_CONFIG) as [
   WellbeingMood,
-  { label: string; emoji: string },
+  { label: string; icon: LucideIcon },
 ][];
 
 export function WellbeingEntryForm({
@@ -111,7 +112,9 @@ export function WellbeingEntryForm({
           Mood
         </label>
         <div className="grid grid-cols-5 gap-1.5">
-          {MOOD_OPTIONS.map(([value, cfg]) => (
+          {MOOD_OPTIONS.map(([value, cfg]) => {
+            const MoodIcon = cfg.icon;
+            return (
             <button
               key={value}
               type="button"
@@ -136,12 +139,13 @@ export function WellbeingEntryForm({
                     : "var(--foreground)",
               }}
             >
-              <span className="text-2xl">{cfg.emoji}</span>
+              <MoodIcon className="h-6 w-6" aria-hidden />
               <span className="text-[10px] font-medium leading-tight">
                 {cfg.label}
               </span>
             </button>
-          ))}
+            );
+          })}
         </div>
       </div>
 

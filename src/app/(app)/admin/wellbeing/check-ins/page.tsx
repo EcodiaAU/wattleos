@@ -1,3 +1,4 @@
+import { ClipboardList } from "lucide-react";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { getTenantContext, hasPermission } from "@/lib/auth/tenant-context";
@@ -57,7 +58,7 @@ export default async function CheckInsPage() {
 
       {checkIns.length === 0 ? (
         <div className="rounded-lg border border-border p-12 text-center" style={{ backgroundColor: "var(--card)" }}>
-          <div className="mx-auto mb-3 text-4xl" style={{ color: "var(--empty-state-icon)" }}>📋</div>
+          <ClipboardList className="mx-auto mb-3 h-12 w-12" style={{ color: "var(--empty-state-icon)" }} aria-hidden />
           <p className="text-sm font-medium" style={{ color: "var(--foreground)" }}>No check-ins</p>
           <p className="mt-1 text-xs" style={{ color: "var(--muted-foreground)" }}>
             Scheduled student wellbeing check-ins will appear here.
@@ -88,9 +89,16 @@ export default async function CheckInsPage() {
                     </p>
                   </div>
                   <div className="flex items-center gap-2">
-                    {moodCfg && (
-                      <span title={moodCfg.label} className="text-lg">{moodCfg.emoji}</span>
-                    )}
+                    {moodCfg && (() => {
+                      const MoodIcon = moodCfg.icon;
+                      return (
+                        <MoodIcon
+                          aria-label={moodCfg.label}
+                          className="h-6 w-6"
+                          style={{ color: moodCfg.color }}
+                        />
+                      );
+                    })()}
                     <span
                       className="rounded-full px-2 py-0.5 text-xs font-medium"
                       style={{ backgroundColor: statusCfg.color, color: "#fff" }}

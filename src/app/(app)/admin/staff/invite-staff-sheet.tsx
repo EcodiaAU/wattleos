@@ -11,6 +11,7 @@
 "use client";
 
 import { useRef, useState, useTransition } from "react";
+import { X } from "lucide-react";
 import { inviteStaffMember } from "@/lib/actions/staff-actions";
 import type { RoleWithCounts } from "@/types/domain";
 
@@ -91,7 +92,7 @@ export function InviteStaffSheet({
             className="rounded-md p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground"
             aria-label="Close"
           >
-            ✕
+            <X className="h-4 w-4" aria-hidden />
           </button>
         </div>
 

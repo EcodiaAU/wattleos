@@ -4,6 +4,7 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { Phone } from "lucide-react";
 import { AlertCard } from "./alert-card";
 import { AlertStatusBadge } from "./alert-status-badge";
 import { generateDailyAlerts } from "@/lib/actions/absence-followup";
@@ -179,7 +180,9 @@ export function AbsenceFollowupDashboardClient({
       {/* Alert list */}
       {filtered.length === 0 ? (
         <div className="py-16 text-center space-y-3">
-          <div className="text-4xl" style={{ color: "var(--empty-state-icon)" }}>📞</div>
+          <div className="flex justify-center" style={{ color: "var(--empty-state-icon)" }}>
+            <Phone className="h-10 w-10" aria-hidden />
+          </div>
           <p className="text-sm font-medium">
             {summary.total_today === 0
               ? "No unexplained absences today"

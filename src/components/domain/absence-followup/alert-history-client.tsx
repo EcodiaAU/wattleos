@@ -4,6 +4,7 @@
 
 import { useState, useTransition } from "react";
 import Link from "next/link";
+import { Inbox } from "lucide-react";
 import { AlertStatusBadge } from "./alert-status-badge";
 import { exportAlertHistory, getAlertHistory } from "@/lib/actions/absence-followup";
 import { useHaptics } from "@/lib/hooks/use-haptics";
@@ -170,7 +171,9 @@ export function AlertHistoryClient({
 
       {alerts.length === 0 ? (
         <div className="py-16 text-center space-y-2">
-          <div className="text-4xl" style={{ color: "var(--empty-state-icon)" }}>📭</div>
+          <div className="flex justify-center" style={{ color: "var(--empty-state-icon)" }}>
+            <Inbox className="h-10 w-10" aria-hidden />
+          </div>
           <p className="text-sm font-medium">No alerts match your filters</p>
         </div>
       ) : (

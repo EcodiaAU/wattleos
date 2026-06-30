@@ -9,6 +9,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { Check } from "lucide-react";
 
 import {
   createThreePeriodLesson,
@@ -383,11 +384,15 @@ export function ThreePeriodLessonForm({
                           }
                     }
                   >
-                    {s === "not_started"
-                      ? "Not started"
-                      : s === "completed"
-                        ? "Completed ✓"
-                        : "Needs repeat"}
+                    {s === "not_started" ? (
+                      "Not started"
+                    ) : s === "completed" ? (
+                      <span className="inline-flex items-center gap-1">
+                        Completed <Check className="h-3.5 w-3.5" aria-hidden />
+                      </span>
+                    ) : (
+                      "Needs repeat"
+                    )}
                   </button>
                 ))}
               </div>

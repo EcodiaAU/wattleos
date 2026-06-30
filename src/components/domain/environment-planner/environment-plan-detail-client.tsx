@@ -5,7 +5,7 @@
 import Link from "next/link";
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, Edit2, Trash2, Plus, X, Check } from "lucide-react";
+import { ArrowLeft, Edit2, Trash2, Plus, X, Check, MapPin } from "lucide-react";
 import type {
   EnvironmentPlanWithDetails,
   MaterialInventoryItemWithDetails,
@@ -115,8 +115,8 @@ export function EnvironmentPlanDetailClient({ plan, availableItems, canManage }:
             <p className="text-sm mt-0.5" style={{ color: "var(--text-secondary)" }}>{plan.theme}</p>
           )}
           {plan.location && (
-            <p className="text-sm mt-0.5" style={{ color: "var(--text-tertiary)" }}>
-              📍 {(plan.location as { name: string }).name}
+            <p className="inline-flex items-center gap-1 text-sm mt-0.5" style={{ color: "var(--text-tertiary)" }}>
+              <MapPin className="h-4 w-4" aria-hidden /> {(plan.location as { name: string }).name}
             </p>
           )}
         </div>

@@ -202,8 +202,8 @@ function LoginForm() {
         return;
       }
 
-      // Success: session cookie is set, redirect to callback to resolve tenant
-      window.location.href = "/dashboard";
+      // Success: session cookie is set, go through tenant resolution
+      window.location.href = "/tenant-picker";
     },
     [email, password],
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import type { DailyCareEntryWithRecorder } from "@/types/domain";
+import type { LucideIcon } from "lucide-react";
 import { CareEntryTypeBadge } from "./care-entry-type-badge";
 import {
   CARE_ENTRY_TYPE_CONFIG,
@@ -34,24 +35,31 @@ function formatReapplyTime(iso: string | null): string {
   return formatTime(iso);
 }
 
+interface DetailSummary {
+  /** Optional leading icon (food consumed / wellbeing mood). */
+  icon?: LucideIcon;
+  text: string;
+}
+
 /** Build a short detail summary line based on entry type. */
-function getDetailSummary(entry: DailyCareEntryWithRecorder): string {
+function getDetailSummary(entry: DailyCareEntryWithRecorder): DetailSummary {
   switch (entry.entry_type) {
     case "nappy_change": {
       const type = entry.nappy_type
         ? NAPPY_TYPE_CONFIG[entry.nappy_type].label
         : "Nappy";
       const cream = entry.nappy_cream_applied ? " \u2014 cream applied" : "";
-      return `${type}${cream}`;
+      return { text: `${type}${cream}` };
     }
     case "meal": {
       const meal = entry.meal_type
         ? MEAL_TYPE_CONFIG[entry.meal_type].label
         : "Meal";
-      const consumed = entry.food_consumed
-        ? ` \u2014 ${FOOD_CONSUMED_CONFIG[entry.food_consumed].emoji} ${FOOD_CONSUMED_CONFIG[entry.food_consumed].label}`
-        : "";
-      return `${meal}${consumed}`;
+      if (entry.food_consumed) {
+        const consumed = FOOD_CONSUMED_CONFIG[entry.food_consumed];
+        return { icon: consumed.icon, text: `${meal} \u2014 ${consumed.label}` };
+      }
+      return { text: meal };
     }
     case "bottle": {
       const bType = entry.bottle_type
@@ -59,7 +67,7 @@ function getDetailSummary(entry: DailyCareEntryWithRecorder): string {
         : "Bottle";
       const amount =
         entry.bottle_amount_ml != null ? ` \u2014 ${entry.bottle_amount_ml} ml` : "";
-      return `${bType}${amount}`;
+      return { text: `${bType}${amount}` };
     }
     case "sleep_start": {
       const position = entry.sleep_position
@@ -69,30 +77,33 @@ function getDetailSummary(entry: DailyCareEntryWithRecorder): string {
         ? SLEEP_MANNER_CONFIG[entry.sleep_manner].label
         : "";
       const parts = [position, manner].filter(Boolean);
-      return parts.length > 0 ? parts.join(" \u2014 ") : "Sleep started";
+      return {
+        text: parts.length > 0 ? parts.join(" \u2014 ") : "Sleep started",
+      };
     }
     case "sleep_end":
-      return "Woke up";
+      return { text: "Woke up" };
     case "sunscreen": {
       const spf =
         entry.sunscreen_spf != null ? `SPF ${entry.sunscreen_spf}` : "Sunscreen";
       const reapply = entry.sunscreen_reapply_due
         ? ` \u2014 reapply by ${formatReapplyTime(entry.sunscreen_reapply_due)}`
         : "";
-      return `${spf}${reapply}`;
+      return { text: `${spf}${reapply}` };
     }
     case "wellbeing_note": {
-      const mood = entry.wellbeing_mood
-        ? `${WELLBEING_MOOD_CONFIG[entry.wellbeing_mood].emoji} ${WELLBEING_MOOD_CONFIG[entry.wellbeing_mood].label}`
-        : "Wellbeing";
       const temp =
         entry.wellbeing_temperature != null
           ? ` \u2014 ${entry.wellbeing_temperature}\u00B0C`
           : "";
-      return `${mood}${temp}`;
+      if (entry.wellbeing_mood) {
+        const mood = WELLBEING_MOOD_CONFIG[entry.wellbeing_mood];
+        return { icon: mood.icon, text: `${mood.label}${temp}` };
+      }
+      return { text: `Wellbeing${temp}` };
     }
     default:
-      return "";
+      return { text: "" };
   }
 }
 
@@ -166,6 +177,9 @@ export function CareTimeline({
       <div className="flex flex-col gap-0">
         {sorted.map((entry, idx) => {
           const cfg = CARE_ENTRY_TYPE_CONFIG[entry.entry_type];
+          const Icon = cfg.icon;
+          const summary = getDetailSummary(entry);
+          const SummaryIcon = summary.icon;
           const isLast = idx === sorted.length - 1;
 
           return (
@@ -173,13 +187,13 @@ export function CareTimeline({
               {/* Timeline dot */}
               <div className="relative z-10 flex flex-col items-center">
                 <div
-                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-base"
+                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full"
                   style={{
                     background: cfg.cssVar,
                     color: cfg.cssVarFg,
                   }}
                 >
-                  {cfg.emoji}
+                  <Icon className="h-5 w-5" aria-hidden />
                 </div>
                 {/* Hide tail connector on last item */}
                 {!isLast && <div className="w-px flex-1" />}
@@ -202,10 +216,13 @@ export function CareTimeline({
 
                     {/* Detail summary */}
                     <p
-                      className="mt-0.5 text-sm"
+                      className="mt-0.5 flex items-center gap-1 text-sm"
                       style={{ color: "var(--foreground)" }}
                     >
-                      {getDetailSummary(entry)}
+                      {SummaryIcon && (
+                        <SummaryIcon className="h-4 w-4 shrink-0" aria-hidden />
+                      )}
+                      <span>{summary.text}</span>
                     </p>
 
                     {/* Notes */}

@@ -1,5 +1,6 @@
 // src/components/domain/curriculum-content/template-card.tsx
 import type { EnhancedCurriculumTemplate } from "@/lib/actions/curriculum-content";
+import { Scale } from "lucide-react";
 import Link from "next/link";
 
 interface TemplateCardProps {
@@ -34,7 +35,7 @@ export function TemplateCard({ template }: TemplateCardProps) {
 
         {template.is_compliance_framework && (
           <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-widest bg-primary/15 text-primary border border-primary/30">
-            <span className="text-sm">⚖</span> Compliance
+            <Scale className="h-3.5 w-3.5" aria-hidden /> Compliance
           </span>
         )}
       </div>

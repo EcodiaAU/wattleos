@@ -19,7 +19,6 @@ const REVIEW_TYPE_OPTIONS = Object.entries(REVIEW_TYPE_CONFIG).map(
   ([key, cfg]) => ({
     value: key as IlpReviewType,
     label: cfg.label,
-    emoji: cfg.emoji,
   }),
 );
 
@@ -180,7 +179,7 @@ export function ReviewForm({ planId, goals, onComplete }: ReviewFormProps) {
         >
           {REVIEW_TYPE_OPTIONS.map((opt) => (
             <option key={opt.value} value={opt.value}>
-              {opt.emoji} {opt.label}
+              {opt.label}
             </option>
           ))}
         </select>
@@ -329,6 +328,7 @@ export function ReviewForm({ planId, goals, onComplete }: ReviewFormProps) {
           </label>
           {goals.map((goal) => {
             const domainCfg = DEVELOPMENTAL_DOMAIN_CONFIG[goal.developmental_domain];
+            const DomainIcon = domainCfg.icon;
             const update = goalUpdates[goal.id];
             return (
               <div
@@ -337,7 +337,7 @@ export function ReviewForm({ planId, goals, onComplete }: ReviewFormProps) {
                 style={{ background: "var(--card)" }}
               >
                 <div className="flex items-center gap-2">
-                  <span>{domainCfg.emoji}</span>
+                  <DomainIcon className="h-4 w-4 shrink-0" style={{ color: "var(--muted-foreground)" }} aria-hidden />
                   <p
                     className="text-sm font-medium"
                     style={{ color: "var(--foreground)" }}

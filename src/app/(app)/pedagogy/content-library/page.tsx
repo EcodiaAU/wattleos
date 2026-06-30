@@ -12,6 +12,7 @@
 // lets the heavy data fetch happen on the server.
 // ============================================================
 
+import { Library } from "lucide-react";
 import { TemplateCard } from "@/components/domain/curriculum-content/template-card";
 import { TemplateFilterBar } from "@/components/domain/curriculum-content/template-filter-bar";
 import {
@@ -204,7 +205,7 @@ function EmptyState({
 }) {
   return (
     <div className="rounded-lg border border-dashed border-border p-12 text-center">
-      <div className="text-4xl mb-3">📚</div>
+      <Library className="mx-auto mb-3 h-12 w-12 text-muted-foreground" aria-hidden />
       <h3 className="text-lg font-medium mb-1">
         {hasFilters
           ? "No templates match your filters"

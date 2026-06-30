@@ -5,6 +5,7 @@
 // Historical dismissal records - filterable by student, date range, status
 
 import { useCallback, useEffect, useState } from "react";
+import { ClipboardList, AlertTriangle } from "lucide-react";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import { listDismissalHistory } from "@/lib/actions/dismissal";
 import type { DismissalRecordWithStudent } from "@/types/domain";
@@ -188,12 +189,11 @@ export function DismissalHistoryClient() {
         </div>
       ) : records.length === 0 ? (
         <div className="text-center py-16 space-y-2">
-          <div
-            className="text-4xl"
+          <ClipboardList
+            className="h-10 w-10 mx-auto"
             style={{ color: "var(--empty-state-icon)" }}
-          >
-            📋
-          </div>
+            aria-hidden
+          />
           <p className="font-medium" style={{ color: "var(--foreground)" }}>
             No records found
           </p>
@@ -241,10 +241,10 @@ export function DismissalHistoryClient() {
 
                   {r.status === "exception" && r.exception_reason && (
                     <p
-                      className="text-xs mt-1"
+                      className="inline-flex items-center gap-1 text-xs mt-1"
                       style={{ color: "var(--dismissal-exception)" }}
                     >
-                      ⚠{" "}
+                      <AlertTriangle className="h-3.5 w-3.5 flex-shrink-0" aria-hidden />
                       {EXCEPTION_LABELS[r.exception_reason] ??
                         r.exception_reason}
                       {r.exception_notes && `: ${r.exception_notes}`}

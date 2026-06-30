@@ -10,6 +10,7 @@ import {
 } from "@/lib/actions/programs/session-bookings";
 import { GlowTarget } from "@/components/domain/glow/glow-registry";
 import { formatTime } from "@/lib/constants/programs";
+import { Check, Stethoscope } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
@@ -180,15 +181,15 @@ export function KioskClient({ initialSessions }: KioskClientProps) {
 
                       {booking.has_medical_conditions && (
                         <div className="flex-shrink-0 animate-pulse-soft">
-                          <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--medical-life-threatening)] shadow-danger text-2xl" title={booking.medical_summary ?? "Medical alert"}>
-                            🏥
+                          <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--medical-life-threatening)] shadow-danger text-white" title={booking.medical_summary ?? "Medical alert"}>
+                            <Stethoscope className="h-6 w-6" aria-hidden />
                           </span>
                         </div>
                       )}
 
                       <div className="flex-shrink-0">
                         <div className={`h-10 w-10 rounded-full flex items-center justify-center border-2 ${status.borderColor} ${status.dotColor} text-background font-bold text-xl`}>
-                          {(booking.checked_in_at || isComplete) ? "✓" : ""}
+                          {(booking.checked_in_at || isComplete) ? <Check className="h-6 w-6" aria-hidden /> : null}
                         </div>
                       </div>
                     </button>

@@ -4,6 +4,7 @@
 //
 // Per-dispatch delivery receipt viewer (admin only).
 
+import { Apple, Bot, Globe, Smartphone, type LucideIcon } from "lucide-react";
 import { DeliveryStatusBadge } from "./dispatch-status-badge";
 import type { NotificationDeliveryLog, NotificationDispatch } from "@/types/domain";
 
@@ -12,10 +13,10 @@ interface Props {
   log: NotificationDeliveryLog[];
 }
 
-const PLATFORM_ICONS: Record<string, string> = {
-  ios: "🍎",
-  android: "🤖",
-  web: "🌐",
+const PLATFORM_ICONS: Record<string, LucideIcon> = {
+  ios: Apple,
+  android: Bot,
+  web: Globe,
 };
 
 export function DeliveryLogClient({ dispatch, log }: Props) {
@@ -88,7 +89,15 @@ export function DeliveryLogClient({ dispatch, log }: Props) {
             {log.map((entry) => (
               <div key={entry.id} className="flex items-center justify-between px-4 py-3 gap-3">
                 <div className="flex items-center gap-2 min-w-0">
-                  <span title={entry.platform}>{PLATFORM_ICONS[entry.platform] ?? "📱"}</span>
+                  {(() => {
+                    const PlatformIcon = PLATFORM_ICONS[entry.platform] ?? Smartphone;
+                    return (
+                      <PlatformIcon
+                        className="h-4 w-4 shrink-0"
+                        aria-label={entry.platform}
+                      />
+                    );
+                  })()}
                   <span
                     className="text-xs font-mono truncate"
                     style={{ color: "var(--muted-foreground)" }}

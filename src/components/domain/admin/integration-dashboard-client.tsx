@@ -34,6 +34,7 @@ import {
 } from "@/lib/constants/integrations";
 import type { IntegrationConfig, IntegrationSyncLog } from "@/types/domain";
 import { useState } from "react";
+import { Check, XCircle } from "lucide-react";
 
 interface IntegrationDashboardClientProps {
   existingConfigs: IntegrationConfig[];
@@ -71,6 +72,7 @@ export function IntegrationDashboardClient({
       {INTEGRATION_PROVIDER_LIST.map((provider) => {
         const config = getConfig(provider.key);
         const isExpanded = expandedProvider === provider.key;
+        const Icon = provider.icon;
 
         return (
           <div
@@ -83,9 +85,9 @@ export function IntegrationDashboardClient({
             <div className="flex items-center justify-between px-6 py-4">
               <div className="flex items-center gap-[var(--density-card-padding)]">
                 <span
-                  className={`inline-flex h-[var(--density-button-height)] w-10 items-center justify-center rounded-lg text-lg ${provider.bgColor}`}
+                  className={`inline-flex h-[var(--density-button-height)] w-10 items-center justify-center rounded-lg ${provider.bgColor} ${provider.color}`}
                 >
-                  {provider.icon}
+                  <Icon className="h-5 w-5" aria-hidden />
                 </span>
                 <div>
                   <div className="flex items-center gap-2">
@@ -387,9 +389,13 @@ function IntegrationConfigForm({
           className={`rounded-md p-3 ${testResult.connected ? "bg-success/10" : "bg-destructive/10"}`}
         >
           <p
-            className={`text-sm font-medium ${testResult.connected ? "text-success" : "text-destructive"}`}
+            className={`inline-flex items-center gap-1 text-sm font-medium ${testResult.connected ? "text-success" : "text-destructive"}`}
           >
-            {testResult.connected ? "✓ " : "✗ "}
+            {testResult.connected ? (
+              <Check className="h-4 w-4" aria-hidden />
+            ) : (
+              <XCircle className="h-4 w-4" aria-hidden />
+            )}
             {testResult.message}
           </p>
         </div>

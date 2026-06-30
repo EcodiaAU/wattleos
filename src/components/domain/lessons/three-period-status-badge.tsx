@@ -5,6 +5,8 @@
 // Badge for a single three-period lesson period status.
 // ============================================================
 
+import { Sprout, Zap, Flame, Sunrise, type LucideIcon } from "lucide-react";
+
 import type { ThreePeriodStatus } from "@/types/domain";
 
 const STATUS_CONFIG: Record<
@@ -65,32 +67,32 @@ import type { SensitivePeriodIntensity } from "@/types/domain";
 
 const INTENSITY_CONFIG: Record<
   SensitivePeriodIntensity,
-  { label: string; emoji: string; fgVar: string; bgVar: string; borderVar: string }
+  { label: string; icon: LucideIcon; fgVar: string; bgVar: string; borderVar: string }
 > = {
   emerging: {
     label: "Emerging",
-    emoji: "🌱",
+    icon: Sprout,
     fgVar: "--sp-emerging-fg",
     bgVar: "--sp-emerging-bg",
     borderVar: "--sp-emerging",
   },
   active: {
     label: "Active",
-    emoji: "⚡",
+    icon: Zap,
     fgVar: "--sp-active-fg",
     bgVar: "--sp-active-bg",
     borderVar: "--sp-active",
   },
   peak: {
     label: "Peak",
-    emoji: "🔥",
+    icon: Flame,
     fgVar: "--sp-peak-fg",
     bgVar: "--sp-peak-bg",
     borderVar: "--sp-peak",
   },
   waning: {
     label: "Waning",
-    emoji: "🌅",
+    icon: Sunrise,
     fgVar: "--sp-waning-fg",
     bgVar: "--sp-waning-bg",
     borderVar: "--sp-waning",
@@ -109,6 +111,7 @@ export function SensitivePeriodBadge({
   size = "md",
 }: SensitivePeriodBadgeProps) {
   const cfg = INTENSITY_CONFIG[intensity];
+  const Icon = cfg.icon;
   return (
     <span
       className={
@@ -122,7 +125,7 @@ export function SensitivePeriodBadge({
         border: `1px solid var(${cfg.borderVar})`,
       }}
     >
-      {showEmoji && <span>{cfg.emoji}</span>}
+      {showEmoji && <Icon className="h-3.5 w-3.5" aria-hidden />}
       {cfg.label}
     </span>
   );

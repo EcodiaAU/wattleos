@@ -6,6 +6,8 @@
 // day-specific overrides, plus manage pickup authorizations.
 
 import { useState } from "react";
+import type { LucideIcon } from "lucide-react";
+import { User, Bus, School, Footprints, ClipboardList } from "lucide-react";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import { setStudentDismissalMethod } from "@/lib/actions/dismissal";
 import type {
@@ -17,12 +19,12 @@ import type {
 import { DismissalMethodBadge } from "./dismissal-status-badge";
 import { PickupAuthorizationList } from "./pickup-authorization-list";
 
-const METHOD_OPTIONS: { value: DismissalMethod; label: string; emoji: string }[] = [
-  { value: "parent_pickup", label: "Parent / Guardian pickup", emoji: "👤" },
-  { value: "bus",           label: "Bus",                      emoji: "🚌" },
-  { value: "oshc",          label: "OSHC",                     emoji: "🏫" },
-  { value: "walker",        label: "Walker",                   emoji: "🚶" },
-  { value: "other",         label: "Other",                    emoji: "📋" },
+const METHOD_OPTIONS: { value: DismissalMethod; label: string; icon: LucideIcon }[] = [
+  { value: "parent_pickup", label: "Parent / Guardian pickup", icon: User },
+  { value: "bus",           label: "Bus",                      icon: Bus },
+  { value: "oshc",          label: "OSHC",                     icon: School },
+  { value: "walker",        label: "Walker",                   icon: Footprints },
+  { value: "other",         label: "Other",                    icon: ClipboardList },
 ];
 
 const DAY_CONFIG: { key: string; label: string }[] = [
@@ -184,7 +186,9 @@ export function DismissalSetupClient({
                         Method
                       </label>
                       <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-                        {METHOD_OPTIONS.map((opt) => (
+                        {METHOD_OPTIONS.map((opt) => {
+                          const Icon = opt.icon;
+                          return (
                           <button
                             key={opt.value}
                             type="button"
@@ -208,9 +212,12 @@ export function DismissalSetupClient({
                               setMethod(opt.value);
                             }}
                           >
-                            {opt.emoji} {opt.label}
+                            <span className="inline-flex items-center gap-1.5">
+                              <Icon className="h-4 w-4" aria-hidden /> {opt.label}
+                            </span>
                           </button>
-                        ))}
+                          );
+                        })}
                       </div>
                     </div>
 

@@ -5,6 +5,7 @@
 // Panel for viewing and adding evidence items on an NCCD entry detail page.
 
 import { useState } from "react";
+import { Paperclip, X } from "lucide-react";
 
 import { NCCD_EVIDENCE_CONFIG } from "@/lib/constants/nccd";
 import { addNccdEvidence, deleteNccdEvidence } from "@/lib/actions/nccd";
@@ -117,7 +118,6 @@ export function NccdEvidencePanel({
               {(Object.keys(NCCD_EVIDENCE_CONFIG) as NccdEvidenceType[]).map(
                 (t) => (
                   <option key={t} value={t}>
-                    {NCCD_EVIDENCE_CONFIG[t].emoji}{" "}
                     {NCCD_EVIDENCE_CONFIG[t].label}
                   </option>
                 ),
@@ -179,13 +179,17 @@ export function NccdEvidencePanel({
         <div className="space-y-2">
           {evidence.map((item) => {
             const config = NCCD_EVIDENCE_CONFIG[item.evidence_type];
+            const EvidenceIcon = config.icon;
             return (
               <div
                 key={item.id}
                 className="flex items-start gap-3 rounded-xl border border-border p-3"
                 style={{ background: "var(--card)" }}
               >
-                <span className="text-xl mt-0.5 shrink-0">{config.emoji}</span>
+                <EvidenceIcon
+                  className="h-5 w-5 mt-0.5 shrink-0"
+                  aria-hidden
+                />
                 <div className="flex-1 min-w-0">
                   <p className="text-xs font-medium" style={{ color: "var(--muted-foreground)" }}>
                     {config.label}
@@ -202,7 +206,7 @@ export function NccdEvidencePanel({
                       className="text-xs mt-1 inline-flex items-center gap-1"
                       style={{ color: "var(--primary)" }}
                     >
-                      📎 {item.document_name ?? "View document"}
+                      <Paperclip className="h-3.5 w-3.5" aria-hidden /> {item.document_name ?? "View document"}
                     </a>
                   )}
                 </div>
@@ -213,8 +217,9 @@ export function NccdEvidencePanel({
                     className="touch-target active-push shrink-0 rounded-lg p-1.5 text-sm"
                     style={{ color: "var(--muted-foreground)" }}
                     title="Remove evidence"
+                    aria-label="Remove evidence"
                   >
-                    ✕
+                    <X className="h-4 w-4" />
                   </button>
                 )}
               </div>

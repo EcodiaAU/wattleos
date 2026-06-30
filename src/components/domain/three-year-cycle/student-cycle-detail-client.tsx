@@ -8,6 +8,8 @@
 // and a progress bar per area.
 
 import Link from "next/link";
+import { Brush, Eye, Languages, Calculator, Globe } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import type {
   StudentCycleProfile,
   CycleMaterialProgress,
@@ -31,12 +33,12 @@ const AREA_LABELS: Record<MontessoriArea, string> = {
   cultural: "Cultural",
 };
 
-const AREA_EMOJIS: Record<MontessoriArea, string> = {
-  practical_life: "🧹",
-  sensorial: "👁️",
-  language: "🔤",
-  mathematics: "🔢",
-  cultural: "🌍",
+const AREA_ICONS: Record<MontessoriArea, LucideIcon> = {
+  practical_life: Brush,
+  sensorial: Eye,
+  language: Languages,
+  mathematics: Calculator,
+  cultural: Globe,
 };
 
 const AGE_BAND_LABELS: Record<string, string> = {
@@ -209,14 +211,16 @@ export function StudentCycleDetailClient({
 
       {/* Area summary cards */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-        {profile.area_summaries.map((summary) => (
+        {profile.area_summaries.map((summary) => {
+          const AreaIcon = AREA_ICONS[summary.area];
+          return (
           <div
             key={summary.area}
             className="rounded-lg border border-border p-3 space-y-1.5"
             style={{ background: "var(--background)" }}
           >
             <div className="flex items-center gap-1.5">
-              <span style={{ fontSize: 16 }}>{AREA_EMOJIS[summary.area]}</span>
+              <AreaIcon className="h-4 w-4" aria-hidden />
               <span
                 className="text-xs font-medium"
                 style={{ color: "var(--foreground)" }}
@@ -251,7 +255,8 @@ export function StudentCycleDetailClient({
               {summary.introduced} introduced
             </div>
           </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* No materials message */}
@@ -270,6 +275,7 @@ export function StudentCycleDetailClient({
         const mats = materialsByArea.get(area) ?? [];
         if (mats.length === 0) return null;
         const summary = profile.area_summaries.find((s) => s.area === area);
+        const AreaIcon = AREA_ICONS[area];
 
         return (
           <div
@@ -282,7 +288,7 @@ export function StudentCycleDetailClient({
               style={{ background: "var(--muted)" }}
             >
               <div className="flex items-center gap-2">
-                <span style={{ fontSize: 18 }}>{AREA_EMOJIS[area]}</span>
+                <AreaIcon className="h-[18px] w-[18px]" aria-hidden />
                 <span
                   className="font-semibold"
                   style={{ color: "var(--foreground)" }}

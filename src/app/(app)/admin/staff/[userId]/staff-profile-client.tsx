@@ -15,6 +15,7 @@
 
 "use client";
 
+import { IdCard } from "lucide-react";
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import {
@@ -714,10 +715,10 @@ function ComplianceTab({ member }: { member: StaffMemberDetail }) {
     <div className="space-y-4">
       <div className="rounded-lg border border-border bg-card p-6 text-center">
         <p
-          className="mx-auto mb-3 text-3xl"
+          className="mx-auto mb-3 flex justify-center"
           style={{ color: "var(--empty-state-icon)" }}
         >
-          🪪
+          <IdCard className="h-10 w-10" aria-hidden />
         </p>
         <h3 className="text-sm font-semibold text-foreground">
           Regulatory Compliance

@@ -8,6 +8,8 @@
 import { useState, useTransition } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import type { LucideIcon } from "lucide-react";
+import { X } from "lucide-react";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import {
   deleteCosmicUnit,
@@ -164,6 +166,7 @@ export function CosmicUnitDetailClient({
   const [refreshKey, setRefreshKey] = useState(0);
 
   const lessonCfg = getLessonConfig(unit.great_lesson.lesson_key);
+  const LessonIcon: LucideIcon = lessonCfg.icon;
 
   function handleStatusChange(newStatus: typeof unit.status) {
     startTransition(async () => {
@@ -228,8 +231,9 @@ export function CosmicUnitDetailClient({
             <CosmicUnitStatusBadge status={unit.status} />
             <GreatLessonChip lessonKey={unit.great_lesson.lesson_key} />
           </div>
-          <h1 className="text-2xl font-semibold" style={{ color: "var(--foreground)" }}>
-            {lessonCfg.emoji} {unit.title}
+          <h1 className="text-2xl font-semibold flex items-center gap-2" style={{ color: "var(--foreground)" }}>
+            <LessonIcon className="h-7 w-7 shrink-0" style={{ color: `var(${lessonCfg.accentVar})` }} aria-hidden />
+            {unit.title}
           </h1>
           {unit.description && (
             <p className="text-sm" style={{ color: "var(--muted-foreground)" }}>
@@ -348,10 +352,11 @@ export function CosmicUnitDetailClient({
                   {canManage && (
                     <button
                       onClick={e => { e.stopPropagation(); handleDeleteStudy(study.id); }}
-                      className="text-xs px-2 py-1 rounded"
+                      className="px-2 py-1 rounded"
                       style={{ color: "var(--muted-foreground)" }}
+                      aria-label="Remove study topic"
                     >
-                      ✕
+                      <X className="h-3.5 w-3.5" aria-hidden />
                     </button>
                   )}
                 </div>

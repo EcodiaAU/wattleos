@@ -3,6 +3,15 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import {
+  CheckCircle2,
+  PhoneOff,
+  AlertTriangle,
+  ClipboardList,
+  Calendar,
+  Share2,
+  type LucideIcon,
+} from "lucide-react";
 
 import {
   FOLLOW_UP_METHOD_OPTIONS,
@@ -196,6 +205,14 @@ export function FollowUpTimeline({ entries }: FollowUpTimelineProps) {
   const outcomeLabel = (o: FollowUpOutcome) =>
     FOLLOW_UP_OUTCOME_OPTIONS.find((op) => op.value === o)?.label ?? o;
 
+  const outcomeIcon = (o: FollowUpOutcome): LucideIcon => {
+    if (o === "contacted" || o === "resolved") return CheckCircle2;
+    if (o === "no_answer") return PhoneOff;
+    if (o === "referred") return Share2;
+    if (o === "escalated") return AlertTriangle;
+    return ClipboardList;
+  };
+
   return (
     <div className="space-y-3">
       {entries.map((entry, i) => (
@@ -203,11 +220,11 @@ export function FollowUpTimeline({ entries }: FollowUpTimelineProps) {
           key={entry.id}
           className={`flex gap-3 ${i < entries.length - 1 ? "pb-3 border-b border-border" : ""}`}
         >
-          <div className="text-base mt-0.5">
-            {entry.outcome === "contacted" || entry.outcome === "resolved" ? "✅" :
-             entry.outcome === "no_answer" ? "📵" :
-             entry.outcome === "referred" ? "↗️" :
-             entry.outcome === "escalated" ? "⚠️" : "📋"}
+          <div className="mt-0.5">
+            {(() => {
+              const Icon = outcomeIcon(entry.outcome);
+              return <Icon className="h-4 w-4" aria-hidden />;
+            })()}
           </div>
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 flex-wrap text-sm">
@@ -227,8 +244,8 @@ export function FollowUpTimeline({ entries }: FollowUpTimelineProps) {
               <p className="text-sm mt-1">{entry.notes}</p>
             )}
             {entry.next_follow_up && (
-              <p className="text-xs mt-1" style={{ color: "var(--chronic-absence-at-risk)" }}>
-                📅 Follow up by: {entry.next_follow_up}
+              <p className="inline-flex items-center gap-1 text-xs mt-1" style={{ color: "var(--chronic-absence-at-risk)" }}>
+                <Calendar className="h-3.5 w-3.5" aria-hidden /> Follow up by: {entry.next_follow_up}
               </p>
             )}
           </div>

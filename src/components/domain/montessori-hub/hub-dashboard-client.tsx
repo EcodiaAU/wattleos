@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { BookOpen, Bookmark, Search, ChevronRight } from "lucide-react";
+import { BookOpen, Bookmark, Search, ChevronRight, CheckCircle2 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import { HubArticleCard } from "./hub-article-card";
 import {
@@ -87,7 +88,7 @@ export function HubDashboardClient({ data, canManage }: HubDashboardClientProps)
           cssVar="var(--hub-language)"
         />
         <StatCard
-          icon={<span className="text-sm">✓</span>}
+          icon={<CheckCircle2 className="h-4 w-4" aria-hidden />}
           label="Read"
           value={`${readPercent}%`}
           cssVar="var(--hub-status-published)"
@@ -149,7 +150,7 @@ export function HubDashboardClient({ data, canManage }: HubDashboardClientProps)
         {data.bookmarks.length > 0 && (
           <CategoryTab
             label="Saved"
-            emoji="🔖"
+            icon={Bookmark}
             active={activeCategory === "bookmarks"}
             onClick={() => {
               haptics.light();
@@ -164,7 +165,7 @@ export function HubDashboardClient({ data, canManage }: HubDashboardClientProps)
             <CategoryTab
               key={cat}
               label={cfg.label.split(" ")[0]}
-              emoji={cfg.emoji}
+              icon={cfg.icon}
               count={bc?.count}
               active={activeCategory === cat}
               cssVar={cfg.cssVar}
@@ -253,14 +254,14 @@ function StatCard({
 
 function CategoryTab({
   label,
-  emoji,
+  icon: Icon,
   count,
   active,
   cssVar,
   onClick,
 }: {
   label: string;
-  emoji?: string;
+  icon?: LucideIcon;
   count?: number;
   active: boolean;
   cssVar?: string;
@@ -284,7 +285,7 @@ function CategoryTab({
             }
       }
     >
-      {emoji && <span>{emoji}</span>}
+      {Icon && <Icon className="h-4 w-4" aria-hidden />}
       {label}
       {count !== undefined && (
         <span

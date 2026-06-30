@@ -18,6 +18,7 @@ export function HubArticleCard({ article }: HubArticleCardProps) {
   const [isPending, startTransition] = useTransition();
   const [bookmarked, setBookmarked] = useState(article.bookmarked);
   const catCfg = HUB_CATEGORY_CONFIG[article.category];
+  const CategoryIcon = catCfg.icon;
 
   function handleClick() {
     haptics.light();
@@ -55,7 +56,7 @@ export function HubArticleCard({ article }: HubArticleCardProps) {
             backgroundColor: `color-mix(in srgb, ${catCfg.cssVar} 12%, transparent)`,
           }}
         >
-          <span>{catCfg.emoji}</span>
+          <CategoryIcon className="h-4 w-4" aria-hidden />
           {catCfg.label}
         </span>
         <div className="flex items-center gap-2">

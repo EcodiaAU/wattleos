@@ -12,7 +12,7 @@
 //
 // Design priorities:
 // - Thumb-friendly on iPad (large tap targets, haptic feedback)
-// - Medical alerts visible (⚠ badges on student rows)
+// - Medical alerts visible (warning badges on student rows)
 // - Quick: "Mark All Present" button for good days
 // - Optimistic: each tap saves immediately via markAttendance
 //
@@ -633,6 +633,7 @@ function StudentRow({
         <div className="flex flex-shrink-0 gap-1.5">
           {STATUS_ORDER.map((status) => {
             const config = ATTENDANCE_STATUS_CONFIG[status];
+            const Icon = config.icon;
             const isActive = currentStatus === status;
             const css = STATUS_CSS[status];
 
@@ -656,8 +657,10 @@ function StudentRow({
                       }
                 }
               >
-                {/* Emoji icon on mobile, text label on desktop */}
-                <span className="sm:hidden">{config.icon}</span>
+                {/* Icon on mobile, text label on desktop */}
+                <span className="sm:hidden">
+                  <Icon className="h-4 w-4" aria-hidden />
+                </span>
                 <span className="hidden text-xs sm:inline">{config.label}</span>
               </button>
             );

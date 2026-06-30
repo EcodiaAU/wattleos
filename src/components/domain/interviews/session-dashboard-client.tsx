@@ -4,6 +4,7 @@
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { Calendar } from "lucide-react";
 import { useHaptics } from "@/lib/hooks/use-haptics";
 import { setInterviewSessionStatus, deleteInterviewSession } from "@/lib/actions/interviews";
 import { InterviewSessionStatusBadge, InterviewBookingStatusBadge } from "./interview-status-badge";
@@ -222,7 +223,7 @@ export function SessionDashboardClient({ dashboard }: SessionDashboardClientProp
             className="rounded-2xl p-10 text-center"
             style={{ background: "var(--muted)", border: "1px solid var(--border)" }}
           >
-            <p className="text-3xl mb-2" style={{ color: "var(--empty-state-icon)" }}>🗓️</p>
+            <Calendar className="h-10 w-10 mx-auto mb-2" style={{ color: "var(--empty-state-icon)" }} aria-hidden />
             <p className="text-sm" style={{ color: "var(--muted-foreground)" }}>
               {session.status === "open"
                 ? "No bookings yet. Share the booking link with families."
