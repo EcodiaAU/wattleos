@@ -904,8 +904,8 @@ function DemoSection() {
             fontSize: "1.05rem", color: C.mist, lineHeight: 1.7, fontStyle: "italic",
           }}>
             Your email client should have opened with your demo request. If not, reach us at{" "}
-            <a href="mailto:hello@ecodia.au" style={{ color: C.clay, textDecoration: "none", fontStyle: "normal", fontWeight: 700 }}>
-              hello@ecodia.au
+            <a href="mailto:code@ecodia.au" style={{ color: C.clay, textDecoration: "none", fontStyle: "normal", fontWeight: 700 }}>
+              code@ecodia.au
             </a>
           </p>
           <button onClick={() => setSubmitted(false)} style={{
@@ -1077,8 +1077,8 @@ function DemoSection() {
             textAlign: "center", marginTop: "1rem",
           }}>
             Or email us at{" "}
-            <a href="mailto:hello@ecodia.au" style={{ color: C.clay, textDecoration: "none", fontWeight: 500 }}>
-              hello@ecodia.au
+            <a href="mailto:code@ecodia.au" style={{ color: C.clay, textDecoration: "none", fontWeight: 500 }}>
+              code@ecodia.au
             </a>
           </p>
         </div>
