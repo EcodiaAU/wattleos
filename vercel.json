@@ -20,5 +20,11 @@
       "path": "/api/cron/webhook-retry",
       "schedule": "*/2 * * * *"
     }
-  ]
+  ],
+  "git": {
+    "deploymentEnabled": {
+      "backup/auto-snapshot": false,
+      "backup/*": false
+    }
+  }
 }
